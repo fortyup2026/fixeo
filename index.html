@@ -8,757 +8,94 @@
 
   <style>
     :root{
-      --bg:#F5FAF9;
-      --card:#FFFFFF;
-      --text:#071527;
-      --muted:#667085;
-      --line:#E4EAF0;
-      --green:#059669;
-      --green2:#10B981;
-      --green3:#D1FAE5;
-      --dark:#061827;
-      --orange:#F97316;
-      --blue:#0F2A44;
-      --shadow:0 18px 45px rgba(15,23,42,.10);
-      --soft:0 8px 24px rgba(15,23,42,.07);
-      --navH:82px;
+      --bg:#F5FAF9; --card:#FFFFFF; --text:#071527; --muted:#667085; --line:#E4EAF0;
+      --green:#059669; --green2:#10B981; --green3:#D1FAE5; --dark:#061827; --red:#EF4444;
+      --shadow:0 18px 45px rgba(15,23,42,.10); --soft:0 8px 24px rgba(15,23,42,.07); --navH:82px;
     }
-
     *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-    html,body{
-      margin:0;
-      min-height:100%;
-      font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-      background:var(--bg);
-      color:var(--text);
-    }
-    body{overflow-x:hidden}
-    button,input,select,textarea{font:inherit}
-    button{border:none;background:none;color:inherit;cursor:pointer}
+    html,body{margin:0;min-height:100%;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text)}
+    body{overflow-x:hidden} button,input,select,textarea{font:inherit} button{border:none;background:none;color:inherit;cursor:pointer}
     .hidden{display:none!important}
-
-    .app{
-      min-height:100vh;
-      max-width:520px;
-      margin:0 auto;
-      background:
-        radial-gradient(circle at 15% 10%, rgba(16,185,129,.16), transparent 28%),
-        radial-gradient(circle at 90% 25%, rgba(14,165,233,.10), transparent 25%),
-        linear-gradient(180deg,#FFFFFF 0%,#F5FAF9 48%,#EEF7F4 100%);
-      position:relative;
-      padding-bottom:calc(var(--navH) + 20px);
-      overflow:hidden;
-    }
-
-    .app:before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background-image:
-        radial-gradient(rgba(15,23,42,.10) 1px, transparent 1px);
-      background-size:18px 18px;
-      opacity:.16;
-      pointer-events:none;
-      mask-image:linear-gradient(180deg,#000 0%,transparent 35%,transparent 70%,#000 100%);
-    }
-
-    .topbar{
-      position:sticky;
-      top:0;
-      z-index:60;
-      background:rgba(255,255,255,.86);
-      backdrop-filter:blur(18px);
-      border-bottom:1px solid rgba(226,232,240,.75);
-      padding:16px 18px 12px;
-    }
-
-    .topRow{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-    }
-
-    .brandMini{
-      display:flex;
-      align-items:center;
-      gap:9px;
-    }
-
-    .mark{
-      width:44px;
-      height:44px;
-      border-radius:16px;
-      background:linear-gradient(145deg,#007F5F,#10B981);
-      display:grid;
-      place-items:center;
-      color:white;
-      font-weight:1000;
-      font-size:1.7rem;
-      box-shadow:0 12px 28px rgba(5,150,105,.25);
-      position:relative;
-      overflow:hidden;
-    }
-
-    .mark:after{
-      content:"";
-      position:absolute;
-      width:30px;
-      height:30px;
-      border:4px solid rgba(255,255,255,.45);
-      border-radius:999px;
-      top:-10px;
-      right:-8px;
-    }
-
-    .brandMini h1{
-      margin:0;
-      font-size:1.75rem;
-      letter-spacing:-.08em;
-      line-height:1;
-    }
-
-    .brandMini h1 span{color:var(--green)}
-    .arPill{
-      font-size:.72rem;
-      font-weight:1000;
-      color:var(--green);
-      border:1.5px solid var(--green);
-      border-radius:9px;
-      padding:3px 7px;
-      margin-left:4px;
-      letter-spacing:.02em;
-    }
-
-    .placePill{
-      display:flex;
-      align-items:center;
-      gap:8px;
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:999px;
-      padding:11px 13px;
-      font-weight:900;
-      box-shadow:var(--soft);
-      white-space:nowrap;
-      font-size:.9rem;
-    }
-
-    .screen{
-      display:none;
-      padding:18px;
-      position:relative;
-      z-index:1;
-    }
-    .screen.active{display:block}
-
-    .logoHero{
-      text-align:center;
-      padding:16px 0 8px;
-    }
-
-    .bigMark{
-      width:94px;
-      height:94px;
-      margin:0 auto 12px;
-      border-radius:34px;
-      background:linear-gradient(145deg,#007F5F,#10B981);
-      display:grid;
-      place-items:center;
-      color:white;
-      font-size:4rem;
-      font-weight:1000;
-      box-shadow:0 18px 45px rgba(5,150,105,.28);
-      position:relative;
-      overflow:hidden;
-    }
-
-    .bigMark:after{
-      content:"";
-      position:absolute;
-      width:62px;
-      height:62px;
-      border:7px solid rgba(255,255,255,.42);
-      border-radius:999px;
-      top:-20px;
-      right:-15px;
-    }
-
-    .logoHero h2{
-      margin:0;
-      font-size:3.85rem;
-      line-height:.92;
-      letter-spacing:-.105em;
-      font-weight:1000;
-    }
-
-    .logoHero h2 span{color:var(--green)}
-    .logoHero .arInline{
-      font-size:1.45rem;
-      margin-left:9px;
-      letter-spacing:.02em;
-      color:var(--green);
-      border-left:2px solid #CBD5E1;
-      padding-left:14px;
-      vertical-align:middle;
-    }
-
-    .kicker{
-      margin:12px 0 0;
-      color:#5D6B7C;
-      font-weight:900;
-      letter-spacing:.16em;
-      font-size:.78rem;
-    }
-
-    .headline{
-      margin:18px 0 8px;
-      text-align:center;
-      font-size:2.45rem;
-      line-height:1.02;
-      letter-spacing:-.06em;
-      font-weight:1000;
-    }
-    .headline span{color:var(--green)}
-
-    .subtitle{
-      text-align:center;
-      color:#526174;
-      margin:0 auto;
-      font-size:1.07rem;
-      line-height:1.45;
-      font-weight:650;
-      max-width:420px;
-    }
-
-    .searchHero{
-      margin:28px 0 16px;
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:26px;
-      padding:12px;
-      box-shadow:var(--shadow);
-      display:grid;
-      grid-template-columns:1fr;
-      gap:10px;
-    }
-
-    .searchInput{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      background:#F8FAFC;
-      border:1px solid #E8EEF4;
-      border-radius:18px;
-      padding:13px 14px;
-    }
-
-    .searchInput input{
-      width:100%;
-      border:none;
-      outline:none;
-      background:transparent;
-      color:var(--text);
-      font-weight:800;
-      min-width:0;
-    }
-
-    .searchInput input::placeholder{color:#8B97A8}
-    .searchIcon{font-size:1.4rem}
-
-    .card{
-      background:rgba(255,255,255,.92);
-      border:1px solid var(--line);
-      border-radius:28px;
-      padding:16px;
-      box-shadow:var(--shadow);
-    }
-
-    .sectionHead{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      margin:24px 0 12px;
-    }
-    .sectionHead h3{
-      margin:0;
-      font-size:1.22rem;
-      letter-spacing:-.035em;
-    }
-    .link{color:var(--green);font-weight:1000}
-
-    .catGrid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:10px;
-    }
-
-    .cat{
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:22px;
-      padding:13px 7px;
-      text-align:center;
-      box-shadow:0 8px 22px rgba(15,23,42,.05);
-    }
-    .cat .ico{
-      width:52px;
-      height:52px;
-      margin:0 auto 8px;
-      display:grid;
-      place-items:center;
-      border-radius:999px;
-      background:#ECFDF5;
-      font-size:1.65rem;
-    }
-    .cat b{font-size:.8rem}
-
-    .steps{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:10px;
-      text-align:center;
-      margin-top:10px;
-    }
-
-    .step{
-      padding:14px 6px;
-      position:relative;
-    }
-    .step:not(:last-child):after{
-      content:"";
-      position:absolute;
-      right:-5px;
-      top:18px;
-      bottom:18px;
-      width:1px;
-      background:#D7DEE8;
-    }
-    .num{
-      width:28px;
-      height:28px;
-      border-radius:999px;
-      display:grid;
-      place-items:center;
-      background:var(--green);
-      color:white;
-      font-weight:1000;
-      margin:0 auto 8px;
-    }
-    .stepIcon{font-size:2rem;margin-bottom:6px}
-    .step b{display:block;font-size:.9rem}
-    .step small{display:block;color:var(--muted);font-weight:650;margin-top:4px;line-height:1.3}
-
-    .btn{
-      width:100%;
-      border-radius:20px;
-      padding:15px 16px;
-      font-weight:1000;
-      background:linear-gradient(135deg,#059669,#00A96E);
-      color:white;
-      box-shadow:0 14px 30px rgba(5,150,105,.23);
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      font-size:1.02rem;
-    }
-    .btn.secondary{
-      background:#fff;
-      color:var(--green);
-      border:1.7px solid var(--green);
-      box-shadow:none;
-    }
-    .btn.light{
-      background:#F1F5F9;
-      color:var(--text);
-      box-shadow:none;
-      justify-content:center;
-    }
-
-    .trust{
-      margin-top:18px;
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:1px;
-      overflow:hidden;
-      border-radius:24px;
-      background:#E2E8F0;
-      box-shadow:var(--soft);
-    }
-    .trust div{
-      background:rgba(255,255,255,.94);
-      padding:12px 8px;
-      text-align:center;
-    }
-    .trust b{
-      display:block;
-      font-size:.75rem;
-      margin-top:5px;
-    }
-    .trust small{
-      display:block;
-      color:var(--muted);
-      font-size:.65rem;
-      line-height:1.25;
-      margin-top:2px;
-    }
-
-    .filters{
-      display:flex;
-      gap:9px;
-      overflow:auto;
-      margin:14px -18px 2px;
-      padding:0 18px 4px;
-      scrollbar-width:none;
-    }
-    .filters::-webkit-scrollbar{display:none}
-    .chip{
-      white-space:nowrap;
-      padding:10px 14px;
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:999px;
-      color:#526174;
-      font-weight:1000;
-    }
-    .chip.active{
-      color:#fff;
-      background:var(--green);
-      border-color:var(--green);
-    }
-
-    .proCard{
-      margin-bottom:12px;
-    }
-    .pro{
-      display:flex;
-      gap:13px;
-    }
-    .avatar{
-      width:66px;
-      height:66px;
-      border-radius:24px;
-      background:linear-gradient(145deg,#E4FFF3,#F8FAFC);
-      display:grid;
-      place-items:center;
-      font-size:1.8rem;
-      position:relative;
-      flex:0 0 auto;
-    }
-    .online{
-      width:18px;
-      height:18px;
-      border-radius:999px;
-      background:#22C55E;
-      border:3px solid #fff;
-      position:absolute;
-      right:-2px;
-      bottom:-2px;
-    }
-    .proInfo{flex:1;min-width:0}
-    .proInfo h4{margin:0 0 2px;font-size:1.08rem}
-    .service{
-      color:var(--green);
-      font-weight:1000;
-      margin:0 0 4px;
-      font-size:.9rem;
-    }
-    .meta{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-      color:var(--muted);
-      font-size:.78rem;
-      font-weight:800;
-      margin:3px 0;
-    }
-    .desc{
-      color:#475569;
-      font-size:.86rem;
-      line-height:1.36;
-      margin:8px 0 0;
-    }
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      border-radius:999px;
-      padding:6px 9px;
-      background:#D1FAE5;
-      color:#047857;
-      font-size:.72rem;
-      font-weight:1000;
-      white-space:nowrap;
-    }
-    .badge.red{background:#FEE2E2;color:#B91C1C}
-    .badge.gray{background:#F1F5F9;color:#475569}
-    .actions{
-      display:grid;
-      grid-template-columns:1fr 52px;
-      gap:10px;
-      margin-top:14px;
-    }
-
-    .tabs{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      background:#EAF2EF;
-      border-radius:999px;
-      padding:4px;
-      margin:10px 0 14px;
-    }
-    .tabs button{
-      border-radius:999px;
-      padding:10px 4px;
-      font-size:.75rem;
-      font-weight:1000;
-      color:#64748B;
-    }
-    .tabs button.active{
-      background:var(--green);
-      color:#fff;
-    }
-
-    .empty{
-      background:#fff;
-      border:1px dashed #CBD5E1;
-      border-radius:24px;
-      padding:24px 18px;
-      text-align:center;
-      color:var(--muted);
-      font-weight:800;
-      line-height:1.4;
-    }
-
-    .profileHead{
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:30px;
-      padding:18px;
-      box-shadow:var(--shadow);
-    }
-    .profileTop{
-      display:flex;
-      gap:16px;
-      align-items:center;
-    }
-    .profilePic{
-      width:88px;
-      height:88px;
-      border-radius:30px;
-      background:linear-gradient(145deg,#064E3B,#10B981);
-      color:#fff;
-      display:grid;
-      place-items:center;
-      font-size:2.6rem;
-      font-weight:1000;
-    }
-    .stats{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:8px;
-      margin-top:18px;
-    }
-    .stat{
-      background:#F8FAFC;
-      border-radius:18px;
-      padding:12px 8px;
-      text-align:center;
-    }
-    .stat b{font-size:1.35rem}
-    .stat small{
-      display:block;
-      color:var(--muted);
-      font-weight:800;
-      margin-top:2px;
-      font-size:.72rem;
-    }
-
-    .menuList{
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:26px;
-      overflow:hidden;
-      box-shadow:var(--shadow);
-      margin-top:16px;
-    }
-    .menuItem{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      padding:15px;
-      border-bottom:1px solid #EEF2F7;
-    }
-    .menuItem:last-child{border-bottom:none}
-    .mIco{
-      width:40px;
-      height:40px;
-      border-radius:15px;
-      background:#F1F5F9;
-      display:grid;
-      place-items:center;
-      font-size:1.2rem;
-    }
-    .grow{flex:1}
-    .menuItem b{display:block}
-    .menuItem small{
-      display:block;
-      color:var(--muted);
-      margin-top:2px;
-      font-weight:650;
-    }
-
-    .providerBox{
-      margin-top:18px;
-      border-radius:28px;
-      background:linear-gradient(135deg,#E6FFFA,#ECFDF5);
-      padding:18px;
-      display:flex;
-      align-items:center;
-      gap:16px;
-      border:1px solid #CFFAE6;
-    }
-
-    .bottomNav{
-      position:fixed;
-      left:50%;
-      bottom:0;
-      transform:translateX(-50%);
-      width:100%;
-      max-width:520px;
-      height:var(--navH);
-      background:linear-gradient(135deg,#061827,#09253A);
-      border-radius:30px 30px 0 0;
-      display:grid;
-      grid-template-columns:repeat(5,1fr);
-      z-index:90;
-      box-shadow:0 -14px 35px rgba(15,23,42,.18);
-      padding-bottom:env(safe-area-inset-bottom);
-    }
-    .navBtn{
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      gap:3px;
-      color:#CBD5E1;
-      font-size:.72rem;
-      font-weight:900;
-    }
-    .navBtn .nIco{font-size:1.42rem}
-    .navBtn.active{color:#10B981}
-    .navBtn.plus .nIco{
-      width:54px;
-      height:54px;
-      border-radius:999px;
-      background:linear-gradient(135deg,#059669,#10B981);
-      color:#fff;
-      display:grid;
-      place-items:center;
-      font-size:2rem;
-      margin-top:-20px;
-      box-shadow:0 12px 28px rgba(16,185,129,.28);
-    }
-
-    .modal{
-      position:fixed;
-      inset:0;
-      background:rgba(15,23,42,.48);
-      z-index:130;
-      display:none;
-      align-items:flex-end;
-      max-width:520px;
-      margin:0 auto;
-    }
-    .modal.active{display:flex}
-    .sheet{
-      width:100%;
-      background:#fff;
-      border-radius:30px 30px 0 0;
-      padding:20px;
-      max-height:88vh;
-      overflow:auto;
-      box-shadow:0 -22px 60px rgba(15,23,42,.22);
-    }
-    .sheetHead{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      margin-bottom:14px;
-    }
-    .sheetHead h3{margin:0;font-size:1.35rem}
-    .iconBtn{
-      width:42px;
-      height:42px;
-      border-radius:15px;
-      background:#fff;
-      border:1px solid var(--line);
-      display:grid;
-      place-items:center;
-      box-shadow:var(--soft);
-    }
-    .field{margin-bottom:12px}
-    .field label{
-      display:block;
-      font-size:.8rem;
-      font-weight:1000;
-      color:#475569;
-      margin-bottom:6px;
-    }
-    .field input,.field select,.field textarea{
-      width:100%;
-      border:1px solid var(--line);
-      border-radius:16px;
-      padding:13px;
-      outline:none;
-      background:#fff;
-    }
-    .field textarea{
-      min-height:90px;
-      resize:vertical;
-    }
-    .grid2{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:10px;
-    }
-
-    .toast{
-      position:fixed;
-      left:50%;
-      bottom:calc(var(--navH) + 16px);
-      transform:translateX(-50%) translateY(18px);
-      background:#061827;
-      color:#fff;
-      padding:12px 16px;
-      border-radius:999px;
-      font-weight:900;
-      opacity:0;
-      z-index:200;
-      transition:.25s;
-      max-width:90%;
-      text-align:center;
-    }
-    .toast.show{
-      opacity:1;
-      transform:translateX(-50%) translateY(0);
-    }
-
-    @media(max-width:390px){
-      .logoHero h2{font-size:3.25rem}
-      .headline{font-size:2.05rem}
-      .subtitle{font-size:.98rem}
-      .placePill{font-size:.78rem;padding:10px}
-      .steps{gap:5px}
-      .step small{font-size:.68rem}
-    }
+    .app{min-height:100vh;max-width:520px;margin:0 auto;background:radial-gradient(circle at 15% 10%,rgba(16,185,129,.16),transparent 28%),radial-gradient(circle at 90% 25%,rgba(14,165,233,.10),transparent 25%),linear-gradient(180deg,#fff 0%,#F5FAF9 48%,#EEF7F4 100%);position:relative;padding-bottom:calc(var(--navH) + 20px);overflow:hidden}
+    .app:before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(15,23,42,.10) 1px,transparent 1px);background-size:18px 18px;opacity:.14;pointer-events:none;mask-image:linear-gradient(180deg,#000 0%,transparent 35%,transparent 70%,#000 100%)}
+    .topbar{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.88);backdrop-filter:blur(18px);border-bottom:1px solid rgba(226,232,240,.75);padding:16px 18px 12px}
+    .topRow{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brandMini{display:flex;align-items:center;gap:9px}
+    .mark{width:44px;height:44px;border-radius:16px;background:linear-gradient(145deg,#007F5F,#10B981);display:grid;place-items:center;color:white;font-weight:1000;font-size:1.7rem;box-shadow:0 12px 28px rgba(5,150,105,.25);position:relative;overflow:hidden}
+    .mark:after{content:"";position:absolute;width:30px;height:30px;border:4px solid rgba(255,255,255,.45);border-radius:999px;top:-10px;right:-8px}
+    .brandMini h1{margin:0;font-size:1.75rem;letter-spacing:-.08em;line-height:1}.brandMini h1 span{color:var(--green)}
+    .arPill{font-size:.72rem;font-weight:1000;color:var(--green);border:1.5px solid var(--green);border-radius:9px;padding:3px 7px;margin-left:4px}
+    .placePill{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:11px 13px;font-weight:900;box-shadow:var(--soft);white-space:nowrap;font-size:.88rem}
+    .screen{display:none;padding:18px;position:relative;z-index:1}.screen.active{display:block}
+    .logoHero{text-align:center;padding:16px 0 8px}
+    .bigMark{width:94px;height:94px;margin:0 auto 12px;border-radius:34px;background:linear-gradient(145deg,#007F5F,#10B981);display:grid;place-items:center;color:white;font-size:4rem;font-weight:1000;box-shadow:0 18px 45px rgba(5,150,105,.28);position:relative;overflow:hidden}
+    .bigMark:after{content:"";position:absolute;width:62px;height:62px;border:7px solid rgba(255,255,255,.42);border-radius:999px;top:-20px;right:-15px}
+    .logoHero h2{margin:0;font-size:3.85rem;line-height:.92;letter-spacing:-.105em;font-weight:1000}.logoHero h2 span{color:var(--green)}
+    .logoHero .arInline{font-size:1.45rem;margin-left:9px;letter-spacing:.02em;color:var(--green);border-left:2px solid #CBD5E1;padding-left:14px;vertical-align:middle}
+    .kicker{margin:12px 0 0;color:#5D6B7C;font-weight:900;letter-spacing:.16em;font-size:.78rem}
+    .headline{margin:18px 0 8px;text-align:center;font-size:2.35rem;line-height:1.02;letter-spacing:-.06em;font-weight:1000}.headline span{color:var(--green)}
+    .subtitle{text-align:center;color:#526174;margin:0 auto;font-size:1.04rem;line-height:1.45;font-weight:650;max-width:420px}
+    .searchHero{margin:28px 0 16px;background:#fff;border:1px solid var(--line);border-radius:26px;padding:12px;box-shadow:var(--shadow);display:grid;gap:10px}
+    .searchInput{display:flex;align-items:center;gap:12px;background:#F8FAFC;border:1px solid #E8EEF4;border-radius:18px;padding:13px 14px}
+    .searchInput input{width:100%;border:none;outline:none;background:transparent;color:var(--text);font-weight:800;min-width:0}.searchInput input::placeholder{color:#8B97A8}.searchIcon{font-size:1.4rem}
+    .card{background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:28px;padding:16px;box-shadow:var(--shadow)}
+    .sectionHead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:24px 0 12px}.sectionHead h3{margin:0;font-size:1.22rem;letter-spacing:-.035em}.link{color:var(--green);font-weight:1000}
+    .catGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.cat{background:#fff;border:1px solid var(--line);border-radius:22px;padding:13px 7px;text-align:center;box-shadow:0 8px 22px rgba(15,23,42,.05)}
+    .cat .ico{width:52px;height:52px;margin:0 auto 8px;display:grid;place-items:center;border-radius:999px;background:#ECFDF5;font-size:1.65rem}.cat b{font-size:.8rem}
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;text-align:center;margin-top:10px}.step{padding:14px 6px;position:relative}.step:not(:last-child):after{content:"";position:absolute;right:-5px;top:18px;bottom:18px;width:1px;background:#D7DEE8}
+    .num{width:28px;height:28px;border-radius:999px;display:grid;place-items:center;background:var(--green);color:white;font-weight:1000;margin:0 auto 8px}.stepIcon{font-size:2rem;margin-bottom:6px}.step b{display:block;font-size:.9rem}.step small{display:block;color:var(--muted);font-weight:650;margin-top:4px;line-height:1.3}
+    .btn{width:100%;border-radius:20px;padding:15px 16px;font-weight:1000;background:linear-gradient(135deg,#059669,#00A96E);color:white;box-shadow:0 14px 30px rgba(5,150,105,.23);display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:1.02rem}
+    .btn.secondary{background:#fff;color:var(--green);border:1.7px solid var(--green);box-shadow:none}.btn.light{background:#F1F5F9;color:var(--text);box-shadow:none;justify-content:center}.btn.red{background:#EF4444}
+    .trust{margin-top:18px;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;overflow:hidden;border-radius:24px;background:#E2E8F0;box-shadow:var(--soft)}.trust div{background:rgba(255,255,255,.94);padding:12px 8px;text-align:center}.trust b{display:block;font-size:.75rem;margin-top:5px}.trust small{display:block;color:var(--muted);font-size:.65rem;line-height:1.25;margin-top:2px}
+    .filters{display:flex;gap:9px;overflow:auto;margin:14px -18px 2px;padding:0 18px 4px;scrollbar-width:none}.filters::-webkit-scrollbar{display:none}.chip{white-space:nowrap;padding:10px 14px;background:#fff;border:1px solid var(--line);border-radius:999px;color:#526174;font-weight:1000}.chip.active{color:#fff;background:var(--green);border-color:var(--green)}
+    .proCard{margin-bottom:12px}.pro{display:flex;gap:13px}.avatar{width:66px;height:66px;border-radius:24px;background:linear-gradient(145deg,#E4FFF3,#F8FAFC);display:grid;place-items:center;font-size:1.8rem;position:relative;flex:0 0 auto}.online{width:18px;height:18px;border-radius:999px;background:#22C55E;border:3px solid #fff;position:absolute;right:-2px;bottom:-2px}
+    .proInfo{flex:1;min-width:0}.proInfo h4{margin:0 0 2px;font-size:1.08rem}.service{color:var(--green);font-weight:1000;margin:0 0 4px;font-size:.9rem}.meta{display:flex;gap:8px;flex-wrap:wrap;color:var(--muted);font-size:.78rem;font-weight:800;margin:3px 0}.desc{color:#475569;font-size:.86rem;line-height:1.36;margin:8px 0 0}
+    .badge{display:inline-flex;align-items:center;border-radius:999px;padding:6px 9px;background:#D1FAE5;color:#047857;font-size:.72rem;font-weight:1000;white-space:nowrap}.badge.red{background:#FEE2E2;color:#B91C1C}.badge.gray{background:#F1F5F9;color:#475569}.badge.blue{background:#DBEAFE;color:#1D4ED8}
+    .actions{display:grid;grid-template-columns:1fr 52px 52px;gap:10px;margin-top:14px}
+    .tabs{display:grid;grid-template-columns:repeat(4,1fr);background:#EAF2EF;border-radius:999px;padding:4px;margin:10px 0 14px}.tabs button{border-radius:999px;padding:10px 4px;font-size:.72rem;font-weight:1000;color:#64748B}.tabs button.active{background:var(--green);color:#fff}
+    .empty{background:#fff;border:1px dashed #CBD5E1;border-radius:24px;padding:24px 18px;text-align:center;color:var(--muted);font-weight:800;line-height:1.4}
+    .profileHead{background:#fff;border:1px solid var(--line);border-radius:30px;padding:18px;box-shadow:var(--shadow)}.profileTop{display:flex;gap:16px;align-items:center}.profilePic{width:88px;height:88px;border-radius:30px;background:linear-gradient(145deg,#064E3B,#10B981);color:#fff;display:grid;place-items:center;font-size:2.6rem;font-weight:1000}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:18px}.stat{background:#F8FAFC;border-radius:18px;padding:12px 8px;text-align:center}.stat b{font-size:1.35rem}.stat small{display:block;color:var(--muted);font-weight:800;margin-top:2px;font-size:.72rem}
+    .menuList{background:#fff;border:1px solid var(--line);border-radius:26px;overflow:hidden;box-shadow:var(--shadow);margin-top:16px}.menuItem{display:flex;align-items:center;gap:12px;padding:15px;border-bottom:1px solid #EEF2F7}.menuItem:last-child{border-bottom:none}.mIco{width:40px;height:40px;border-radius:15px;background:#F1F5F9;display:grid;place-items:center;font-size:1.2rem}.grow{flex:1}.menuItem b{display:block}.menuItem small{display:block;color:var(--muted);margin-top:2px;font-weight:650}
+    .providerBox{margin-top:18px;border-radius:28px;background:linear-gradient(135deg,#E6FFFA,#ECFDF5);padding:18px;display:flex;align-items:center;gap:16px;border:1px solid #CFFAE6}
+    .bottomNav{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:100%;max-width:520px;height:var(--navH);background:linear-gradient(135deg,#061827,#09253A);border-radius:30px 30px 0 0;display:grid;grid-template-columns:repeat(5,1fr);z-index:90;box-shadow:0 -14px 35px rgba(15,23,42,.18);padding-bottom:env(safe-area-inset-bottom)}
+    .navBtn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:#CBD5E1;font-size:.72rem;font-weight:900}.navBtn .nIco{font-size:1.42rem}.navBtn.active{color:#10B981}.navBtn.plus .nIco{width:54px;height:54px;border-radius:999px;background:linear-gradient(135deg,#059669,#10B981);color:#fff;display:grid;place-items:center;font-size:2rem;margin-top:-20px;box-shadow:0 12px 28px rgba(16,185,129,.28)}
+    .modal{position:fixed;inset:0;background:rgba(15,23,42,.48);z-index:130;display:none;align-items:flex-end;max-width:520px;margin:0 auto}.modal.active{display:flex}.sheet{width:100%;background:#fff;border-radius:30px 30px 0 0;padding:20px;max-height:88vh;overflow:auto;box-shadow:0 -22px 60px rgba(15,23,42,.22)}.sheetHead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}.sheetHead h3{margin:0;font-size:1.35rem}.iconBtn{width:42px;height:42px;border-radius:15px;background:#fff;border:1px solid var(--line);display:grid;place-items:center;box-shadow:var(--soft)}
+    .field{margin-bottom:12px}.field label{display:block;font-size:.8rem;font-weight:1000;color:#475569;margin-bottom:6px}.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);border-radius:16px;padding:13px;outline:none;background:#fff}.field textarea{min-height:90px;resize:vertical}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .toast{position:fixed;left:50%;bottom:calc(var(--navH) + 16px);transform:translateX(-50%) translateY(18px);background:#061827;color:#fff;padding:12px 16px;border-radius:999px;font-weight:900;opacity:0;z-index:200;transition:.25s;max-width:90%;text-align:center}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+    .loginWrap{min-height:100vh;display:grid;place-items:center;padding:18px;max-width:520px;margin:0 auto;background:linear-gradient(180deg,#fff,#ECFDF5)}.loginCard{width:100%;background:#fff;border:1px solid var(--line);border-radius:34px;padding:24px;box-shadow:var(--shadow)}.termsText{font-size:.76rem;color:var(--muted);line-height:1.4;text-align:center;margin-top:12px}.termsText button{color:var(--green);font-weight:1000}
+    @media(max-width:390px){.logoHero h2{font-size:3.15rem}.headline{font-size:2.02rem}.subtitle{font-size:.96rem}.placePill{font-size:.75rem;padding:10px}.steps{gap:5px}.step small{font-size:.66rem}.actions{grid-template-columns:1fr 46px 46px}}
   </style>
 </head>
 
 <body>
-  <main class="app">
+  <section id="loginScreen" class="loginWrap">
+    <div class="loginCard">
+      <div class="logoHero" style="padding-top:0">
+        <div class="bigMark">S</div>
+        <h2>Servi<span>Go</span><span class="arInline">AR</span></h2>
+        <p class="kicker">SERVICIOS AL ALCANCE DE TU MANO</p>
+      </div>
+      <h1 class="headline">Entrá seguro</h1>
+      <p class="subtitle">Usá tu email para iniciar sesión. En esta versión web se guarda localmente; para correo real necesitás Firebase/Auth.</p>
+
+      <div class="field" style="margin-top:20px">
+        <label>Email</label>
+        <input id="loginEmail" type="email" placeholder="tuemail@gmail.com" autocomplete="email" />
+      </div>
+      <div class="field">
+        <label>Nombre</label>
+        <input id="loginName" placeholder="Tu nombre" autocomplete="name" />
+      </div>
+
+      <button class="btn" onclick="login()">Iniciar sesión <span>→</span></button>
+      <button class="btn secondary" style="margin-top:10px" onclick="guestLogin()">Entrar de prueba <span>→</span></button>
+
+      <p class="termsText">Al ingresar aceptás los <button onclick="openTerms()">Términos y Condiciones</button> y la política de privacidad de ServiGo AR.</p>
+    </div>
+  </section>
+
+  <main id="mainApp" class="app hidden">
     <header class="topbar">
       <div class="topRow">
         <div class="brandMini">
@@ -766,7 +103,7 @@
           <h1>Servi<span>Go</span></h1>
           <span class="arPill">AR</span>
         </div>
-        <button class="placePill" onclick="showScreen('search')">📍 Argentina ▾</button>
+        <button class="placePill" onclick="showScreen('search')">📍 Buscar zona ▾</button>
       </div>
     </header>
 
@@ -778,52 +115,22 @@
       </div>
 
       <h1 class="headline">Encontrá. Contratá. <span>Listo.</span></h1>
-      <p class="subtitle">Buscá profesionales confiables por categoría o ubicación y resolvé lo que necesitás, rápido y fácil.</p>
+      <p class="subtitle">Buscá profesionales por localidad exacta o parecida. No usamos ubicación automática sin permiso.</p>
 
       <div class="searchHero">
-        <div class="searchInput">
-          <span class="searchIcon">🔎</span>
-          <input id="homeService" placeholder="¿Qué servicio necesitás?" oninput="syncSearch()" />
-        </div>
-        <div class="searchInput">
-          <span class="searchIcon">📍</span>
-          <input id="homeCity" placeholder="Ciudad o localidad. Ej: Córdoba" oninput="syncSearch()" />
-        </div>
+        <div class="searchInput"><span class="searchIcon">🔎</span><input id="homeService" placeholder="¿Qué servicio necesitás?" oninput="syncSearch()" /></div>
+        <div class="searchInput"><span class="searchIcon">📍</span><input id="homeCity" placeholder="Ej: Villa Bosch, Córdoba, Capital Federal" oninput="syncSearch()" /></div>
         <button class="btn" onclick="searchFromHome()">Buscar profesionales <span>→</span></button>
       </div>
 
-      <div class="sectionHead">
-        <h3>Categorías populares</h3>
-        <button class="link" onclick="showScreen('search')">Ver todas</button>
-      </div>
+      <div class="sectionHead"><h3>Categorías populares</h3><button class="link" onclick="showScreen('search')">Ver todas</button></div>
+      <div class="card"><div class="catGrid" id="categoryGrid"></div></div>
 
-      <div class="card">
-        <div class="catGrid" id="categoryGrid"></div>
-      </div>
-
-      <div class="sectionHead">
-        <h3>¿Cómo funciona?</h3>
-      </div>
-
+      <div class="sectionHead"><h3>¿Cómo funciona?</h3></div>
       <div class="steps">
-        <div class="step">
-          <div class="num">1</div>
-          <div class="stepIcon">📱</div>
-          <b>Buscá</b>
-          <small>Encontrá el servicio que necesitás</small>
-        </div>
-        <div class="step">
-          <div class="num">2</div>
-          <div class="stepIcon">💬</div>
-          <b>Contactá</b>
-          <small>Hablá directo con el profesional</small>
-        </div>
-        <div class="step">
-          <div class="num">3</div>
-          <div class="stepIcon">🛡️</div>
-          <b>Contratá</b>
-          <small>Elegí y resolvé de forma segura</small>
-        </div>
+        <div class="step"><div class="num">1</div><div class="stepIcon">📱</div><b>Buscá</b><small>Elegí servicio y localidad</small></div>
+        <div class="step"><div class="num">2</div><div class="stepIcon">💬</div><b>Contactá</b><small>Hablá con el profesional</small></div>
+        <div class="step"><div class="num">3</div><div class="stepIcon">🛡️</div><b>Contratá</b><small>Resolvé de forma segura</small></div>
       </div>
 
       <div style="margin-top:20px;display:grid;gap:10px">
@@ -832,53 +139,36 @@
       </div>
 
       <div class="trust">
-        <div>🛡️<b>Perfiles verificados</b><small>Profesionales de confianza</small></div>
-        <div>⭐<b>Calificaciones reales</b><small>Opiniones de clientes</small></div>
-        <div>🔒<b>Contacto seguro</b><small>Comunicación protegida</small></div>
+        <div>🛡️<b>Seguridad</b><small>Datos locales protegidos</small></div>
+        <div>⭐<b>Calificaciones</b><small>Empiezan en cero</small></div>
+        <div>🔒<b>Privacidad</b><small>Sin geolocalizar sin permiso</small></div>
       </div>
 
-      <div class="sectionHead">
-        <h3>Profesionales destacados</h3>
-        <button class="link" onclick="showScreen('search')">Ver todos</button>
-      </div>
+      <div class="sectionHead"><h3>Profesionales disponibles</h3><button class="link" onclick="showScreen('search')">Ver todos</button></div>
       <div id="featuredList"></div>
     </section>
 
     <section id="search" class="screen">
       <h1 class="headline" style="text-align:left;margin-top:2px">Buscar servicios</h1>
-      <p class="subtitle" style="text-align:left;margin:0">No usamos ubicación automática. Escribís la localidad y te trae los resultados.</p>
-
+      <p class="subtitle" style="text-align:left;margin:0">Escribí la localidad. Ej: Villa Bosch, Córdoba, Capital Federal, Villa Devoto, Laprida, Bahía Blanca.</p>
       <div class="card" style="margin-top:18px">
-        <div class="field">
-          <label>Servicio</label>
-          <input id="searchService" placeholder="Ej: electricista, enfermera, médico" oninput="renderResults()" />
-        </div>
-        <div class="field">
-          <label>Localidad</label>
-          <input id="searchCity" placeholder="Ej: Villa Bosch, Ituzaingó, Córdoba" oninput="renderResults()" />
-        </div>
+        <div class="field"><label>Servicio</label><input id="searchService" placeholder="Ej: electricista, enfermera, médico" oninput="renderResults()" /></div>
+        <div class="field"><label>Localidad</label><input id="searchCity" placeholder="Ej: Villa Bosch" oninput="renderResults()" /></div>
       </div>
-
       <div class="filters" id="filterChips"></div>
-
-      <div class="sectionHead">
-        <h3>Resultados</h3>
-        <button class="link" onclick="clearSearch()">Limpiar</button>
-      </div>
+      <div class="sectionHead"><h3>Resultados</h3><button class="link" onclick="clearSearch()">Limpiar</button></div>
       <div id="resultsList"></div>
     </section>
 
     <section id="orders" class="screen">
       <h1 class="headline" style="text-align:left;margin-top:2px">Mis pedidos</h1>
       <p class="subtitle" style="text-align:left;margin:0">Seguimiento de solicitudes y trabajos contratados.</p>
-
       <div class="tabs">
         <button class="active" onclick="setOrderFilter('Todos',this)">Todos</button>
         <button onclick="setOrderFilter('En curso',this)">En curso</button>
         <button onclick="setOrderFilter('Completado',this)">Completados</button>
         <button onclick="setOrderFilter('Cancelado',this)">Cancelados</button>
       </div>
-
       <div id="ordersList"></div>
     </section>
 
@@ -888,50 +178,42 @@
       <div id="messagesList" style="margin-top:18px"></div>
     </section>
 
+    <section id="favorites" class="screen">
+      <h1 class="headline" style="text-align:left;margin-top:2px">Favoritos</h1>
+      <p class="subtitle" style="text-align:left;margin:0">Tus profesionales guardados.</p>
+      <div id="favoritesList" style="margin-top:18px"></div>
+    </section>
+
     <section id="profile" class="screen">
       <h1 class="headline" style="text-align:left;margin-top:2px">Mi perfil</h1>
       <p class="subtitle" style="text-align:left;margin:0">Tu cuenta, pedidos y servicios.</p>
-
       <div class="profileHead" style="margin-top:18px">
         <div class="profileTop">
-          <div class="profilePic">S</div>
+          <div class="profilePic" id="profileInitial">S</div>
           <div>
-            <h3 style="font-size:1.45rem;margin:0">Sebastián</h3>
-            <p style="margin:4px 0;color:var(--muted);font-weight:800">Cliente ServiGo AR</p>
+            <h3 id="profileName" style="font-size:1.45rem;margin:0">Sebastián</h3>
+            <p id="profileEmail" style="margin:4px 0;color:var(--muted);font-weight:800">Cliente ServiGo AR</p>
             <span class="badge">Cuenta activa</span>
           </div>
         </div>
-
         <div class="stats">
           <div class="stat"><b id="statOrders">0</b><small>Pedidos</small></div>
-          <div class="stat"><b>4.8</b><small>Valoración</small></div>
-          <div class="stat"><b id="statFavs">3</b><small>Favoritos</small></div>
+          <div class="stat"><b id="statRating">0.0</b><small>Valoración</small></div>
+          <div class="stat"><b id="statFavs">0</b><small>Favoritos</small></div>
         </div>
       </div>
 
       <div class="menuList">
-        <button class="menuItem" onclick="showScreen('orders')">
-          <span class="mIco">📋</span><span class="grow"><b>Mis pedidos</b><small>Estado y detalles</small></span><span>›</span>
-        </button>
-        <button class="menuItem" onclick="showToast('Favoritos próximamente')">
-          <span class="mIco">❤️</span><span class="grow"><b>Favoritos</b><small>Profesionales guardados</small></span><span>›</span>
-        </button>
-        <button class="menuItem" onclick="showToast('Pagos próximamente')">
-          <span class="mIco">💳</span><span class="grow"><b>Métodos de pago</b><small>Tarjetas y billeteras</small></span><span>›</span>
-        </button>
-        <button class="menuItem" onclick="showToast('Ayuda próximamente')">
-          <span class="mIco">❓</span><span class="grow"><b>Ayuda y soporte</b><small>Centro de ayuda</small></span><span>›</span>
-        </button>
-        <button class="menuItem" onclick="showToast('Configuración próximamente')">
-          <span class="mIco">⚙️</span><span class="grow"><b>Configuración</b><small>Cuenta y privacidad</small></span><span>›</span>
-        </button>
+        <button class="menuItem" onclick="showScreen('orders')"><span class="mIco">📋</span><span class="grow"><b>Mis pedidos</b><small>Estado y detalles</small></span><span>›</span></button>
+        <button class="menuItem" onclick="showScreen('favorites')"><span class="mIco">❤️</span><span class="grow"><b>Favoritos</b><small>Profesionales guardados</small></span><span>›</span></button>
+        <button class="menuItem" onclick="openTerms()"><span class="mIco">📄</span><span class="grow"><b>Términos y condiciones</b><small>Reglas de uso y privacidad</small></span><span>›</span></button>
+        <button class="menuItem" onclick="showToast('La geolocalización automática está desactivada')"><span class="mIco">📍</span><span class="grow"><b>Ubicación</b><small>Solo búsqueda escrita por localidad</small></span><span>›</span></button>
+        <button class="menuItem" onclick="showToast('Centro de ayuda próximamente')"><span class="mIco">❓</span><span class="grow"><b>Ayuda y soporte</b><small>Centro de ayuda</small></span><span>›</span></button>
+        <button class="menuItem" onclick="logout()"><span class="mIco">🚪</span><span class="grow"><b>Cerrar sesión</b><small>Salir de ServiGo AR</small></span><span>›</span></button>
       </div>
 
       <div class="providerBox">
-        <div class="grow">
-          <h3 style="margin:0 0 5px">¿Sos profesional?</h3>
-          <p style="margin:0;color:var(--muted);font-weight:750">Publicá tu servicio y conseguí clientes.</p>
-        </div>
+        <div class="grow"><h3 style="margin:0 0 5px">¿Sos profesional?</h3><p style="margin:0;color:var(--muted);font-weight:750">Publicá cualquier servicio y conseguí clientes.</p></div>
         <button class="btn" style="width:auto;padding:13px 16px" onclick="openProviderRegister()">Publicar</button>
       </div>
     </section>
@@ -945,419 +227,193 @@
     </nav>
   </main>
 
-  <div id="detailModal" class="modal">
-    <div class="sheet">
-      <div class="sheetHead">
-        <h3 id="modalProName">Profesional</h3>
-        <button class="iconBtn" onclick="closeModal('detailModal')">✕</button>
-      </div>
+  <div id="detailModal" class="modal"><div class="sheet">
+    <div class="sheetHead"><h3 id="modalProName">Profesional</h3><button class="iconBtn" onclick="closeModal('detailModal')">✕</button></div>
+    <div id="modalProContent"></div>
+    <div class="field"><label>Día del servicio</label><input id="requestDate" type="date" /></div>
+    <div class="field"><label>Horario</label><input id="requestTime" type="time" /></div>
+    <div class="field"><label>Mensaje</label><textarea id="requestMsg" placeholder="Contale brevemente qué necesitás..."></textarea></div>
+    <div class="grid2"><button class="btn secondary" onclick="contactSelected()">Contactar</button><button class="btn" onclick="createOrder()">Solicitar</button></div>
+  </div></div>
 
-      <div id="modalProContent"></div>
+  <div id="providerModal" class="modal"><div class="sheet">
+    <div class="sheetHead"><h3>Publicar servicio</h3><button class="iconBtn" onclick="closeModal('providerModal')">✕</button></div>
+    <div class="field"><label>Nombre profesional</label><input id="provName" placeholder="Ej: Sebastián Witon" /></div>
+    <div class="field"><label>Servicio que ofrecés</label><input id="provService" placeholder="Ej: Gasista, Carpintero, Enfermería, Médico, Otro..." /></div>
+    <div class="field"><label>Localidad donde ofrecés el servicio</label><input id="provCity" placeholder="Ej: Villa Bosch" /></div>
+    <div class="field"><label>Contacto</label><input id="provContact" placeholder="WhatsApp, email o teléfono" /></div>
+    <div class="field"><label>Disponibilidad</label><input id="provHours" placeholder="Ej: Lun a Vie 9 a 18 hs" /></div>
+    <div class="field"><label>Descripción</label><textarea id="provDesc" placeholder="Contá qué hacés, experiencia, zonas, urgencias, etc."></textarea></div>
+    <button class="btn" onclick="saveProvider()">Publicar servicio</button>
+  </div></div>
 
-      <div class="field">
-        <label>Día del servicio</label>
-        <input id="requestDate" type="date" />
-      </div>
-      <div class="field">
-        <label>Horario</label>
-        <input id="requestTime" type="time" />
-      </div>
-      <div class="field">
-        <label>Mensaje</label>
-        <textarea id="requestMsg" placeholder="Contale brevemente qué necesitás..."></textarea>
-      </div>
-
-      <div class="grid2">
-        <button class="btn secondary" onclick="contactSelected()">Contactar</button>
-        <button class="btn" onclick="createOrder()">Solicitar</button>
-      </div>
-    </div>
-  </div>
-
-  <div id="providerModal" class="modal">
-    <div class="sheet">
-      <div class="sheetHead">
-        <h3>Publicar servicio</h3>
-        <button class="iconBtn" onclick="closeModal('providerModal')">✕</button>
-      </div>
-
-      <div class="field">
-        <label>Nombre profesional</label>
-        <input id="provName" placeholder="Ej: Sebastián Witon" />
-      </div>
-      <div class="field">
-        <label>Servicio</label>
-        <select id="provService">
-          <option>Electricista</option>
-          <option>Gasista</option>
-          <option>Carpintero</option>
-          <option>Plomero</option>
-          <option>Pintor</option>
-          <option>Enfermería</option>
-          <option>Médico</option>
-          <option>Técnico PC</option>
-          <option>Mascotas</option>
-          <option>Limpieza</option>
-          <option>Otro</option>
-        </select>
-      </div>
-      <div class="field">
-        <label>Localidad donde ofrecés el servicio</label>
-        <input id="provCity" placeholder="Ej: Villa Bosch" />
-      </div>
-      <div class="field">
-        <label>Contacto</label>
-        <input id="provContact" placeholder="WhatsApp, email o teléfono" />
-      </div>
-      <div class="field">
-        <label>Disponibilidad</label>
-        <input id="provHours" placeholder="Ej: Lun a Vie 9 a 18 hs" />
-      </div>
-      <div class="field">
-        <label>Descripción</label>
-        <textarea id="provDesc" placeholder="Contá qué hacés, experiencia, zonas, urgencias, etc."></textarea>
-      </div>
-
-      <button class="btn" onclick="saveProvider()">Publicar servicio</button>
-    </div>
-  </div>
+  <div id="termsModal" class="modal"><div class="sheet">
+    <div class="sheetHead"><h3>Términos y seguridad</h3><button class="iconBtn" onclick="closeModal('termsModal')">✕</button></div>
+    <p class="desc"><b>ServiGo AR</b> conecta usuarios con profesionales por localidad. La plataforma no garantiza trabajos fuera de la información cargada por cada usuario.</p>
+    <p class="desc"><b>Privacidad:</b> no se usa ubicación automática. Las búsquedas son por texto escrito por el usuario.</p>
+    <p class="desc"><b>Seguridad:</b> evitá compartir datos sensibles. Antes de contratar, verificá identidad, matrícula o referencias del profesional si corresponde.</p>
+    <p class="desc"><b>Pagos:</b> cualquier pago o seña debe acordarse con responsabilidad entre las partes.</p>
+    <p class="desc"><b>Versión actual:</b> esta demo guarda información localmente en el navegador. Para usuarios reales, email real y base de datos compartida se debe conectar Firebase/Auth o backend.</p>
+    <button class="btn" style="margin-top:14px" onclick="closeModal('termsModal')">Aceptar</button>
+  </div></div>
 
   <div id="toast" class="toast">Listo</div>
 
   <script>
-    const categories = [
-      ["🛠️","Hogar"],["⚡","Electricista"],["🚰","Plomero"],
-      ["🎨","Pintor"],["🩺","Salud"],["🌱","Jardinería"],
-      ["🔥","Gasista"],["🪚","Carpintero"],["💻","Técnico PC"]
-    ];
+    const STORAGE_PREFIX = "servigoAR_";
+    const categories = [["🛠️","Hogar"],["⚡","Electricista"],["🚰","Plomero"],["🎨","Pintor"],["🩺","Salud"],["🌱","Jardinería"],["🔥","Gasista"],["🪚","Carpintero"],["💻","Técnico PC"],["🧹","Limpieza"],["🐶","Mascotas"],["🚗","Automotor"]];
 
-    const defaultProviders = [
-      {id:1,name:"Martín López",service:"Electricista",city:"Villa Bosch",rating:4.8,reviews:120,icon:"⚡",verified:true,available:true,contact:"+54 9 11 5555 1001",hours:"Lun a Sáb 8 a 18 hs",desc:"Instalaciones, reparaciones, mantenimiento eléctrico y urgencias."},
-      {id:2,name:"Carlos Gómez",service:"Gasista",city:"Córdoba",rating:4.7,reviews:98,icon:"🔥",verified:true,available:true,contact:"+54 9 351 555 2002",hours:"Lun a Vie 9 a 19 hs",desc:"Detección de fugas, reparación de artefactos y matriculado."},
-      {id:3,name:"Luciano Peralta",service:"Carpintero",city:"Villa Bosch",rating:4.9,reviews:76,icon:"🪚",verified:true,available:false,contact:"+54 9 11 5555 3003",hours:"Turnos programados",desc:"Muebles a medida, colocación de puertas y reparaciones."},
-      {id:4,name:"Ana Robledo",service:"Enfermería",city:"Ituzaingó",rating:4.9,reviews:61,icon:"🩺",verified:true,available:true,contact:"+54 9 11 5555 4004",hours:"Disponibilidad nocturna",desc:"Cuidados domiciliarios, controles, acompañamiento y medicación."},
-      {id:5,name:"Diego Ramírez",service:"Plomero",city:"Rosario",rating:4.6,reviews:88,icon:"🚰",verified:false,available:true,contact:"+54 9 341 555 5005",hours:"24 hs",desc:"Destapes, cañerías, pérdidas y reparaciones urgentes."},
-      {id:6,name:"Laura Méndez",service:"Médico",city:"Córdoba",rating:4.8,reviews:42,icon:"🩺",verified:true,available:true,contact:"turnos@servigo.app",hours:"Lun, Mié y Vie 10 a 16 hs",desc:"Consulta clínica general y orientación médica domiciliaria."}
-    ];
-
-    let providers = JSON.parse(localStorage.getItem("servigoProviders") || "null") || defaultProviders;
-    let orders = JSON.parse(localStorage.getItem("servigoOrders") || "[]");
-    let messages = JSON.parse(localStorage.getItem("servigoMessages") || "[]");
+    let providers = JSON.parse(localStorage.getItem(STORAGE_PREFIX+"providers") || "[]");
+    let orders = JSON.parse(localStorage.getItem(STORAGE_PREFIX+"orders") || "[]");
+    let messages = JSON.parse(localStorage.getItem(STORAGE_PREFIX+"messages") || "[]");
+    let favorites = JSON.parse(localStorage.getItem(STORAGE_PREFIX+"favorites") || "[]");
+    let currentUser = JSON.parse(localStorage.getItem(STORAGE_PREFIX+"user") || "null");
     let selectedProvider = null;
     let currentOrderFilter = "Todos";
 
-    function saveAll(){
-      localStorage.setItem("servigoProviders", JSON.stringify(providers));
-      localStorage.setItem("servigoOrders", JSON.stringify(orders));
-      localStorage.setItem("servigoMessages", JSON.stringify(messages));
-    }
+    const cityAliases = {
+      "villavol":"villa bosch", "villabor":"villa bosch", "villa bosch":"villa bosch",
+      "caba":"capital federal", "capital":"capital federal", "capital federal":"capital federal", "buenos aires capital":"capital federal",
+      "villadeboto":"villa devoto", "villa deboto":"villa devoto", "villa devoto":"villa devoto",
+      "laprida":"laprida", "la prida":"laprida",
+      "bahia blanca":"bahía blanca", "bahía blanca":"bahía blanca", "la barria":"bahía blanca", "la barría":"bahía blanca",
+      "cordoba":"córdoba", "córdoba":"córdoba", "rosario":"rosario", "ituzaingo":"ituzaingó", "ituzaingó":"ituzaingó"
+    };
 
+    function normalizeText(str){
+      return (str || "").toLowerCase().trim().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/\s+/g," ");
+    }
+    function normalizeCity(str){
+      const clean = normalizeText(str);
+      const aliasKey = Object.keys(cityAliases).find(k => normalizeText(k) === clean);
+      return normalizeText(aliasKey ? cityAliases[aliasKey] : clean);
+    }
+    function saveAll(){
+      localStorage.setItem(STORAGE_PREFIX+"providers", JSON.stringify(providers));
+      localStorage.setItem(STORAGE_PREFIX+"orders", JSON.stringify(orders));
+      localStorage.setItem(STORAGE_PREFIX+"messages", JSON.stringify(messages));
+      localStorage.setItem(STORAGE_PREFIX+"favorites", JSON.stringify(favorites));
+    }
+    function login(){
+      const email = document.getElementById("loginEmail").value.trim();
+      const name = document.getElementById("loginName").value.trim();
+      if(!email || !email.includes("@")) return showToast("Ingresá un email válido");
+      if(!name) return showToast("Ingresá tu nombre");
+      currentUser = {name,email,createdAt:new Date().toISOString()};
+      localStorage.setItem(STORAGE_PREFIX+"user", JSON.stringify(currentUser));
+      bootApp();
+      showToast("Sesión iniciada");
+    }
+    function guestLogin(){
+      currentUser = {name:"Sebastián",email:"demo@servigo.ar",createdAt:new Date().toISOString()};
+      localStorage.setItem(STORAGE_PREFIX+"user", JSON.stringify(currentUser));
+      bootApp();
+    }
+    function logout(){
+      localStorage.removeItem(STORAGE_PREFIX+"user");
+      currentUser = null;
+      document.getElementById("mainApp").classList.add("hidden");
+      document.getElementById("loginScreen").classList.remove("hidden");
+      showToast("Sesión cerrada");
+    }
+    function bootApp(){
+      document.getElementById("loginScreen").classList.add("hidden");
+      document.getElementById("mainApp").classList.remove("hidden");
+      renderAll();
+      renderProfile();
+    }
     function showScreen(id, btn){
       document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
       document.getElementById(id).classList.add("active");
-
       document.querySelectorAll(".navBtn").forEach(b => b.classList.remove("active"));
       if(btn && !btn.classList.contains("plus")) btn.classList.add("active");
       else {
-        const index = {home:0,search:1,orders:2,messages:3,profile:4}[id] ?? 0;
-        const map = [0,1,null,3,4];
-        const navIndex = map[index] ?? 0;
-        document.querySelectorAll(".navBtn")[navIndex].classList.add("active");
+        const idx = {home:0,search:1,orders:1,messages:3,favorites:4,profile:4}[id] ?? 0;
+        document.querySelectorAll(".navBtn")[idx].classList.add("active");
       }
-
-      if(id === "search") renderResults();
-      if(id === "orders") renderOrders();
-      if(id === "messages") renderMessages();
-      if(id === "profile") renderProfile();
-
+      if(id==="search") renderResults();
+      if(id==="orders") renderOrders();
+      if(id==="messages") renderMessages();
+      if(id==="favorites") renderFavorites();
+      if(id==="profile") renderProfile();
       window.scrollTo({top:0,behavior:"smooth"});
     }
-
     function renderCategories(){
-      const grid = document.getElementById("categoryGrid");
-      grid.innerHTML = categories.slice(0,6).map(c => `
-        <button class="cat" onclick="selectCategory('${c[1]}')">
-          <div class="ico">${c[0]}</div>
-          <b>${c[1]}</b>
-        </button>
-      `).join("");
-
-      const chips = document.getElementById("filterChips");
-      chips.innerHTML = `<button class="chip active" onclick="setServiceChip('',this)">Todos</button>` +
-        categories.map(c => `<button class="chip" onclick="setServiceChip('${c[1]}',this)">${c[0]} ${c[1]}</button>`).join("");
+      document.getElementById("categoryGrid").innerHTML = categories.slice(0,6).map(c => `<button class="cat" onclick="selectCategory('${c[1]}')"><div class="ico">${c[0]}</div><b>${c[1]}</b></button>`).join("");
+      document.getElementById("filterChips").innerHTML = `<button class="chip active" onclick="setServiceChip('',this)">Todos</button>` + categories.map(c => `<button class="chip" onclick="setServiceChip('${c[1]}',this)">${c[0]} ${c[1]}</button>`).join("");
     }
-
-    function selectCategory(service){
-      document.getElementById("searchService").value = service === "Hogar" ? "" : service;
-      showScreen("search");
-    }
-
-    function setServiceChip(service, el){
-      document.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
-      el.classList.add("active");
-      document.getElementById("searchService").value = service === "Hogar" ? "" : service;
-      renderResults();
-    }
-
-    function syncSearch(){
-      document.getElementById("searchCity").value = document.getElementById("homeCity").value;
-      document.getElementById("searchService").value = document.getElementById("homeService").value;
-    }
-
-    function searchFromHome(){
-      syncSearch();
-      showScreen("search");
-    }
-
-    function clearSearch(){
-      document.getElementById("searchCity").value = "";
-      document.getElementById("searchService").value = "";
-      document.querySelectorAll(".chip").forEach((c,i)=>c.classList.toggle("active",i===0));
-      renderResults();
-    }
-
+    function selectCategory(service){document.getElementById("searchService").value = service==="Hogar" ? "" : service;showScreen("search")}
+    function setServiceChip(service, el){document.querySelectorAll(".chip").forEach(c=>c.classList.remove("active"));el.classList.add("active");document.getElementById("searchService").value = service==="Hogar" ? "" : service;renderResults()}
+    function syncSearch(){document.getElementById("searchCity").value=document.getElementById("homeCity").value;document.getElementById("searchService").value=document.getElementById("homeService").value}
+    function searchFromHome(){syncSearch();showScreen("search")}
+    function clearSearch(){document.getElementById("searchCity").value="";document.getElementById("searchService").value="";document.querySelectorAll(".chip").forEach((c,i)=>c.classList.toggle("active",i===0));renderResults()}
     function filterProviders(){
-      const city = (document.getElementById("searchCity").value || "").toLowerCase().trim();
-      const service = (document.getElementById("searchService").value || "").toLowerCase().trim();
-
+      const city = normalizeCity(document.getElementById("searchCity").value);
+      const service = normalizeText(document.getElementById("searchService").value);
       return providers.filter(p => {
-        const cityOk = !city || p.city.toLowerCase().includes(city);
-        const serviceOk = !service || p.service.toLowerCase().includes(service) || p.desc.toLowerCase().includes(service);
+        const pCity = normalizeCity(p.city);
+        const pService = normalizeText(p.service + " " + p.desc);
+        const cityOk = !city || pCity.includes(city) || city.includes(pCity);
+        const serviceOk = !service || pService.includes(service) || service.includes(normalizeText(p.service));
         return cityOk && serviceOk;
       });
     }
-
+    function ratingText(p){ return p.reviews > 0 ? `⭐ ${p.rating.toFixed(1)} (${p.reviews})` : "⭐ Sin calificaciones"; }
     function proCard(p){
-      return `
-        <div class="card proCard">
-          <div class="pro">
-            <div class="avatar">${p.icon || "🛠️"}<span class="online"></span></div>
-            <div class="proInfo">
-              <div style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start">
-                <div>
-                  <h4>${p.name}</h4>
-                  <p class="service">${p.service} ${p.verified ? "✅" : ""}</p>
-                </div>
-                <span class="badge ${p.available ? "" : "red"}">${p.available ? "Disponible" : "Ocupado"}</span>
-              </div>
-              <div class="meta"><span>⭐ ${p.rating || "Nuevo"} (${p.reviews || 0})</span><span>📍 ${p.city}</span></div>
-              <p class="desc">${p.desc}</p>
-            </div>
-          </div>
-          <div class="actions">
-            <button class="btn" onclick="openProvider(${p.id})">Ver perfil</button>
-            <button class="btn light" onclick="quickMessage(${p.id})">💬</button>
-          </div>
-        </div>
-      `;
+      const fav = favorites.includes(p.id);
+      return `<div class="card proCard"><div class="pro"><div class="avatar">${p.icon||"🛠️"}<span class="online"></span></div><div class="proInfo"><div style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start"><div><h4>${p.name}</h4><p class="service">${p.service} ${p.verified?"✅":""}</p></div><span class="badge ${p.available?"":"red"}">${p.available?"Disponible":"Ocupado"}</span></div><div class="meta"><span>${ratingText(p)}</span><span>📍 ${p.city}</span></div><p class="desc">${p.desc}</p></div></div><div class="actions"><button class="btn" onclick="openProvider(${p.id})">Ver perfil</button><button class="btn light" onclick="quickMessage(${p.id})">💬</button><button class="btn light" onclick="toggleFavorite(${p.id})">${fav?"❤️":"♡"}</button></div></div>`;
     }
-
     function renderFeatured(){
-      document.getElementById("featuredList").innerHTML = providers.slice(0,3).map(proCard).join("");
+      const list = document.getElementById("featuredList");
+      list.innerHTML = providers.length ? providers.slice(0,3).map(proCard).join("") : `<div class="empty">Todavía no hay profesionales publicados. Tocá “Ofrecer mis servicios” para cargar el primero.</div>`;
     }
-
     function renderResults(){
-      const list = document.getElementById("resultsList");
       const data = filterProviders();
-
-      if(!data.length){
-        list.innerHTML = `<div class="empty">No encontramos profesionales con esa búsqueda. Probá otra localidad o publicá tu necesidad.</div>`;
-        return;
-      }
-
-      list.innerHTML = data.map(proCard).join("");
+      document.getElementById("resultsList").innerHTML = data.length ? data.map(proCard).join("") : `<div class="empty">No encontramos profesionales con esa búsqueda. Si buscás “Villa Bosch”, “Córdoba”, “Capital Federal”, “Villa Devoto”, “Laprida” o “Bahía Blanca”, solo aparecerán usuarios publicados en esas localidades.</div>`;
     }
-
     function openProvider(id){
-      selectedProvider = providers.find(p => p.id === id);
-      if(!selectedProvider) return;
-
+      selectedProvider = providers.find(p=>p.id===id); if(!selectedProvider) return;
       document.getElementById("modalProName").textContent = selectedProvider.name;
-      document.getElementById("modalProContent").innerHTML = `
-        <div class="card" style="box-shadow:none;margin-bottom:14px">
-          <div class="pro">
-            <div class="avatar">${selectedProvider.icon || "🛠️"}</div>
-            <div class="proInfo">
-              <h4>${selectedProvider.name}</h4>
-              <p class="service">${selectedProvider.service} ${selectedProvider.verified ? "✅" : ""}</p>
-              <div class="meta"><span>⭐ ${selectedProvider.rating || "Nuevo"}</span><span>📍 ${selectedProvider.city}</span></div>
-              <p class="desc">${selectedProvider.desc}</p>
-              <p class="desc"><b>Horario:</b> ${selectedProvider.hours}</p>
-              <p class="desc"><b>Contacto:</b> ${selectedProvider.contact}</p>
-            </div>
-          </div>
-        </div>
-      `;
+      document.getElementById("modalProContent").innerHTML = `<div class="card" style="box-shadow:none;margin-bottom:14px"><div class="pro"><div class="avatar">${selectedProvider.icon||"🛠️"}</div><div class="proInfo"><h4>${selectedProvider.name}</h4><p class="service">${selectedProvider.service} ${selectedProvider.verified?"✅":""}</p><div class="meta"><span>${ratingText(selectedProvider)}</span><span>📍 ${selectedProvider.city}</span></div><p class="desc">${selectedProvider.desc}</p><p class="desc"><b>Horario:</b> ${selectedProvider.hours}</p><p class="desc"><b>Contacto:</b> ${selectedProvider.contact}</p></div></div></div>`;
       document.getElementById("detailModal").classList.add("active");
     }
-
-    function closeModal(id){
-      document.getElementById(id).classList.remove("active");
-    }
-
-    function contactSelected(){
-      if(!selectedProvider) return;
-      messages.unshift({
-        id: Date.now(),
-        name:selectedProvider.name,
-        service:selectedProvider.service,
-        text:"Hola, necesito consultar por tu servicio.",
-        date:new Date().toLocaleString()
-      });
-      saveAll();
-      closeModal("detailModal");
-      showToast("Mensaje creado");
-      showScreen("messages");
-    }
-
-    function quickMessage(id){
-      const p = providers.find(x => x.id === id);
-      if(!p) return;
-      messages.unshift({id:Date.now(),name:p.name,service:p.service,text:"Consulta iniciada desde ServiGo AR.",date:new Date().toLocaleString()});
-      saveAll();
-      showToast("Mensaje creado");
-      renderMessages();
-    }
-
+    function closeModal(id){document.getElementById(id).classList.remove("active")}
+    function contactSelected(){ if(!selectedProvider) return; messages.unshift({id:Date.now(),name:selectedProvider.name,service:selectedProvider.service,text:"Hola, necesito consultar por tu servicio.",date:new Date().toLocaleString()}); saveAll(); closeModal("detailModal"); showToast("Mensaje creado"); showScreen("messages") }
+    function quickMessage(id){ const p=providers.find(x=>x.id===id); if(!p)return; messages.unshift({id:Date.now(),name:p.name,service:p.service,text:"Consulta iniciada desde ServiGo AR.",date:new Date().toLocaleString()}); saveAll(); showToast("Mensaje creado") }
     function createOrder(){
       if(!selectedProvider) return;
-      const date = document.getElementById("requestDate").value || "Sin fecha";
-      const time = document.getElementById("requestTime").value || "Sin horario";
-      const msg = document.getElementById("requestMsg").value || "Sin mensaje";
-
-      orders.unshift({
-        id: Date.now(),
-        service:selectedProvider.service,
-        provider:selectedProvider.name,
-        city:selectedProvider.city,
-        icon:selectedProvider.icon,
-        status:"En curso",
-        date,time,msg,
-        rating:selectedProvider.rating
-      });
-      saveAll();
-      closeModal("detailModal");
-      showToast("Pedido creado");
-      showScreen("orders");
+      orders.unshift({id:Date.now(),service:selectedProvider.service,provider:selectedProvider.name,city:selectedProvider.city,icon:selectedProvider.icon,status:"En curso",date:document.getElementById("requestDate").value||"Sin fecha",time:document.getElementById("requestTime").value||"Sin horario",msg:document.getElementById("requestMsg").value||"Sin mensaje",rating:selectedProvider.rating,reviews:selectedProvider.reviews});
+      saveAll(); closeModal("detailModal"); showToast("Pedido creado"); showScreen("orders");
     }
-
-    function setOrderFilter(filter, el){
-      currentOrderFilter = filter;
-      document.querySelectorAll(".tabs button").forEach(b => b.classList.remove("active"));
-      el.classList.add("active");
-      renderOrders();
-    }
-
+    function setOrderFilter(filter,el){currentOrderFilter=filter;document.querySelectorAll(".tabs button").forEach(b=>b.classList.remove("active"));el.classList.add("active");renderOrders()}
     function renderOrders(){
-      const list = document.getElementById("ordersList");
-      let data = orders;
-      if(currentOrderFilter !== "Todos") data = orders.filter(o => o.status === currentOrderFilter);
-
-      if(!data.length){
-        list.innerHTML = `<div class="empty">Todavía no tenés pedidos en esta sección.</div>`;
-        return;
-      }
-
-      list.innerHTML = data.map(o => `
-        <div class="card proCard">
-          <div style="display:flex;justify-content:space-between;margin-bottom:10px">
-            <span class="badge ${o.status === "Cancelado" ? "red" : o.status === "Completado" ? "gray" : ""}">${o.status}</span>
-            <span style="color:var(--muted);font-weight:900;font-size:.8rem">Pedido #${String(o.id).slice(-4)}</span>
-          </div>
-          <div class="pro">
-            <div class="avatar">${o.icon || "🛠️"}</div>
-            <div class="proInfo">
-              <h4>${o.service}</h4>
-              <p class="desc">${o.msg}</p>
-              <div class="meta"><span>📍 ${o.city}</span><span>📅 ${o.date}</span><span>🕒 ${o.time}</span></div>
-              <div class="meta"><span>${o.provider}</span><span>⭐ ${o.rating || ""}</span></div>
-            </div>
-          </div>
-          <button class="btn" style="margin-top:12px" onclick="showToast('Detalle del pedido próximamente')">Ver detalle</button>
-        </div>
-      `).join("");
+      let data = currentOrderFilter==="Todos" ? orders : orders.filter(o=>o.status===currentOrderFilter);
+      document.getElementById("ordersList").innerHTML = data.length ? data.map(o=>`<div class="card proCard"><div style="display:flex;justify-content:space-between;margin-bottom:10px"><span class="badge ${o.status==="Cancelado"?"red":o.status==="Completado"?"gray":""}">${o.status}</span><span style="color:var(--muted);font-weight:900;font-size:.8rem">Pedido #${String(o.id).slice(-4)}</span></div><div class="pro"><div class="avatar">${o.icon||"🛠️"}</div><div class="proInfo"><h4>${o.service}</h4><p class="desc">${o.msg}</p><div class="meta"><span>📍 ${o.city}</span><span>📅 ${o.date}</span><span>🕒 ${o.time}</span></div><div class="meta"><span>${o.provider}</span></div></div></div><button class="btn" style="margin-top:12px" onclick="showToast('Detalle del pedido próximamente')">Ver detalle</button></div>`).join("") : `<div class="empty">Todavía no tenés pedidos en esta sección.</div>`;
     }
-
-    function renderMessages(){
-      const list = document.getElementById("messagesList");
-      if(!messages.length){
-        list.innerHTML = `<div class="empty">Todavía no tenés mensajes. Tocá 💬 en un profesional para iniciar una conversación.</div>`;
-        return;
-      }
-
-      list.innerHTML = messages.map(m => `
-        <div class="card proCard">
-          <div class="pro">
-            <div class="avatar">💬</div>
-            <div class="proInfo">
-              <h4>${m.name}</h4>
-              <p class="service">${m.service}</p>
-              <p class="desc">${m.text}</p>
-              <div class="meta"><span>${m.date}</span></div>
-            </div>
-          </div>
-        </div>
-      `).join("");
-    }
-
-    function openProviderRegister(){
-      document.getElementById("providerModal").classList.add("active");
-    }
-
+    function renderMessages(){document.getElementById("messagesList").innerHTML = messages.length ? messages.map(m=>`<div class="card proCard"><div class="pro"><div class="avatar">💬</div><div class="proInfo"><h4>${m.name}</h4><p class="service">${m.service}</p><p class="desc">${m.text}</p><div class="meta"><span>${m.date}</span></div></div></div></div>`).join("") : `<div class="empty">Todavía no tenés mensajes. Tocá 💬 en un profesional para iniciar una conversación.</div>`}
+    function toggleFavorite(id){ favorites = favorites.includes(id) ? favorites.filter(x=>x!==id) : [...favorites,id]; saveAll(); renderAll(); showToast(favorites.includes(id)?"Agregado a favoritos":"Quitado de favoritos") }
+    function renderFavorites(){ const data = providers.filter(p=>favorites.includes(p.id)); document.getElementById("favoritesList").innerHTML = data.length ? data.map(proCard).join("") : `<div class="empty">Todavía no guardaste favoritos. Tocá ♡ en un profesional para guardarlo.</div>`}
+    function openProviderRegister(){document.getElementById("providerModal").classList.add("active")}
+    function iconForService(service){ const s=normalizeText(service); if(s.includes("electric"))return"⚡"; if(s.includes("gas"))return"🔥"; if(s.includes("carp"))return"🪚"; if(s.includes("plom"))return"🚰"; if(s.includes("pint"))return"🎨"; if(s.includes("med")||s.includes("enfer"))return"🩺"; if(s.includes("pc")||s.includes("tec"))return"💻"; if(s.includes("jardin"))return"🌱"; if(s.includes("limp"))return"🧹"; return"🛠️"; }
     function saveProvider(){
-      const name = document.getElementById("provName").value.trim();
-      const service = document.getElementById("provService").value;
-      const city = document.getElementById("provCity").value.trim();
-      const contact = document.getElementById("provContact").value.trim();
-      const hours = document.getElementById("provHours").value.trim();
-      const desc = document.getElementById("provDesc").value.trim();
-
-      if(!name || !city || !contact){
-        showToast("Completá nombre, localidad y contacto");
-        return;
-      }
-
-      const cat = categories.find(c => c[1] === service);
-      providers.unshift({
-        id:Date.now(),
-        name,service,city,contact,
-        hours:hours || "A coordinar",
-        desc:desc || "Servicio profesional disponible.",
-        rating:"Nuevo",
-        reviews:0,
-        icon:cat ? cat[0] : "🛠️",
-        verified:false,
-        available:true
-      });
-
-      saveAll();
-      closeModal("providerModal");
-      showToast("Servicio publicado");
-      renderAll();
-      showScreen("search");
+      const name=document.getElementById("provName").value.trim(), service=document.getElementById("provService").value.trim(), city=document.getElementById("provCity").value.trim(), contact=document.getElementById("provContact").value.trim(), hours=document.getElementById("provHours").value.trim(), desc=document.getElementById("provDesc").value.trim();
+      if(!name||!service||!city||!contact) return showToast("Completá nombre, servicio, localidad y contacto");
+      providers.unshift({id:Date.now(),name,service,city,contact,hours:hours||"A coordinar",desc:desc||"Servicio profesional disponible.",rating:0,reviews:0,icon:iconForService(service),verified:false,available:true,ownerEmail:currentUser?.email||"",createdAt:new Date().toISOString()});
+      saveAll(); closeModal("providerModal"); showToast("Servicio publicado"); renderAll(); showScreen("search");
     }
-
     function renderProfile(){
+      const u=currentUser||{name:"Sebastián",email:"demo@servigo.ar"};
+      document.getElementById("profileName").textContent = u.name;
+      document.getElementById("profileEmail").textContent = u.email;
+      document.getElementById("profileInitial").textContent = (u.name||"S")[0].toUpperCase();
       document.getElementById("statOrders").textContent = orders.length;
+      document.getElementById("statFavs").textContent = favorites.length;
+      document.getElementById("statRating").textContent = "0.0";
     }
-
-    function showToast(text){
-      const t = document.getElementById("toast");
-      t.textContent = text;
-      t.classList.add("show");
-      setTimeout(()=>t.classList.remove("show"),1800);
-    }
-
-    function renderAll(){
-      renderCategories();
-      renderFeatured();
-      renderResults();
-      renderOrders();
-      renderMessages();
-      renderProfile();
-    }
-
-    renderAll();
+    function openTerms(){document.getElementById("termsModal").classList.add("active")}
+    function showToast(text){const t=document.getElementById("toast");t.textContent=text;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),1800)}
+    function renderAll(){renderCategories();renderFeatured();renderResults();renderOrders();renderMessages();renderFavorites();renderProfile()}
+    if(currentUser) bootApp(); else {renderCategories();renderFeatured();}
   </script>
 </body>
 </html>
