@@ -235,6 +235,15 @@
           </div>
         </div>
 
+        <!-- Suscripción PRO -->
+        <div class="card" style="margin-top:14px;border:2px solid var(--pro2)">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px">
+            <h3 style="margin:0">🚀 Tu plan ServiGo</h3>
+            <span id="planBadge" class="badge gray">Gratis</span>
+          </div>
+          <div id="planInfoBox"></div>
+        </div>
+
         <!-- Vidriera -->
         <div class="card" style="margin-top:4px">
           <h3 style="margin-top:0">🖼️ Vidriera profesional</h3>
@@ -488,8 +497,8 @@ function boot(){loginScreen.classList.add("hidden");mainApp.classList.remove("hi
 function updateAccount(){let i=accounts.findIndex(a=>a.email===user.email);if(i>=0)accounts[i]=user;else accounts.push(user);save()}
 
 // ── NAVEGACIÓN ──
-function fillSelects(){["searchServiceSelect","provServiceSelect"].forEach(id=>{let el=document.getElementById(id);el.innerHTML='<option value="">Seleccionar servicio</option>'+services.map(s=>`<option>${s}</option>`).join("")})}
-function serviceSelectToInput(sel,input){let v=document.getElementById(sel).value;if(v)document.getElementById(input).value=v}
+function fillSelects(){["searchServiceSelect","provServiceSelect"].forEach(id=>{let el=document.getElementById(id);el.innerHTML='<option value="">-- Elegir categoría --</option>'+services.map(s=>`<option value="${s}">${s}</option>`).join("")})}
+function serviceSelectToInput(sel,input){let v=document.getElementById(sel).value;if(v){let inp=document.getElementById(input);if(inp)inp.value=v}}
 function showScreen(id,btn){document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));document.getElementById(id).classList.add("active");document.querySelectorAll(".navBtn").forEach(b=>b.classList.remove("active","proActive"));if(btn)btn.classList.add(id==="professional"?"proActive":"active");if(id==="search")renderResults();if(id==="orders")renderOrders();if(id==="professional")renderPro();if(id==="messages")renderMessages();if(id==="profile")renderProfile();scrollTo({top:0,behavior:"smooth"})}
 
 // ── BUSCAR ──
@@ -498,7 +507,17 @@ function searchFromHome(){syncSearch();showScreen("search")}
 function clearSearch(){searchCity.value="";searchService.value="";searchServiceSelect.value="";renderResults()}
 function renderCategories(){categoryGrid.innerHTML=services.slice(0,6).map(s=>`<button class="cat" onclick="pickService('${s}')"><div class="ico">${icons[s]||"🛠️"}</div><b>${s}</b></button>`).join("")}
 function pickService(s){searchService.value=s;showScreen("search")}
-function matches(){let c=city(searchCity.value),sv=norm(searchService.value);return providers.filter(p=>(p.status!=="Pausado")&&(!c||city(p.city).includes(c)||c.includes(city(p.city)))&&(!sv||norm(p.service+" "+p.desc).includes(sv)||sv.includes(norm(p.service))))}
+function matches(){
+  let c=city(searchCity.value),sv=norm(searchService.value);
+  let result=providers.filter(p=>(p.status!=="Pausado")&&(!c||city(p.city).includes(c)||c.includes(city(p.city)))&&(!sv||norm(p.service+" "+p.desc).includes(sv)||sv.includes(norm(p.service))));
+  // ordenar: destacado > pro > gratis; dentro de cada grupo, disponibles primero
+  return result.sort((a,b)=>{
+    let rank={destacado:3,pro:2,gratis:1};
+    let ra=(rank[a.plan]||1)+(a.available?0.5:0);
+    let rb=(rank[b.plan]||1)+(b.available?0.5:0);
+    return rb-ra;
+  });
+}
 function avatarHtml(p){return p.photo?`<div class="avatar" style="background-image:url('${p.photo}')"></div>`:`<div class="avatar">${p.icon||"🛠️"}</div>`}
 function availBadge(p){
   let online=p.available===true;
@@ -510,13 +529,14 @@ function providerCard(p){
   let gallery=(p.gallery||[]).slice(0,3).map(src=>`<div style="background-image:url('${src}')"></div>`).join("");
   let hours=p.availHours?`<span>🕐 ${p.availHours}</span>`:"";
   let vb=verBadgesHtml(p);
+  let planTag=p.plan==="destacado"?`<span class="verBadge" style="background:#fef3c7;color:#92400e">⭐ Destacado</span>`:p.plan==="pro"?`<span class="verBadge mat">🚀 PRO</span>`:"";
   let mat=p.matricula?`<span>📋 Mat: ${p.matricula}</span>`:"";
   return`<div class="card proCard">
     <div class="pro">${avatarHtml(p)}<div class="proInfo">
       <h4>${p.name}</h4>
       <p class="service">${p.service}</p>
       <div class="meta">${availBadge(p)}<span>⭐ ${av.count?av.avg.toFixed(1)+" ("+av.count+")":"Sin calificaciones"}</span><span>📍 ${p.city}</span>${p.price?`<span>💵 Desde ${p.price}</span>`:""}</div>
-      ${vb?`<div style="margin:5px 0">${vb}</div>`:""}
+      ${planTag||vb?`<div style="margin:5px 0">${planTag}${vb}</div>`:""}
       ${hours||mat?`<div class="meta" style="margin-top:4px">${hours}${mat}</div>`:""}
       <p class="desc">${p.desc||"Servicio profesional disponible."}</p>
     </div></div>
@@ -565,6 +585,7 @@ function renderPro(){
   proPanel.classList.remove("hidden");
   loadAvailToggle();
   renderVerSection();
+  renderPlanBox();
   renderProStats();
   renderMyServices();
   renderProJobs();
@@ -645,20 +666,36 @@ function editProvider(id){let p=providers.find(x=>x.id===id&&x.owner===user?.ema
 function deleteProvider(id){let p=providers.find(x=>x.id===id&&x.owner===user?.email);if(!p)return toast("No encontré ese servicio");if(!confirm("¿Eliminar este servicio publicado?"))return;providers=providers.filter(x=>x.id!==id);save();renderAll();renderPro();toast("Servicio eliminado")}
 function toggleProviderStatus(id){let p=providers.find(x=>x.id===id&&x.owner===user?.email);if(!p)return;p.status=p.status==="Pausado"?"Activo":"Pausado";save();renderAll();renderPro();toast(p.status==="Pausado"?"Publicación pausada":"Servicio publicado nuevamente")}
 function saveProvider(){
-  let name=provName.value.trim(),service=provService.value.trim()||provServiceSelect.value,cityValue=provCity.value.trim(),contact=provContact.value.trim();
-  if(!name||!service||!cityValue||!contact)return toast("Completá nombre, servicio, localidad y contacto");
+  // Tomar servicio: primero el select, si no el input libre
+  let selVal=provServiceSelect.value;
+  let txtVal=provService.value.trim();
+  let service=selVal&&selVal!=""?selVal:txtVal;
+  let name=provName.value.trim()||user?.name||"";
+  let cityValue=provCity.value.trim();
+  let contact=provContact.value.trim();
+  if(!service)return toast("Elegí o escribí el tipo de servicio");
+  if(!cityValue)return toast("Escribí la localidad");
+  if(!contact)return toast("Agregá un contacto (WhatsApp o teléfono)");
+  if(!name)return toast("Ingresá tu nombre profesional");
   let matricula=provMatInput?provMatInput.value.trim():"";
-  let data={name,service,city:cityValue,contact,price:provPrice.value.trim(),hours:provHours.value||"A coordinar",status:provStatus.value||"Activo",desc:provDesc.value||"Servicio profesional disponible.",icon:icons[service]||"🛠️",photo:tempProviderPhoto,gallery:tempProviderGallery,owner:user?.email||"",matricula};
+  let data={name,service,city:cityValue,contact,
+    price:provPrice.value.trim(),
+    hours:provHours.value||"A coordinar",
+    status:provStatus.value||"Activo",
+    desc:provDesc.value||"Servicio profesional disponible.",
+    icon:icons[service]||"🛠️",
+    photo:tempProviderPhoto,gallery:tempProviderGallery,
+    owner:user?.email||"",matricula};
   if(tempCredPhoto){data.verMatDoc=tempCredPhoto;data.verMat=data.verMat||"pending";}
   if(editingProviderId){
     let idx=providers.findIndex(x=>x.id===editingProviderId&&x.owner===user?.email);
     if(idx<0)return toast("No encontré ese servicio");
-    // preservar verificación existente
     let existing=providers[idx];
     data.verId=existing.verId;data.verMat=data.verMat||existing.verMat;data.verSG=existing.verSG;
-    providers[idx]={...existing,...data};toast("Servicio actualizado");
+    data.available=existing.available;data.availHours=existing.availHours;
+    providers[idx]={...existing,...data};toast("Servicio actualizado ✓");
   }else{
-    providers.unshift({id:Date.now(),...data});toast("Servicio publicado");
+    providers.unshift({id:Date.now(),...data});toast("Servicio publicado ✓");
   }
   editingProviderId=null;tempProviderPhoto="";tempProviderGallery=[];tempCredPhoto="";
   save();closeModal("providerModal");renderAll();showScreen("professional");
@@ -691,7 +728,51 @@ function openJobFicha(id){let o=orders.find(x=>x.id===id);if(!o)return;currentJo
 function saveJobFicha(){let o=orders.find(x=>x.id===currentJobId);if(!o)return;o.amount=jobAmount.value.trim();o.paid=jobPaid.value;o.workNotes=jobNotes.value.trim();o.status=jobStatus.value;save();closeModal("jobModal");renderProJobs();renderProStats();renderOrders();toast("Ficha guardada")}
 function markJobPaid(id){let o=orders.find(x=>x.id===id);if(!o)return;o.paid="Pagado";save();renderProJobs();renderProStats();toast("Marcado como pagado")}
 
-// ── VERIFICACIÓN ──
+// ── PLANES / SUSCRIPCIÓN ──
+const planes={
+  gratis:{nombre:"Plan Gratis",precio:0,color:"gray",features:["1 servicio publicado","Aparece en búsquedas","Sin badge destacado"]},
+  pro:{nombre:"PRO Mensual",precio:4500,color:"pro",features:["Servicios ilimitados","🔝 Aparece primero en búsquedas","Badge PRO destacado","Panel completo de agenda","Soporte prioritario"]},
+  destacado:{nombre:"Destacado Semanal",precio:1800,color:"amber",features:["Aparece primero 7 días","Badge ⭐ Destacado","Ideal para ganar clientes rápido"]}
+};
+function renderPlanBox(){
+  let plan=user.plan||"gratis";
+  let p=planes[plan]||planes.gratis;
+  let vencimiento=user.planVence?` · Vence ${new Date(user.planVence).toLocaleDateString("es-AR")}`:"";
+  planBadge.textContent=p.nombre;
+  planBadge.className="badge "+(plan==="gratis"?"gray":plan==="pro"?"pro":"amber");
+  planInfoBox.innerHTML=`
+    <ul style="padding:0 0 0 14px;margin:0 0 12px;color:#475569;font-size:.84rem;font-weight:700">
+      ${p.features.map(f=>`<li style="margin-bottom:4px">${f}</li>`).join("")}
+    </ul>
+    ${vencimiento?`<p class="desc" style="margin-bottom:10px">📅${vencimiento}</p>`:""}
+    ${plan==="gratis"?`
+      <p class="desc" style="font-weight:800;color:var(--pro2);margin-bottom:10px">Suscribite para crecer más rápido:</p>
+      <div style="display:grid;gap:8px">
+        <button class="btn pro" onclick="suscribirse('pro')">PRO Mensual — $4.500/mes <span>→</span></button>
+        <button class="btn" style="background:linear-gradient(135deg,#f59e0b,#fbbf24)" onclick="suscribirse('destacado')">Destacado Semanal — $1.800 <span>→</span></button>
+      </div>`
+    :plan==="destacado"?`<button class="btn pro" onclick="suscribirse('pro')">Pasarme a PRO Mensual <span>→</span></button>`
+    :`<button class="btn light" onclick="suscribirse('gratis')">Cancelar suscripción</button>`}
+  `;
+}
+function suscribirse(plan){
+  if(plan==="gratis"){
+    if(!confirm("¿Cancelar tu suscripción y volver al plan gratuito?"))return;
+    user.plan="gratis";user.planVence=null;
+  }else{
+    // En producción: redirigir a Mercado Pago Checkout Pro
+    // Por ahora simula la activación
+    let dias=plan==="pro"?30:7;
+    let vence=new Date();vence.setDate(vence.getDate()+dias);
+    user.plan=plan;user.planVence=vence.toISOString();
+    toast(`Plan ${planes[plan].nombre} activado ✓ (demo)`);
+  }
+  // aplicar orden de búsqueda según plan
+  providers.forEach(p=>{if(p.owner===user.email)p.plan=user.plan});
+  updateAccount();save();renderPlanBox();renderAll();
+}
+
+
 function verBadgesHtml(p){
   let b="";
   if(p.verSG) b+=`<span class="verBadge sg">🛡️ ServiGo Verificado</span>`;
