@@ -193,6 +193,15 @@
     .divider{display:flex;align-items:center;gap:10px;color:#94a3b8;font-weight:600;font-size:.78rem;margin:12px 0 10px}
     .divider:before,.divider:after{content:"";height:1px;background:var(--line);flex:1}
     .smallHelp{font-size:.76rem;color:#94a3b8;font-weight:500;line-height:1.4}
+    /* ── PUNTAJE DE PERFIL ── */
+    .scoreCard{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:20px;padding:14px;margin-bottom:12px}
+    .scoreCard h4{margin:0 0 10px;color:#fff;font-size:.95rem;font-weight:800}
+    .scoreBar{height:10px;background:rgba(255,255,255,.15);border-radius:999px;overflow:hidden;margin:8px 0 4px}
+    .scoreBarFill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--green2),#6ee7b7);transition:width .6s ease}
+    .scoreItem{display:flex;align-items:center;justify-content:space-between;padding:7px 10px;border-radius:12px;margin-bottom:5px;font-size:.78rem;font-weight:600}
+    .scoreItem.done{background:rgba(110,231,183,.15);color:#a7f3d0}
+    .scoreItem.todo{background:rgba(255,255,255,.06);color:rgba(255,255,255,.45)}
+    .scoreItem .pts{font-weight:800;font-size:.72rem;opacity:.8}
     /* ── PRO MODE ── */
     .proMode{background:linear-gradient(160deg,#1e0a4a 0%,#2e1065 40%,#4c1d95 80%,#5b21b6 100%);color:#fff;min-height:calc(100vh - var(--navH));margin:-16px;padding:20px}
     .proMode .card{background:rgba(255,255,255,.96);color:var(--text)}
@@ -385,6 +394,18 @@
       <p class="sub" style="color:#ede9fe">Tu centro de control: agenda, clientes, cobros, reputación y servicios.</p>
       <div id="proGate"></div>
       <div id="proPanel" class="hidden">
+
+        <!-- Puntaje de perfil -->
+        <div class="scoreCard">
+          <h4>📊 Puntaje de tu perfil</h4>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+            <span id="scorePts" style="font-size:1.6rem;font-weight:900;color:#fff">0 pts</span>
+            <span id="scoreLabel" style="font-size:.78rem;color:#c4b5fd;font-weight:700">Calculando...</span>
+          </div>
+          <div class="scoreBar"><div class="scoreBarFill" id="scoreBarFill" style="width:0%"></div></div>
+          <p style="margin:4px 0 10px;font-size:.72rem;color:rgba(255,255,255,.5);font-weight:500">Más completo tu perfil → más arriba aparecés en las búsquedas. <b style="color:#c4b5fd">Es gratis y para todos.</b></p>
+          <div id="scoreItemsList"></div>
+        </div>
 
         <!-- Disponibilidad rápida -->
         <div class="availCard">
@@ -770,15 +791,64 @@ function providerCard(p){
     </div>
   </div>`;
 }
+// ── PUNTAJE DE PERFIL ──
+// Cada ítem suman puntos. Más completo = aparece más arriba.
+function profileScore(p){
+  let s=0;
+  // Info básica
+  if(p.photo)          s+=15;  // foto de perfil
+  if(p.desc&&p.desc.length>40) s+=10;  // descripción completa
+  if(p.price)          s+=5;   // precio cargado
+  if(p.hours||p.availHours) s+=5; // horario
+  if(p.contact)        s+=5;   // contacto
+  // Galería
+  let gLen=(p.gallery||[]).length;
+  if(gLen>=1) s+=8;
+  if(gLen>=3) s+=7;  // hasta 15 puntos por galería
+  // Matrícula / datos profesionales
+  if(p.matricula&&p.matricula.length>2) s+=10;
+  // Verificación
+  if(p.verId==="ok")   s+=15;
+  if(p.verMat==="ok")  s+=15;
+  if(p.verSG)          s+=20;  // ServiGo Verificado: bonus grande
+  // Reputación ganada
+  let av=providerRating(p);
+  if(av.count>=1)  s+=5;
+  if(av.count>=3)  s+=5;
+  if(av.count>=5)  s+=5;
+  if(av.avg>=4)    s+=8;
+  if(av.avg>=4.5)  s+=7;  // hasta 30 pts por reputación
+  // Disponibilidad activa
+  if(p.available)      s+=5;
+  return s; // máx teórico ~150 pts
+}
+
+function sortProviders(list){
+  return [...list].sort((a,b)=>profileScore(b)-profileScore(a));
+}
+
+function matches(){
+  let c=city(searchCity.value),sv=norm(searchService.value);
+  let result=providers.filter(p=>
+    (p.status!=="Pausado")&&
+    (!c||city(p.city).includes(c)||c.includes(city(p.city)))&&
+    (!sv||norm(p.service+" "+p.desc).includes(sv)||sv.includes(norm(p.service)))
+  );
+  return sortProviders(result);
+}
 function renderFeatured(){
-  let visible=providers.filter(p=>p.status!=="Pausado").sort((a,b)=>{let r={destacado:3,pro:2,gratis:1};return((r[b.plan]||1)+(b.available?.5:0))-((r[a.plan]||1)+(a.available?.5:0))});
-  featuredList.innerHTML=visible.length?visible.slice(0,4).map(providerCard).join(""):`<div class="empty"><span class="emptyIco">🛠️</span><p>Todavía no hay profesionales publicados.<br><b>¿Sos profesional?</b> Entrá en la sección PRO y publicá tu servicio.</p></div>`;
+  let visible=sortProviders(providers.filter(p=>p.status!=="Pausado"));
+  featuredList.innerHTML=visible.length
+    ?visible.slice(0,4).map(providerCard).join("")
+    :`<div class="empty"><span class="emptyIco">🛠️</span><p>Todavía no hay profesionales publicados.<br><b>¿Sos profesional?</b> Entrá en la sección PRO y publicá tu servicio.</p></div>`;
 }
 function renderResults(){
   let data=matches();
   let countEl=document.getElementById("resultsCount");
   if(countEl)countEl.textContent=data.length?`${data.length} resultado${data.length===1?"":"s"}`:"Resultados";
-  resultsList.innerHTML=data.length?data.map(providerCard).join(""):`<div class="empty"><span class="emptyIco">🔎</span><p>No encontramos profesionales para esa búsqueda.<br>Probá otra localidad o cambiá el servicio.</p></div>`;
+  resultsList.innerHTML=data.length
+    ?data.map(providerCard).join("")
+    :`<div class="empty"><span class="emptyIco">🔎</span><p>No encontramos profesionales para esa búsqueda.<br>Probá otra localidad o cambiá el servicio.</p></div>`;
 }
 
 // ── CONTRATAR ──
@@ -840,6 +910,7 @@ function renderPro(){
   }
   proGate.innerHTML="";
   proPanel.classList.remove("hidden");
+  renderScoreCard();
   loadAvailToggle();
   renderVerSection();
   renderPlanBox();
@@ -851,6 +922,58 @@ function renderPro(){
 }
 function unlockPro(){let pin=proLoginPin.value.trim();if(pin!==user.proPin)return toast("Clave PRO incorrecta");proUnlocked=true;renderPro();toast("Bienvenido al panel PRO")}
 function activatePro(){let pin=proPinInput.value.trim();if(!/^\d{4}$/.test(pin))return toast("La clave PRO debe tener 4 números");user.proActive=true;user.proPin=pin;proUnlocked=true;user.wallet=user.wallet||{balance:0,alias:"",method:"",note:""};updateAccount();renderPro();toast("Panel PRO activado")}
+
+function renderScoreCard(){
+  let mine=providers.find(p=>p.owner===user?.email);
+  let MAX=150;
+  let score=mine?profileScore(mine):0;
+  let pct=Math.min(100,Math.round(score/MAX*100));
+
+  // label de nivel
+  let nivel=pct<25?"Perfil básico":pct<50?"En construcción":pct<70?"Buen perfil":pct<88?"Perfil destacado":"Perfil completo ✓";
+
+  document.getElementById("scorePts").textContent=score+" pts";
+  document.getElementById("scoreLabel").textContent=nivel+" · "+pct+"% completado";
+  document.getElementById("scoreBarFill").style.width=pct+"%";
+
+  // lista de ítems con estado
+  let items=[
+    {done:mine&&!!mine.photo,       label:"Foto de perfil",           pts:15},
+    {done:mine&&mine.desc&&mine.desc.length>40, label:"Descripción completa (+40 caracteres)", pts:10},
+    {done:mine&&!!(mine.gallery&&mine.gallery.length>=1), label:"Al menos 1 foto de trabajo",  pts:8},
+    {done:mine&&!!(mine.gallery&&mine.gallery.length>=3), label:"Galería de 3+ fotos",          pts:7},
+    {done:mine&&!!mine.price,       label:"Precio desde",             pts:5},
+    {done:mine&&!!(mine.hours||mine.availHours), label:"Horario de atención",     pts:5},
+    {done:mine&&!!mine.contact,     label:"Contacto cargado",         pts:5},
+    {done:mine&&!!(mine.matricula&&mine.matricula.length>2), label:"Número de matrícula",       pts:10},
+    {done:mine&&mine.verId==="ok",  label:"Identidad verificada (DNI)", pts:15},
+    {done:mine&&mine.verMat==="ok", label:"Matrícula verificada",     pts:15},
+    {done:mine&&!!mine.verSG,       label:"ServiGo Verificado 🛡️",    pts:20},
+    {done:mine&&mine.available,     label:"Disponible ahora activado",pts:5},
+  ];
+
+  let pending=items.filter(x=>!x.done);
+  let done=items.filter(x=>x.done);
+
+  let html="";
+  // primero los pendientes (los más urgentes)
+  if(pending.length){
+    html+=`<p style="font-size:.72rem;color:#c4b5fd;font-weight:700;margin:0 0 5px">Por completar:</p>`;
+    html+=pending.map(x=>`<div class="scoreItem todo">
+      <span>○ ${x.label}</span>
+      <span class="pts">+${x.pts} pts</span>
+    </div>`).join("");
+  }
+  if(done.length){
+    html+=`<p style="font-size:.72rem;color:rgba(167,243,208,.7);font-weight:700;margin:8px 0 5px">Completado:</p>`;
+    html+=done.map(x=>`<div class="scoreItem done">
+      <span>✓ ${x.label}</span>
+      <span class="pts">+${x.pts} pts</span>
+    </div>`).join("");
+  }
+  if(!mine) html=`<p style="font-size:.8rem;color:rgba(255,255,255,.5);font-weight:500;margin:0">Publicá tu primer servicio para ver tu puntaje.</p>`;
+  document.getElementById("scoreItemsList").innerHTML=html;
+}
 
 function renderProStats(){
   let mine=orders.filter(o=>o.providerOwner===user?.email);
