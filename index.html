@@ -42,6 +42,12 @@
     .loginWrap{min-height:100vh;display:grid;place-items:center;padding:18px;max-width:520px;margin:0 auto;background:linear-gradient(180deg,#061827 0%,#09253a 48%,#f3f8f7 48%)}.loginCard{width:100%;background:#fff;border:1px solid var(--line);border-radius:34px;padding:22px;box-shadow:var(--shadow)}.authTabs{display:grid;grid-template-columns:1fr 1fr;background:#eef7f4;border-radius:999px;padding:4px;margin:18px 0}.authTabs button{padding:11px 8px;border-radius:999px;font-weight:1000;color:#526174}.authTabs button.active{background:var(--green);color:#fff}.logoPanel{background:linear-gradient(135deg,#061827,#09253a);border-radius:28px;padding:18px 12px;color:#fff;text-align:center;box-shadow:var(--shadow)}.logoPanel .bigLogo{box-shadow:none;background:transparent;width:92px;height:92px}.logoPanel h2{font-size:3rem}.logoTagline{letter-spacing:.32em;font-weight:1000;font-size:.74rem;margin:12px 0 0;display:flex;justify-content:center;gap:.8em;align-items:center;white-space:nowrap}.logoTagline span{font-size:inherit;line-height:1;color:#fff}.logoTagline .ok{color:var(--green2)}.socialLogin{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0 8px}.socialBtn{height:48px;border-radius:18px;border:1px solid var(--line);background:#fff;box-shadow:var(--soft);font-weight:1000;display:grid;place-items:center;font-size:1.12rem}.divider{display:flex;align-items:center;gap:10px;color:#8b97a8;font-weight:850;font-size:.82rem;margin:16px 0 12px}.divider:before,.divider:after{content:"";height:1px;background:#e5e7eb;flex:1}.smallHelp{font-size:.78rem;color:#667085;font-weight:750;line-height:1.35}.walletGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.moneyBox{background:#f8fafc;border:1px solid var(--line);border-radius:20px;padding:13px}.moneyBox b{font-size:1.35rem}.moneyBox small{display:block;color:var(--muted);font-weight:800}.jobCard{background:#fff;border:1px solid var(--line);border-radius:22px;padding:14px;margin-bottom:10px;box-shadow:var(--soft)}.jobTop{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.jobTop h4{margin:0;font-size:1.02rem}.miniBtns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0 12px}.gallery div{height:78px;border-radius:18px;background:#f1f5f9;background-size:cover;background-position:center;display:grid;place-items:center;color:#64748b;font-weight:1000}.stars{display:flex;gap:7px;justify-content:center;margin:12px 0}.starBtn{font-size:2rem;filter:grayscale(1);opacity:.45}.starBtn.active{filter:none;opacity:1}.chatBox{background:#f8fafc;border:1px solid var(--line);border-radius:20px;padding:12px;max-height:320px;overflow:auto;margin-bottom:10px}.bubble{max-width:82%;padding:10px 12px;border-radius:18px;margin:8px 0;font-size:.9rem;line-height:1.32}.bubble.me{margin-left:auto;background:#d1fae5}.bubble.other{background:#fff;border:1px solid var(--line)}.photoPreview{width:86px;height:86px;border-radius:28px;background:#f1f5f9;background-size:cover;background-position:center;display:grid;place-items:center;font-size:2.2rem;margin-bottom:10px}
     @media(max-width:390px){.hero h2{font-size:3rem}.headline{font-size:1.95rem}.sub{font-size:.95rem}.actions{grid-template-columns:1fr 46px}.grid3{gap:8px}.row2,.walletGrid{grid-template-columns:1fr}}
   .logoTagline span{font-size:1em!important;letter-spacing:.32em}.logoMark:after{content:none!important;display:none!important}
+
+    .googleBtn{margin-top:8px;justify-content:space-between;background:linear-gradient(135deg,#009b72,#12c18b)}
+    .googleCircle{width:34px;height:34px;border-radius:999px;background:#fff;color:#009b72;display:grid;place-items:center;font-size:1.05rem;box-shadow:0 8px 18px rgba(6,24,39,.12)}
+    .logoMark:after,.bigLogo .logoMark:after{content:none!important;display:none!important;width:0!important;height:0!important;background:none!important;box-shadow:none!important}
+    .logoTagline{display:flex;justify-content:center;gap:12px;align-items:center;font-size:.78rem!important;letter-spacing:.34em!important;font-weight:1000;white-space:nowrap}
+    .logoTagline span{font-size:inherit!important;line-height:1!important}
 </style>
 </head>
 <body>
@@ -52,27 +58,26 @@
       <h2>Servi<span style="color:var(--green2)">Go</span> <span class="ar">AR</span></h2>
       <p class="logoTagline"><span>BUSCÁ.</span><span>CONTRATÁ.</span><span class="ok">LISTO.</span></p>
     </div>
-    <div class="authTabs"><button id="loginTab" class="active" onclick="setAuthMode('login')">Iniciar sesión</button><button id="registerTab" onclick="setAuthMode('register')">Registrarte</button></div>
-    
-    <div class="divider">o continuá con</div>
-    <div class="socialLogin">
-      <button class="socialBtn" onclick="socialAuth('Google')">G</button>
-      <button class="socialBtn" onclick="socialAuth('Facebook')">f</button>
-      <button class="socialBtn" onclick="socialAuth('Apple')"></button>
-    </div>
-    <p class="smallHelp center" style="margin:0 0 12px">Google ya queda conectado a Firebase. Facebook y Apple quedan preparados para activar después.</p>
-    <div id="loginForm">
-      <div class="field"><label>Email</label><input id="loginEmail" type="email" placeholder="tuemail@gmail.com"></div>
-      <div class="field"><label>Contraseña</label><input id="loginPass" type="password" placeholder="Tu contraseña"></div>
-      <button class="btn" onclick="login()">Iniciar sesión <span>→</span></button>
-      <button class="btn secondary" style="margin-top:10px" onclick="openRecover()">Recuperar contraseña <span>→</span></button>
+    <div class="authTabs"><button id="loginTab" class="active" style="width:100%">Acceso seguro</button></div>
+
+    <div class="divider">entrar o registrarte</div>
+
+    <button class="btn googleBtn" onclick="socialAuth('Google')">
+      <span style="display:flex;align-items:center;gap:12px"><b class="googleCircle">G</b> Continuar con Google</span>
+      <span>→</span>
+    </button>
+
+    <p class="smallHelp center" style="margin:14px 0 0">Por ahora ServiGo AR usa solo Google. Facebook, Apple y email/contraseña fueron quitados para evitar errores.</p>
+
+    <div id="loginForm" class="hidden">
+      <input id="loginEmail" type="hidden">
+      <input id="loginPass" type="hidden">
     </div>
     <div id="registerForm" class="hidden">
-      <div class="field"><label>Nombre completo</label><input id="regName" placeholder="Tu nombre"></div>
-      <div class="field"><label>Email</label><input id="regEmail" type="email" placeholder="tuemail@gmail.com"></div>
-      <div class="field"><label>Contraseña</label><input id="regPass" type="password" placeholder="Mínimo 6 caracteres"></div>
-      <label class="checkRow"><input id="regTerms" type="checkbox"> Acepto términos, condiciones, privacidad y reglas de seguridad.</label>
-      <button class="btn" onclick="registerUser()">Crear cuenta <span>→</span></button>
+      <input id="regName" type="hidden">
+      <input id="regEmail" type="hidden">
+      <input id="regPass" type="hidden">
+      <input id="regTerms" type="checkbox" checked>
     </div>
   </div>
 </section>
@@ -245,34 +250,27 @@ onAuthStateChanged(auth, async fbUser => {
 });
 
 function setAuthMode(mode){
-  loginTab.classList.toggle("active", mode === "login");
-  registerTab.classList.toggle("active", mode === "register");
-  loginForm.classList.toggle("hidden", mode !== "login");
-  registerForm.classList.toggle("hidden", mode !== "register");
+  // Email/contraseña está desactivado en esta versión. El acceso es solo con Google.
+  return;
 }
 async function socialAuth(provider){
   try{
-    if(provider !== "Google") return toast(provider + " queda preparado. Primero hay que activar ese proveedor en Firebase.");
+    if(provider !== "Google") return toast("Solo Google está activado en esta versión.");
     const res = await signInWithPopup(auth, googleProvider);
     await ensureUserProfile(res.user);
     toast("Sesión iniciada con Google");
-  }catch(e){ toast("Google: " + e.message); }
+  }catch(e){
+    let msg = e?.message || "No se pudo iniciar sesión con Google";
+    if(String(msg).includes("auth/unauthorized-domain")) msg = "Agregá este dominio en Firebase Authentication → Settings → Dominios autorizados.";
+    if(String(msg).includes("popup")) msg = "No se pudo abrir Google. Probá desde el dominio publicado en Vercel.";
+    toast("Google: " + msg);
+  }
 }
 async function login(){
-  try{
-    await signInWithEmailAndPassword(auth, val("loginEmail"), val("loginPass"));
-    toast("Sesión iniciada");
-  }catch(e){ toast("Email/contraseña no está activo o los datos no coinciden"); }
+  return toast("Usá el botón Continuar con Google.");
 }
 async function registerUser(){
-  try{
-    if(!regTerms.checked) return toast("Aceptá términos y condiciones");
-    if(val("regPass").length < 6) return toast("Contraseña mínima: 6 caracteres");
-    const res = await createUserWithEmailAndPassword(auth, val("regEmail"), val("regPass"));
-    await updateProfile(res.user, {displayName: val("regName")});
-    await ensureUserProfile(res.user, {name: val("regName"), email: val("regEmail")});
-    toast("Cuenta creada");
-  }catch(e){ toast("Registro: " + e.message); }
+  return toast("El registro se hace con Google automáticamente.");
 }
 async function logout(){ await signOut(auth); toast("Sesión cerrada"); }
 async function recoverPassword(){
