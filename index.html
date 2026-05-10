@@ -141,6 +141,7 @@
       <label class="checkRow"><input id="regTerms" type="checkbox"> Acepto términos, condiciones, privacidad y reglas de seguridad.</label>
       <button class="btn" onclick="registerUser()">Crear cuenta <span>→</span></button>
     </div>
+    <p style="text-align:center;font-size:.75rem;color:#94a3b8;font-weight:750;margin:14px 0 0">¿Problemas? <a href="mailto:servigo.ar@gmail.com" style="color:var(--green);font-weight:900">servigo.ar@gmail.com</a></p>
   </div>
 </section>
 
@@ -235,14 +236,6 @@
           </div>
         </div>
 
-        <!-- Suscripción PRO -->
-        <div class="card" style="margin-top:14px;border:2px solid var(--pro2)">
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px">
-            <h3 style="margin:0">🚀 Tu plan ServiGo</h3>
-            <span id="planBadge" class="badge gray">Gratis</span>
-          </div>
-          <div id="planInfoBox"></div>
-        </div>
 
         <!-- Vidriera -->
         <div class="card" style="margin-top:4px">
@@ -397,9 +390,34 @@
 
 <div id="securityModal" class="modal"><div class="sheet">
   <div class="sheetHead"><h3>Seguridad</h3><button class="iconBtn" onclick="closeModal('securityModal')">✕</button></div>
-  <div class="field"><label>Nueva contraseña</label><input id="newPass" type="password" placeholder="Mínimo 6 caracteres"></div>
-  <div class="field"><label>Clave PRO de 4 números</label><input id="newProPin" inputmode="numeric" maxlength="4" placeholder="Ej: 1234"></div>
+
+  <p style="font-size:.8rem;font-weight:800;color:#475569;margin:0 0 14px">Actualizá tu contraseña o tu clave PRO cuando quieras.</p>
+  <div class="field"><label>Nueva contraseña</label><input id="newPass" type="password" placeholder="Mínimo 6 caracteres (dejá vacío para no cambiar)"></div>
+  <div class="field"><label>Clave PRO de 4 números</label><input id="newProPin" inputmode="numeric" maxlength="4" placeholder="Dejá vacío para no cambiar"></div>
   <button class="btn" onclick="saveSecurity()">Actualizar seguridad <span>→</span></button>
+
+  <div style="margin-top:20px;background:#f8fafc;border:1px solid var(--line);border-radius:20px;padding:16px">
+    <h4 style="margin:0 0 6px;font-size:.95rem">🚨 Reportar un problema</h4>
+    <p style="margin:0 0 12px;font-size:.82rem;color:#526174;font-weight:700">Si encontraste un error, tuviste un inconveniente con un profesional o querés reportar algo, escribinos. Respondemos en menos de 24 hs.</p>
+    <div class="field"><label>Tipo de problema</label>
+      <select id="reportType">
+        <option value="">Seleccioná una opción</option>
+        <option>Error técnico en la app</option>
+        <option>Problema con un profesional</option>
+        <option>Problema con un cliente</option>
+        <option>No puedo acceder a mi cuenta</option>
+        <option>Quiero eliminar mi cuenta</option>
+        <option>Sugerencia de mejora</option>
+        <option>Otro</option>
+      </select>
+    </div>
+    <div class="field"><label>Descripción del problema</label>
+      <textarea id="reportDesc" placeholder="Contanos qué pasó con el mayor detalle posible..."></textarea>
+    </div>
+    <button class="btn secondary" onclick="sendReport()">Enviar reporte a ServiGo AR <span>→</span></button>
+    <p style="margin:10px 0 0;font-size:.75rem;color:#94a3b8;font-weight:750;text-align:center">O escribinos directamente a <a href="mailto:servigo.ar@gmail.com" style="color:var(--green);font-weight:900">servigo.ar@gmail.com</a></p>
+  </div>
+
 </div></div>
 
 <div id="recoverModal" class="modal"><div class="sheet">
@@ -441,6 +459,10 @@
   <p class="desc"><b>Seguridad:</b> verificá identidad, matrícula, referencias y datos antes de contratar. ServiGo AR funciona como puente.</p>
   <p class="desc"><b>Pagos:</b> la app puede cobrar comisión por reserva o suscripción profesional. Para pagos reales se integra pasarela segura.</p>
   <p class="desc"><b>Privacidad:</b> no usamos ubicación automática; la búsqueda es por localidad escrita. El alias de cobro del profesional solo se muestra a clientes con reserva activa.</p>
+  <div style="background:#f0fdf4;border:1px solid #86efac;border-radius:18px;padding:14px;margin-top:14px">
+    <p style="margin:0;font-size:.84rem;font-weight:800;color:#166534">📬 Contacto y soporte</p>
+    <p style="margin:6px 0 0;font-size:.82rem;color:#166534;font-weight:700">Para dudas, problemas o sugerencias escribinos a <a href="mailto:servigo.ar@gmail.com" style="color:#15803d;font-weight:1000">servigo.ar@gmail.com</a> — respondemos en menos de 24 hs.</p>
+  </div>
   <button class="btn" style="margin-top:14px" onclick="closeModal('termsModal')">Aceptar</button>
 </div></div>
 
@@ -893,8 +915,31 @@ function saveProfile(){user.name=editName.value.trim()||user.name;user.phone=edi
 function providerRating(p){let rs=orders.filter(o=>o.providerOwner===p.owner&&o.provider===p.name&&o.rating);if(!rs.length)return{avg:0,count:0};return{avg:rs.reduce((a,o)=>a+Number(o.rating||0),0)/rs.length,count:rs.length}}
 
 // ── SEGURIDAD ──
-function openSecurity(){newPass.value="";newProPin.value=user.proPin||"";securityModal.classList.add("active")}
-function saveSecurity(){if(newPass.value&&newPass.value.length<6)return toast("Contraseña mínima: 6 caracteres");if(newProPin.value&&!/^\d{4}$/.test(newProPin.value))return toast("Clave PRO: 4 números");if(newPass.value)user.pass=newPass.value;if(newProPin.value)user.proPin=newProPin.value;updateAccount();closeModal("securityModal");toast("Seguridad actualizada")}
+function openSecurity(){
+  newPass.value="";newProPin.value=user.proPin||"";
+  if(document.getElementById("reportType"))document.getElementById("reportType").value="";
+  if(document.getElementById("reportDesc"))document.getElementById("reportDesc").value="";
+  securityModal.classList.add("active");
+}
+function saveSecurity(){
+  if(newPass.value&&newPass.value.length<6)return toast("Contraseña mínima: 6 caracteres");
+  if(newProPin.value&&!/^\d{4}$/.test(newProPin.value))return toast("Clave PRO: 4 números");
+  if(newPass.value)user.pass=newPass.value;
+  if(newProPin.value)user.proPin=newProPin.value;
+  updateAccount();toast("Seguridad actualizada ✓");
+}
+function sendReport(){
+  let tipo=document.getElementById("reportType").value;
+  let desc=document.getElementById("reportDesc").value.trim();
+  if(!tipo)return toast("Elegí el tipo de problema");
+  if(desc.length<10)return toast("Describí el problema con más detalle");
+  let asunto=encodeURIComponent("[ServiGo AR] "+tipo);
+  let cuerpo=encodeURIComponent("Tipo: "+tipo+"\nUsuario: "+(user?.name||"")+" ("+( user?.email||"")+")"+"\n\nDescripción:\n"+desc+"\n\n---\nEnviado desde ServiGo AR");
+  window.open("mailto:servigo.ar@gmail.com?subject="+asunto+"&body="+cuerpo,"_blank");
+  toast("Abriendo tu app de correo...");
+  document.getElementById("reportType").value="";
+  document.getElementById("reportDesc").value="";
+}
 function openRecover(){recoverModal.classList.add("active")}
 function recoverPassword(){let email=recoverEmail.value.trim().toLowerCase();if(!email.includes("@"))return toast("Ingresá un email válido");toast("Recuperación preparada para Firebase Auth")}
 function openTerms(){termsModal.classList.add("active")}
