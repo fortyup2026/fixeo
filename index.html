@@ -57,6 +57,43 @@
     .stars{display:flex;gap:7px;justify-content:center;margin:12px 0}.starBtn{font-size:2rem;filter:grayscale(1);opacity:.45}.starBtn.active{filter:none;opacity:1}
     .chatBox{background:#f8fafc;border:1px solid var(--line);border-radius:20px;padding:12px;max-height:320px;overflow:auto;margin-bottom:10px}.bubble{max-width:82%;padding:10px 12px;border-radius:18px;margin:8px 0;font-size:.9rem;line-height:1.32}.bubble.me{margin-left:auto;background:#d1fae5}.bubble.other{background:#fff;border:1px solid var(--line)}
     .photoPreview{width:86px;height:86px;border-radius:28px;background:#f1f5f9;background-size:cover;background-position:center;display:grid;place-items:center;font-size:2.2rem;margin-bottom:10px}
+    /* badges de verificación */
+    .verBadge{display:inline-flex;align-items:center;gap:4px;border-radius:999px;padding:4px 9px;font-size:.7rem;font-weight:1000;white-space:nowrap;margin:2px 2px 0 0}
+    .verBadge.id{background:#dbeafe;color:#1d4ed8}
+    .verBadge.mat{background:#ede9fe;color:#6d28d9}
+    .verBadge.sg{background:linear-gradient(135deg,#fef3c7,#d1fae5);color:#064e3b;border:1px solid #6ee7b7}
+    .verBadge.pending{background:#fef9c3;color:#854d0e}
+    /* card de verificación en PRO */
+    .verCard{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);border-radius:22px;padding:14px;margin-bottom:14px}
+    .verCard h4{margin:0 0 10px;color:#fff;font-size:1rem}
+    .verLevel{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.15);border-radius:16px;padding:11px 13px;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+    .verLevel .left{flex:1}
+    .verLevel .left b{display:block;color:#fff;font-size:.88rem}
+    .verLevel .left small{color:#c4b5fd;font-size:.74rem;font-weight:700}
+    .verLevel .right{flex:0 0 auto}
+    .uploadBtn{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.28);border-radius:12px;padding:7px 12px;color:#fff;font-size:.78rem;font-weight:900;cursor:pointer}
+    .uploadBtn:hover{background:rgba(255,255,255,.26)}
+    
+    .availBadge{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:5px 10px;font-size:.72rem;font-weight:1000;white-space:nowrap}
+    .availBadge.online{background:#d1fae5;color:#047857}
+    .availBadge.offline{background:#f1f5f9;color:#64748b}
+    .availBadge.online:before{content:"";width:7px;height:7px;border-radius:50%;background:#10b981;display:inline-block;animation:pulse 1.8s infinite}
+    .availBadge.offline:before{content:"";width:7px;height:7px;border-radius:50%;background:#94a3b8;display:inline-block}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(1.3)}}
+    /* toggle switch */
+    .toggleRow{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#f8fafc;border:1px solid var(--line);border-radius:18px;padding:13px 16px;margin-bottom:12px}
+    .toggleRow span{font-weight:900;font-size:.9rem}
+    .toggleWrap{position:relative;width:52px;height:28px;flex:0 0 auto}
+    .toggleWrap input{opacity:0;width:0;height:0;position:absolute}
+    .toggleSlider{position:absolute;inset:0;border-radius:999px;background:#cbd5e1;cursor:pointer;transition:.25s}
+    .toggleSlider:before{content:"";position:absolute;width:20px;height:20px;border-radius:50%;background:#fff;left:4px;top:4px;transition:.25s;box-shadow:0 2px 6px rgba(0,0,0,.18)}
+    .toggleWrap input:checked+.toggleSlider{background:var(--green)}
+    .toggleWrap input:checked+.toggleSlider:before{transform:translateX(24px)}
+    /* pro disponibilidad card */
+    .availCard{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);border-radius:22px;padding:14px;margin-bottom:14px}
+    .availCard h4{margin:0 0 10px;color:#fff;font-size:1rem}
+    .availCard .toggleRow{background:rgba(255,255,255,.10);border-color:rgba(255,255,255,.18)}
+    .availCard .toggleRow span{color:#ede9fe}
     /* alias box oculta en perfil público */
     .aliasPrivate{background:#fef3c7;border:1px solid #fcd34d;border-radius:16px;padding:12px 14px;font-size:.84rem;color:#92400e;font-weight:800;margin-top:10px;display:flex;align-items:center;gap:8px}
     @media(max-width:390px){.hero h2{font-size:3rem}.headline{font-size:1.95rem}.sub{font-size:.95rem}.actions{grid-template-columns:1fr 46px}.grid3{gap:8px}.row2,.walletGrid{grid-template-columns:1fr}}
@@ -157,11 +194,45 @@
       <div id="proGate"></div>
       <div id="proPanel" class="hidden">
 
+        <!-- Disponibilidad rápida -->
+        <div class="availCard">
+          <h4>🟢 Tu disponibilidad ahora</h4>
+          <div class="toggleRow">
+            <span id="availLabel">Cargando...</span>
+            <label class="toggleWrap">
+              <input type="checkbox" id="availToggle" onchange="toggleAvailability()">
+              <span class="toggleSlider"></span>
+            </label>
+          </div>
+          <div class="field" style="margin-bottom:0">
+            <label style="color:#c4b5fd;font-size:.78rem;font-weight:1000">Horario de atención (aparece en tu perfil)</label>
+            <input id="availHours" placeholder="Ej: Lun–Vie 8–20 hs · Sáb 9–14 hs · Urgencias 24 hs" style="background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.2);color:#fff" oninput="saveAvailHours()">
+          </div>
+        </div>
+
         <!-- Stats resumen -->
         <div class="proStats">
           <div class="proStatBox"><b id="proStatJobs">0</b><small>Trabajos</small></div>
           <div class="proStatBox"><b id="proStatRating">—</b><small>Estrellas</small></div>
           <div class="proStatBox"><b id="proStatPending">0</b><small>Pendientes</small></div>
+        </div>
+
+        <!-- Verificación de identidad y matrícula -->
+        <div class="verCard">
+          <h4>🛡️ Tu nivel de verificación</h4>
+          <div id="verLevelDisplay"></div>
+          <div class="verLevel">
+            <div class="left"><b>🪪 Verificación de identidad (DNI)</b><small>Foto del frente de tu DNI · Solo lo ve el equipo ServiGo</small></div>
+            <div class="right"><span id="verIdStatus"></span></div>
+          </div>
+          <div class="verLevel">
+            <div class="left"><b>📋 Matrícula profesional</b><small>Opcional · Solo si tenés (enfermero, arquitecto, gasista...)</small></div>
+            <div class="right"><span id="verMatStatus"></span></div>
+          </div>
+          <div class="field" style="margin-top:8px;margin-bottom:0">
+            <label style="color:#c4b5fd;font-size:.78rem;font-weight:1000">Número de matrícula (opcional, texto)</label>
+            <input id="provMatricula" placeholder="Ej: MN 123456 · Reg. Provincial 789" style="background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.2);color:#fff" oninput="saveMatricula()">
+          </div>
         </div>
 
         <!-- Vidriera -->
@@ -276,6 +347,12 @@
     <p class="smallHelp">Si lo pausás, no aparece en búsquedas pero queda guardado.</p>
   </div>
   <div class="field"><label>Descripción</label><textarea id="provDesc" placeholder="Experiencia, zonas, urgencias, referencias, matrícula si corresponde, etc."></textarea></div>
+  <!-- Verificación opcional -->
+  <div style="background:#f8fafc;border:1px solid var(--line);border-radius:20px;padding:14px;margin-bottom:12px">
+    <p style="margin:0 0 10px;font-weight:1000;font-size:.88rem;color:#475569">🛡️ Datos de confianza (opcionales)</p>
+    <div class="field" style="margin-bottom:10px"><label>Número de matrícula / registro</label><input id="provMatInput" placeholder="Ej: MN 123456, Reg. Prov. 789, CUIT..."></div>
+    <div class="field" style="margin-bottom:0"><label>Foto del carnet / certificado / credencial</label><input id="provCredPhoto" type="file" accept="image/*" onchange="previewCredPhoto(event)"><div id="provCredPreview" class="photoPreview" style="width:100%;height:60px;border-radius:14px;font-size:.82rem;font-weight:800;color:#64748b">📋 Subir foto del carnet o certificado</div><p class="smallHelp" style="margin-top:6px">Solo lo ve el equipo ServiGo para verificar. No se muestra públicamente en su forma original.</p></div>
+  </div>
   <button class="btn pro" onclick="saveProvider()">Guardar servicio <span>→</span></button>
 </div></div>
 
@@ -423,12 +500,35 @@ function renderCategories(){categoryGrid.innerHTML=services.slice(0,6).map(s=>`<
 function pickService(s){searchService.value=s;showScreen("search")}
 function matches(){let c=city(searchCity.value),sv=norm(searchService.value);return providers.filter(p=>(p.status!=="Pausado")&&(!c||city(p.city).includes(c)||c.includes(city(p.city)))&&(!sv||norm(p.service+" "+p.desc).includes(sv)||sv.includes(norm(p.service))))}
 function avatarHtml(p){return p.photo?`<div class="avatar" style="background-image:url('${p.photo}')"></div>`:`<div class="avatar">${p.icon||"🛠️"}</div>`}
-function providerCard(p){let fav=favorites.includes(p.id);let av=providerRating(p);let gallery=(p.gallery||[]).slice(0,3).map(src=>`<div style="background-image:url('${src}')"></div>`).join("");return`<div class="card proCard"><div class="pro">${avatarHtml(p)}<div class="proInfo"><h4>${p.name}</h4><p class="service">${p.service}</p><div class="meta"><span>⭐ ${av.count?av.avg.toFixed(1)+" ("+av.count+")":"Sin calificaciones"}</span><span>📍 ${p.city}</span>${p.price?`<span>💵 Desde ${p.price}</span>`:""}</div><p class="desc">${p.desc||"Servicio profesional disponible."}</p></div></div>${gallery?`<div class="gallery">${gallery}</div>`:""}<div class="actions"><button class="btn" onclick="openProvider(${p.id})">Contratar</button><button class="btn light" onclick="toggleFav(${p.id})">${fav?"❤️":"♡"}</button></div></div>`}
+function availBadge(p){
+  let online=p.available===true;
+  return`<span class="availBadge ${online?"online":"offline"}">${online?"Disponible ahora":"No disponible"}</span>`;
+}
+function providerCard(p){
+  let fav=favorites.includes(p.id);
+  let av=providerRating(p);
+  let gallery=(p.gallery||[]).slice(0,3).map(src=>`<div style="background-image:url('${src}')"></div>`).join("");
+  let hours=p.availHours?`<span>🕐 ${p.availHours}</span>`:"";
+  let vb=verBadgesHtml(p);
+  let mat=p.matricula?`<span>📋 Mat: ${p.matricula}</span>`:"";
+  return`<div class="card proCard">
+    <div class="pro">${avatarHtml(p)}<div class="proInfo">
+      <h4>${p.name}</h4>
+      <p class="service">${p.service}</p>
+      <div class="meta">${availBadge(p)}<span>⭐ ${av.count?av.avg.toFixed(1)+" ("+av.count+")":"Sin calificaciones"}</span><span>📍 ${p.city}</span>${p.price?`<span>💵 Desde ${p.price}</span>`:""}</div>
+      ${vb?`<div style="margin:5px 0">${vb}</div>`:""}
+      ${hours||mat?`<div class="meta" style="margin-top:4px">${hours}${mat}</div>`:""}
+      <p class="desc">${p.desc||"Servicio profesional disponible."}</p>
+    </div></div>
+    ${gallery?`<div class="gallery">${gallery}</div>`:""}
+    <div class="actions"><button class="btn" onclick="openProvider(${p.id})">Contratar</button><button class="btn light" onclick="toggleFav(${p.id})">${fav?"❤️":"♡"}</button></div>
+  </div>`;
+}
 function renderFeatured(){let visible=providers.filter(p=>p.status!=="Pausado");featuredList.innerHTML=visible.length?visible.slice(0,3).map(providerCard).join(""):`<div class="empty">Todavía no hay profesionales publicados. Entrá en PRO y cargá el primero.</div>`}
 function renderResults(){let data=matches();resultsList.innerHTML=data.length?data.map(providerCard).join(""):`<div class="empty">No hay profesionales para esa búsqueda. Probá otra localidad o servicio.</div>`}
 
 // ── CONTRATAR ──
-function openProvider(id){selected=providers.find(p=>p.id===id);if(!selected)return;modalName.textContent=selected.name;let av=providerRating(selected);modalContent.innerHTML=`<div class="card" style="box-shadow:none;margin-bottom:14px"><div class="pro">${avatarHtml(selected)}<div class="proInfo"><h4>${selected.name}</h4><p class="service">${selected.service}</p><div class="meta"><span>📍 ${selected.city}</span><span>⭐ ${av.count?av.avg.toFixed(1)+" ("+av.count+")":"Sin calificaciones"}</span>${selected.price?`<span>💵 Desde ${selected.price}</span>`:""}</div><p class="desc">${selected.desc||"Servicio profesional disponible."}</p><p class="desc"><b>Horario:</b> ${selected.hours||"A coordinar"}</p><p class="desc"><b>Contacto:</b> ${selected.contact}</p></div></div></div>`;detailModal.classList.add("active")}
+function openProvider(id){selected=providers.find(p=>p.id===id);if(!selected)return;modalName.textContent=selected.name;let av=providerRating(selected);let hoursLine=selected.availHours?`<p class="desc"><b>🕐 Horario:</b> ${selected.availHours}</p>`:`<p class="desc"><b>Horario:</b> ${selected.hours||"A coordinar"}</p>`;modalContent.innerHTML=`<div class="card" style="box-shadow:none;margin-bottom:14px"><div class="pro">${avatarHtml(selected)}<div class="proInfo"><h4>${selected.name}</h4><p class="service">${selected.service}</p><div class="meta">${availBadge(selected)}<span>📍 ${selected.city}</span><span>⭐ ${av.count?av.avg.toFixed(1)+" ("+av.count+")":"Sin calificaciones"}</span>${selected.price?`<span>💵 Desde ${selected.price}</span>`:""}</div>${hoursLine}<p class="desc"><b>Contacto:</b> ${selected.contact}</p><p class="desc">${selected.desc||"Servicio profesional disponible."}</p></div></div></div>`;detailModal.classList.add("active")}
 function createOrder(){if(!selected)return;let d=requestDate.value,t=requestTime.value;if(!d||!t)return toast("Elegí día y horario");let id=Date.now();orders.unshift({id,provider:selected.name,providerOwner:selected.owner,service:selected.service,city:selected.city,date:d,time:t,status:"Activo",msg:requestMsg.value||"Sin mensaje",clientName:user?.name||"Cliente",clientEmail:user?.email||"",clientPhone:user?.phone||"",clientAddress:user?.address||"",paid:"Pendiente",amount:"",workNotes:"",rating:null,ratingComment:"",chat:[]});save();closeModal("detailModal");toast("Servicio contratado");showScreen("orders")}
 
 // ── MIS SERVICIOS ──
@@ -463,6 +563,8 @@ function renderPro(){
   }
   proGate.innerHTML="";
   proPanel.classList.remove("hidden");
+  loadAvailToggle();
+  renderVerSection();
   renderProStats();
   renderMyServices();
   renderProJobs();
@@ -534,25 +636,48 @@ function renderAliasStatus(){
 }
 
 // ── PUBLICAR SERVICIO ──
-function resetProviderForm(){editingProviderId=null;provName.value=user?.name||"";provServiceSelect.value="";provService.value="";provCity.value="";provContact.value="";provPrice.value="";provHours.value="";provStatus.value="Activo";provDesc.value="";tempProviderPhoto="";tempProviderGallery=[];provPhoto.value="";provGallery.value="";provPhotoPreview.style.backgroundImage="";provPhotoPreview.textContent="🧑‍🔧";provGalleryPreview.innerHTML="<div>+</div><div>+</div><div>+</div>"}
+let tempCredPhoto="";
+function resetProviderForm(){editingProviderId=null;provName.value=user?.name||"";provServiceSelect.value="";provService.value="";provCity.value="";provContact.value="";provPrice.value="";provHours.value="";provStatus.value="Activo";provDesc.value="";provMatInput.value="";tempProviderPhoto="";tempProviderGallery=[];tempCredPhoto="";provPhoto.value="";provGallery.value="";if(provCredPhoto)provCredPhoto.value="";provPhotoPreview.style.backgroundImage="";provPhotoPreview.textContent="🧑‍🔧";provGalleryPreview.innerHTML="<div>+</div><div>+</div><div>+</div>";if(provCredPreview){provCredPreview.style.backgroundImage="";provCredPreview.textContent="📋 Subir foto del carnet o certificado"}}
 function openProviderRegister(){if(!user.proActive)return toast("Primero activá PRO");if(!proUnlocked)return toast("Ingresá tu clave PRO");resetProviderForm();providerModal.querySelector("h3").textContent="Publicar servicio";providerModal.classList.add("active")}
 function previewProviderPhoto(e){readFile(e.target.files[0],src=>{tempProviderPhoto=src;provPhotoPreview.style.backgroundImage=`url('${src}')`;provPhotoPreview.textContent=""})}
 function previewProviderGallery(e){tempProviderGallery=[];let files=[...(e.target.files||[])].slice(0,6);provGalleryPreview.innerHTML="";if(!files.length){provGalleryPreview.innerHTML="<div>+</div><div>+</div><div>+</div>";return}files.forEach(file=>readFile(file,src=>{tempProviderGallery.push(src);provGalleryPreview.innerHTML=tempProviderGallery.map(x=>`<div style="background-image:url('${x}')"></div>`).join("")}))}
-function editProvider(id){let p=providers.find(x=>x.id===id&&x.owner===user?.email);if(!p)return toast("No encontré ese servicio");editingProviderId=id;providerModal.querySelector("h3").textContent="Editar servicio";provName.value=p.name||"";provServiceSelect.value=services.includes(p.service)?p.service:"";provService.value=p.service||"";provCity.value=p.city||"";provContact.value=p.contact||"";provPrice.value=p.price||"";provHours.value=p.hours||"";provStatus.value=p.status||"Activo";provDesc.value=p.desc||"";tempProviderPhoto=p.photo||"";tempProviderGallery=[...(p.gallery||[])];provPhoto.value="";provGallery.value="";if(p.photo){provPhotoPreview.style.backgroundImage=`url('${p.photo}')`;provPhotoPreview.textContent=""}else{provPhotoPreview.style.backgroundImage="";provPhotoPreview.textContent="🧑‍🔧"}provGalleryPreview.innerHTML=tempProviderGallery.length?tempProviderGallery.map(x=>`<div style="background-image:url('${x}')"></div>`).join(""):"<div>+</div><div>+</div><div>+</div>";providerModal.classList.add("active")}
+function editProvider(id){let p=providers.find(x=>x.id===id&&x.owner===user?.email);if(!p)return toast("No encontré ese servicio");editingProviderId=id;providerModal.querySelector("h3").textContent="Editar servicio";provName.value=p.name||"";provServiceSelect.value=services.includes(p.service)?p.service:"";provService.value=p.service||"";provCity.value=p.city||"";provContact.value=p.contact||"";provPrice.value=p.price||"";provHours.value=p.hours||"";provStatus.value=p.status||"Activo";provDesc.value=p.desc||"";provMatInput.value=p.matricula||"";tempProviderPhoto=p.photo||"";tempProviderGallery=[...(p.gallery||[])];tempCredPhoto="";provPhoto.value="";provGallery.value="";if(p.photo){provPhotoPreview.style.backgroundImage=`url('${p.photo}')`;provPhotoPreview.textContent=""}else{provPhotoPreview.style.backgroundImage="";provPhotoPreview.textContent="🧑‍🔧"}provGalleryPreview.innerHTML=tempProviderGallery.length?tempProviderGallery.map(x=>`<div style="background-image:url('${x}')"></div>`).join(""):"<div>+</div><div>+</div><div>+</div>";providerModal.classList.add("active")}
 function deleteProvider(id){let p=providers.find(x=>x.id===id&&x.owner===user?.email);if(!p)return toast("No encontré ese servicio");if(!confirm("¿Eliminar este servicio publicado?"))return;providers=providers.filter(x=>x.id!==id);save();renderAll();renderPro();toast("Servicio eliminado")}
 function toggleProviderStatus(id){let p=providers.find(x=>x.id===id&&x.owner===user?.email);if(!p)return;p.status=p.status==="Pausado"?"Activo":"Pausado";save();renderAll();renderPro();toast(p.status==="Pausado"?"Publicación pausada":"Servicio publicado nuevamente")}
-function saveProvider(){let name=provName.value.trim(),service=provService.value.trim()||provServiceSelect.value,cityValue=provCity.value.trim(),contact=provContact.value.trim();if(!name||!service||!cityValue||!contact)return toast("Completá nombre, servicio, localidad y contacto");let data={name,service,city:cityValue,contact,price:provPrice.value.trim(),hours:provHours.value||"A coordinar",status:provStatus.value||"Activo",desc:provDesc.value||"Servicio profesional disponible.",icon:icons[service]||"🛠️",photo:tempProviderPhoto,gallery:tempProviderGallery,owner:user?.email||""};if(editingProviderId){let idx=providers.findIndex(x=>x.id===editingProviderId&&x.owner===user?.email);if(idx<0)return toast("No encontré ese servicio");providers[idx]={...providers[idx],...data};toast("Servicio actualizado")}else{providers.unshift({id:Date.now(),...data});toast("Servicio publicado")}editingProviderId=null;tempProviderPhoto="";tempProviderGallery=[];save();closeModal("providerModal");renderAll();showScreen("professional")}
+function saveProvider(){
+  let name=provName.value.trim(),service=provService.value.trim()||provServiceSelect.value,cityValue=provCity.value.trim(),contact=provContact.value.trim();
+  if(!name||!service||!cityValue||!contact)return toast("Completá nombre, servicio, localidad y contacto");
+  let matricula=provMatInput?provMatInput.value.trim():"";
+  let data={name,service,city:cityValue,contact,price:provPrice.value.trim(),hours:provHours.value||"A coordinar",status:provStatus.value||"Activo",desc:provDesc.value||"Servicio profesional disponible.",icon:icons[service]||"🛠️",photo:tempProviderPhoto,gallery:tempProviderGallery,owner:user?.email||"",matricula};
+  if(tempCredPhoto){data.verMatDoc=tempCredPhoto;data.verMat=data.verMat||"pending";}
+  if(editingProviderId){
+    let idx=providers.findIndex(x=>x.id===editingProviderId&&x.owner===user?.email);
+    if(idx<0)return toast("No encontré ese servicio");
+    // preservar verificación existente
+    let existing=providers[idx];
+    data.verId=existing.verId;data.verMat=data.verMat||existing.verMat;data.verSG=existing.verSG;
+    providers[idx]={...existing,...data};toast("Servicio actualizado");
+  }else{
+    providers.unshift({id:Date.now(),...data});toast("Servicio publicado");
+  }
+  editingProviderId=null;tempProviderPhoto="";tempProviderGallery=[];tempCredPhoto="";
+  save();closeModal("providerModal");renderAll();showScreen("professional");
+}
 
 function providerManageCard(p){
   let av=providerRating(p);
   let gallery=(p.gallery||[]).slice(0,3).map(src=>`<div style="background-image:url('${src}')"></div>`).join("");
+  let vb=verBadgesHtml(p);
+  let level=calcVerLevel(p);
   return`<div class="card proCard">
     <div class="pro">${avatarHtml(p)}<div class="proInfo">
       <h4>${p.name}</h4>
       <p class="service">${p.service}</p>
       <div class="meta"><span class="badge ${p.status==='Pausado'?'gray':'pro'}">${p.status||'Activo'}</span><span>⭐ ${av.count?av.avg.toFixed(1)+" ("+av.count+")":"Sin calificaciones"}</span><span>📍 ${p.city}</span>${p.price?`<span>💵 Desde ${p.price}</span>`:""}</div>
+      ${vb?`<div style="margin:5px 0">${vb}</div>`:""}
+      ${p.matricula?`<p class="desc"><b>📋 Matrícula:</b> ${p.matricula}</p>`:""}
       <p class="desc">${p.desc||"Servicio profesional disponible."}</p>
-      <p class="desc"><b>Disponibilidad:</b> ${p.hours||"A coordinar"}</p>
+      <p class="desc"><b>Disponibilidad:</b> ${p.availHours||p.hours||"A coordinar"}</p>
     </div></div>
     ${gallery?`<div class="gallery">${gallery}</div>`:""}
     <div class="miniBtns"><button class="btn pro" onclick="editProvider(${p.id})">Editar</button><button class="btn red" onclick="deleteProvider(${p.id})">Eliminar</button></div>
@@ -566,7 +691,89 @@ function openJobFicha(id){let o=orders.find(x=>x.id===id);if(!o)return;currentJo
 function saveJobFicha(){let o=orders.find(x=>x.id===currentJobId);if(!o)return;o.amount=jobAmount.value.trim();o.paid=jobPaid.value;o.workNotes=jobNotes.value.trim();o.status=jobStatus.value;save();closeModal("jobModal");renderProJobs();renderProStats();renderOrders();toast("Ficha guardada")}
 function markJobPaid(id){let o=orders.find(x=>x.id===id);if(!o)return;o.paid="Pagado";save();renderProJobs();renderProStats();toast("Marcado como pagado")}
 
-// ── PAGOS / ALIAS ──
+// ── VERIFICACIÓN ──
+function verBadgesHtml(p){
+  let b="";
+  if(p.verSG) b+=`<span class="verBadge sg">🛡️ ServiGo Verificado</span>`;
+  else{
+    if(p.verId==="ok") b+=`<span class="verBadge id">🪪 Identidad verificada</span>`;
+    if(p.verMat==="ok") b+=`<span class="verBadge mat">📋 Matrícula verificada</span>`;
+    if(p.verId==="pending") b+=`<span class="verBadge pending">🕐 Verificación pendiente</span>`;
+  }
+  return b;
+}
+function calcVerLevel(p){
+  let av=providerRating(p);
+  let goodRatings=orders.filter(o=>o.providerOwner===p.owner&&o.provider===p.name&&Number(o.rating||0)>=4).length;
+  if(p.verId==="ok"&&p.verMat==="ok"&&goodRatings>=3) return "sg";
+  if(p.verId==="ok"&&p.verMat==="ok") return "mat";
+  if(p.verId==="ok") return "id";
+  if(p.verId==="pending") return "pending";
+  return "none";
+}
+function renderVerSection(){
+  let mine=providers.find(p=>p.owner===user?.email);
+  let level=mine?calcVerLevel(mine):"none";
+  // nivel display
+  let levelMap={
+    none:`<div class="verLevel"><div class="left"><b>Sin verificación</b><small>Subí tu DNI para empezar a generar confianza</small></div><div class="right">—</div></div>`,
+    pending:`<div class="verLevel"><div class="left"><b>🕐 Verificación en revisión</b><small>El equipo ServiGo revisa tu documentación</small></div></div>`,
+    id:`<div class="verLevel"><div class="left"><b>🪪 Identidad verificada</b><small>Podés sumar matrícula para alcanzar ServiGo Verificado</small></div></div>`,
+    mat:`<div class="verLevel"><div class="left"><b>📋 Identidad + Matrícula verificadas</b><small>Necesitás 3 calificaciones ≥4★ para ser ServiGo Verificado</small></div></div>`,
+    sg:`<div class="verLevel" style="background:rgba(110,231,183,.15);border-color:rgba(110,231,183,.35)"><div class="left"><b style="color:#6ee7b7">🛡️ ServiGo Verificado ✓</b><small style="color:#a7f3d0">Máximo nivel de confianza en la plataforma</small></div></div>`
+  };
+  verLevelDisplay.innerHTML=levelMap[level]||levelMap.none;
+  // botones de carga
+  verIdStatus.innerHTML=mine&&mine.verId==="ok"?`<span class="verBadge id">✓ OK</span>`:
+    mine&&mine.verId==="pending"?`<span class="verBadge pending">Pendiente</span>`:
+    `<label class="uploadBtn">Subir DNI<input type="file" accept="image/*" style="display:none" onchange="uploadVerDoc(event,'id')"></label>`;
+  verMatStatus.innerHTML=mine&&mine.verMat==="ok"?`<span class="verBadge mat">✓ OK</span>`:
+    mine&&mine.verMat==="pending"?`<span class="verBadge pending">Pendiente</span>`:
+    `<label class="uploadBtn">Subir<input type="file" accept="image/*" style="display:none" onchange="uploadVerDoc(event,'mat')"></label>`;
+  // matrícula text
+  if(mine) provMatricula.value=mine.matricula||"";
+}
+function uploadVerDoc(e,type){
+  let mine=providers.find(p=>p.owner===user?.email);
+  if(!mine)return toast("Primero publicá un servicio");
+  readFile(e.target.files[0],src=>{
+    mine["ver"+type.charAt(0).toUpperCase()+type.slice(1)]="pending";
+    mine["ver"+type.charAt(0).toUpperCase()+type.slice(1)+"Doc"]=src;
+    save();renderVerSection();
+    toast("Documentación enviada. El equipo ServiGo la revisará en 24–48 hs.");
+  });
+}
+function saveMatricula(){
+  let h=provMatricula.value;
+  providers.forEach(p=>{if(p.owner===user?.email)p.matricula=h});
+  save();
+}
+function previewCredPhoto(e){readFile(e.target.files[0],src=>{let el=document.getElementById("provCredPreview");el.style.backgroundImage=`url('${src}')`;el.textContent=""})}
+
+
+function toggleAvailability(){
+  let on=availToggle.checked;
+  // actualizar todos los servicios del profesional
+  providers.forEach(p=>{if(p.owner===user?.email)p.available=on});
+  availLabel.textContent=on?"Disponible ahora ✅":"No disponible";
+  save();renderFeatured();renderResults();
+  toast(on?"Ahora aparecés como disponible":"Ahora aparecés como no disponible");
+}
+function saveAvailHours(){
+  let h=availHours.value;
+  providers.forEach(p=>{if(p.owner===user?.email)p.availHours=h});
+  save();
+}
+function loadAvailToggle(){
+  let mine=providers.find(p=>p.owner===user?.email);
+  let on=mine?mine.available===true:false;
+  let hours=mine?mine.availHours||"":" ";
+  availToggle.checked=on;
+  availLabel.textContent=on?"Disponible ahora ✅":"No disponible";
+  availHours.value=hours.trim();
+}
+
+
 function openPayments(){let w=user.wallet||{};payAlias.value=w.alias||"";payMethod.value=w.method||"Mercado Pago";payNote.value=w.note||"";paymentsModal.classList.add("active")}
 function savePayments(){user.wallet=user.wallet||{};user.wallet.alias=payAlias.value.trim();user.wallet.method=payMethod.value;user.wallet.note=payNote.value.trim();updateAccount();closeModal("paymentsModal");renderAliasStatus();renderProStats();toast("Alias guardado")}
 
