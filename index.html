@@ -136,6 +136,53 @@
       #professional .tool small{display:none}
     }
 
+  
+    /* Ajuste final pedido: home sin título repetido y nav PRO sin signo + */
+    .homeIntro{
+      text-align:center;
+      max-width:390px;
+      margin:12px auto 18px;
+      font-size:1.02rem;
+      font-weight:850;
+    }
+    .bottomNav{
+      height:76px;
+      border-top:1px solid rgba(255,255,255,.08);
+      background:rgba(2,8,23,.97);
+    }
+    .navBtn{
+      font-size:.70rem;
+      gap:3px;
+    }
+    .navBtn .nIco{
+      font-size:1.28rem;
+      line-height:1;
+    }
+    .fabPro{
+      transform:translateY(-10px);
+    }
+    .fabPro .nIco{
+      width:58px;
+      height:58px;
+      border-radius:20px;
+      font-size:1.72rem;
+      background:linear-gradient(135deg,#7c3aed,#c084fc);
+      color:#fff;
+      box-shadow:0 0 32px rgba(168,85,247,.46);
+      border:1px solid rgba(216,180,254,.35);
+    }
+    .navBtn.proActive{
+      color:#d8b4fe;
+    }
+    .navBtn.proActive .nIco{
+      background:linear-gradient(135deg,#6d28d9,#a855f7);
+    }
+    @media(max-width:390px){
+      .homeIntro{font-size:.96rem;margin-top:10px}
+      .bottomNav{height:74px}
+      .fabPro .nIco{width:54px;height:54px;font-size:1.55rem}
+    }
+
   </style>
 </head>
 <body>
@@ -190,8 +237,7 @@
       <div class="brandText">SERVI<span class="fix">FIX</span><span class="ar">.AR</span></div>
       <div class="tagline"><span>BUSCÁ.</span><span>CONTRATÁ.</span><span class="ok">LISTO.</span></div>
     </div>
-    <h1 class="headline" style="text-align:center;margin-top:18px">Buscá. Contratá. <span class="green">Listo.</span></h1>
-    <p class="sub" style="text-align:center">Encontrá profesionales de confianza por localidad escrita, sin vueltas.</p>
+    <p class="sub homeIntro">Encontrá profesionales de confianza por localidad escrita, sin vueltas.</p>
     <div class="searchBox">
       <div class="input">🔎<input id="homeService" placeholder="¿Qué servicio necesitás?" oninput="syncSearch()"></div>
       <div class="input">📍<input id="homeCity" placeholder="Ej: Villa Bosch, Córdoba, Capital Federal" oninput="syncSearch()"></div>
@@ -262,7 +308,7 @@
     <div class="menuList"><button class="menuItem" onclick="openEditProfile()"><span class="mIco">📷</span><span class="grow"><b>Completar perfil</b><small>Foto, teléfono y datos de seguridad</small></span><span>›</span></button><button class="menuItem" onclick="showScreen('professional')"><span class="mIco">👑</span><span class="grow"><b>Soy profesional</b><small>Panel PRO, agenda, cobros y clientes</small></span><span>›</span></button><button class="menuItem" onclick="showScreen('orders')"><span class="mIco">📋</span><span class="grow"><b>Mis contrataciones</b><small>Servicios, chats y calificaciones</small></span><span>›</span></button><button class="menuItem" onclick="showFavorites()"><span class="mIco">⭐</span><span class="grow"><b>Favoritos</b><small>Profesionales guardados</small></span><span>›</span></button><button class="menuItem" onclick="openTerms()"><span class="mIco">📄</span><span class="grow"><b>Términos y condiciones</b><small>Reglas, seguridad y privacidad</small></span><span>›</span></button><button class="menuItem" onclick="logout()"><span class="mIco">🚪</span><span class="grow"><b>Cerrar sesión</b><small>Salir de SERVIFIX.AR</small></span><span>›</span></button></div>
   </section>
 
-  <nav class="bottomNav"><button class="navBtn active" onclick="showScreen('home',this)"><span class="nIco">⌂</span>Inicio</button><button class="navBtn" onclick="showScreen('search',this)"><span class="nIco">⌕</span>Buscar</button><button class="navBtn fabPro" onclick="showScreen('professional',this)"><span class="nIco">＋</span>PRO</button><button class="navBtn" onclick="showScreen('messages',this)"><span class="nIco">◌</span>Chats</button><button class="navBtn" onclick="showScreen('profile',this)"><span class="nIco">♙</span>Perfil</button></nav>
+  <nav class="bottomNav"><button class="navBtn active" onclick="showScreen('home',this)"><span class="nIco">⌂</span>Inicio</button><button class="navBtn" onclick="showScreen('search',this)"><span class="nIco">⌕</span>Buscar</button><button class="navBtn fabPro" onclick="showScreen('professional',this)"><span class="nIco">👷‍♂️</span>PRO</button><button class="navBtn" onclick="showScreen('messages',this)"><span class="nIco">◌</span>Chats</button><button class="navBtn" onclick="showScreen('profile',this)"><span class="nIco">♙</span>Perfil</button></nav>
 </main>
 
 <div id="detailModal" class="modal"><div class="sheet"><div class="sheetHead"><h3 id="modalName">Profesional</h3><button class="iconBtn" onclick="closeModal('detailModal')">✕</button></div><div id="modalContent"></div><div class="field"><label>Día del servicio</label><input id="requestDate" type="date"></div><div class="field"><label>Horario</label><input id="requestTime" type="time"></div><div class="field"><label>Mensaje</label><textarea id="requestMsg" placeholder="Contale qué necesitás..."></textarea></div><button class="btn" onclick="createOrder()">Contratar servicio <span>→</span></button></div></div>
