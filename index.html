@@ -63,6 +63,79 @@
     /* MODAL / NAV */
     .modal{position:fixed;inset:0;background:rgba(0,0,0,.62);z-index:140;display:none;align-items:flex-end;max-width:520px;margin:0 auto}.modal.active{display:flex}.sheet{width:100%;max-height:88vh;overflow:auto;border-radius:30px 30px 0 0;background:#06111f;border:1px solid var(--line);padding:20px;box-shadow:0 -22px 60px rgba(0,0,0,.5)}.sheetHead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}.sheetHead h3{margin:0}.iconBtn{width:42px;height:42px;border-radius:15px;background:#071224;border:1px solid var(--line);display:grid;place-items:center;color:#fff}.bottomNav{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:100%;max-width:520px;height:var(--navH);background:rgba(2,8,23,.96);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);z-index:90;backdrop-filter:blur(18px)}.navBtn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:#64748b;font-size:.72rem;font-weight:900}.navBtn .nIco{font-size:1.35rem}.navBtn.active,.navBtn.proActive{color:var(--green)}.navBtn.proActive{filter:drop-shadow(0 0 12px rgba(0,245,176,.45))}.fabPro{transform:translateY(-16px)}.fabPro .nIco{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--green2),var(--green));color:#001018;box-shadow:var(--glow)}.toast{position:fixed;left:50%;bottom:calc(var(--navH) + 14px);transform:translateX(-50%) translateY(18px);background:#071224;color:#fff;border:1px solid var(--line2);padding:12px 16px;border-radius:999px;font-weight:1000;opacity:0;z-index:250;transition:.25s;max-width:90%;text-align:center}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}.chatBox{background:#08111f;border:1px solid var(--line);border-radius:18px;padding:12px;max-height:300px;overflow:auto;margin-bottom:10px}.bubble{max-width:82%;padding:10px 12px;border-radius:18px;margin:8px 0;font-size:.9rem;line-height:1.32}.bubble.me{margin-left:auto;background:rgba(0,245,176,.18);border:1px solid rgba(0,245,176,.20)}.bubble.other{background:#071224;border:1px solid var(--line)}.stars{display:flex;gap:7px;justify-content:center;margin:12px 0}.starBtn{font-size:2rem;filter:grayscale(1);opacity:.45}.starBtn.active{filter:none;opacity:1}.checkRow{display:flex;gap:10px;align-items:flex-start;color:var(--muted);font-weight:750;font-size:.86rem;margin:10px 0}.checkRow input{width:auto;margin-top:3px}.aliasPrivate{background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.30);border-radius:15px;padding:11px;color:#fde68a;font-weight:850;font-size:.84rem;margin-top:10px}
     @media(max-width:390px){.heroBrand,.heroHome .brandText{font-size:2.55rem}.toolGrid{gap:8px}.tool{min-height:108px;padding:10px}.proNav{grid-template-columns:repeat(2,1fr)}.row2,.walletGrid{grid-template-columns:1fr}}
+  
+    /* SERVIFIX PRO VIOLETA - ajustes finales */
+    #professional.screen{
+      background:
+        radial-gradient(circle at 75% 0%,rgba(168,85,247,.26),transparent 34%),
+        radial-gradient(circle at 10% 18%,rgba(124,58,237,.20),transparent 28%),
+        linear-gradient(180deg,#16082e 0%,#080b1a 38%,#020817 100%);
+      margin-left:-18px;margin-right:-18px;padding-left:18px;padding-right:18px;
+      min-height:calc(100vh - var(--navH) - 72px);
+    }
+    #professional .proHero{
+      background:linear-gradient(145deg,rgba(124,58,237,.34),rgba(59,24,104,.72));
+      border-color:rgba(216,180,254,.38);
+      box-shadow:0 0 42px rgba(168,85,247,.28);
+      padding:16px;
+      margin-top:0;
+    }
+    #professional .crown,
+    #professional .proMetric .mIcon,
+    #professional .tool .tIcon,
+    #professional .quickItem .qIcon,
+    #professional .mIco{
+      color:#e9d5ff;
+      background:rgba(168,85,247,.18);
+    }
+    #professional .proMetric,
+    #professional .tool,
+    #professional .jobCard,
+    #professional .quickItem,
+    #professional .card{
+      background:linear-gradient(145deg,rgba(22,13,44,.96),rgba(8,13,29,.96));
+      border-color:rgba(216,180,254,.18);
+    }
+    #professional .toolGrid{grid-template-columns:repeat(3,1fr);gap:8px}
+    #professional .tool{min-height:92px;padding:9px;border-radius:20px}
+    #professional .tool .tIcon{font-size:1.32rem;margin-bottom:5px}
+    #professional .tool b{font-size:.75rem}
+    #professional .tool small{font-size:.58rem}
+    #professional .proNav{grid-template-columns:repeat(4,1fr);gap:8px}
+    #professional .proMetric{padding:10px;border-radius:18px}
+    #professional .proMetric .mIcon{width:30px;height:30px;border-radius:11px;margin-bottom:6px}
+    #professional .proMetric b{font-size:1.08rem}
+    #professional .proMetric small{font-size:.66rem}
+    #professional .btn,
+    #professional .btn.violet,
+    .bottomNav .fabPro .nIco{
+      background:linear-gradient(135deg,#7c3aed,#c084fc);
+      color:#fff;
+      box-shadow:0 0 34px rgba(168,85,247,.38);
+    }
+    #professional .btn.dark{background:#120c24;color:#fff;border:1px solid rgba(216,180,254,.20);box-shadow:none}
+    #professional .btn.red{background:#ef4444;color:#fff}
+    #professional .badge:not(.red):not(.amber):not(.gray){
+      background:rgba(168,85,247,.18);
+      color:#e9d5ff;
+    }
+    #professional .count{
+      background:#c084fc;color:#12051f;
+    }
+    #professional .proCta{
+      background:linear-gradient(135deg,rgba(124,58,237,.26),rgba(192,132,252,.13));
+      border-color:rgba(216,180,254,.30);
+    }
+    #professional .sectionHead{margin:16px 0 10px}
+    #professional .headline{color:#fff}
+    @media(max-width:390px){
+      #professional .toolGrid{grid-template-columns:repeat(3,1fr)}
+      #professional .proNav{grid-template-columns:repeat(4,1fr)}
+      #professional .tool{min-height:86px;padding:8px}
+      #professional .tool b{font-size:.68rem}
+      #professional .tool small{display:none}
+    }
+
   </style>
 </head>
 <body>
@@ -147,7 +220,7 @@
   </section>
 
   <section id="professional" class="screen">
-    <div class="proHero"><div><h2>Panel PRO</h2><p>Tu tablero profesional para trabajar mejor.</p></div><div class="crown">👑</div></div>
+    <div class="proHero"><div><h2>Panel PRO</h2><p>Dashboard violeta: agenda, clientes, cobros, presupuestos y servicios.</p></div><div class="crown">👑</div></div>
     <div id="proGate"></div>
     <div id="proPanel" class="hidden">
       <div class="proNav">
@@ -159,17 +232,17 @@
 
       <div class="toolGrid">
         <button class="tool" onclick="openProviderRegister()"><span class="tIcon">➕</span><b>Publicar</b><small>Sumar servicio</small></button>
+        <button class="tool" onclick="openBudgets()"><span class="tIcon">🧾</span><b>Presupuestos</b><small>Importes y notas</small><span class="count" id="countBudgets">0</span></button>
         <button class="tool" onclick="scrollToProJobs()"><span class="tIcon">💼</span><b>Trabajos</b><small>Gestioná pedidos</small><span class="count" id="countJobs">0</span></button>
         <button class="tool" onclick="toast('Agenda PRO lista para integrar calendario')"><span class="tIcon">📅</span><b>Agenda</b><small>Horarios y visitas</small></button>
         <button class="tool" onclick="toast('Ficha de clientes disponible en cada trabajo')"><span class="tIcon">👥</span><b>Clientes</b><small>Historial privado</small></button>
         <button class="tool" onclick="openPayments()"><span class="tIcon">💳</span><b>Cobros</b><small>Alias y pagos</small></button>
         <button class="tool" onclick="toast('Estadísticas calculadas desde tus trabajos')"><span class="tIcon">📊</span><b>Estadísticas</b><small>Métricas del mes</small></button>
         <button class="tool" onclick="toast('Tu portfolio se carga al publicar servicios')"><span class="tIcon">🖼️</span><b>Portfolio</b><small>Fotos realizadas</small></button>
-        <button class="tool" onclick="toast('Definí zonas en cada servicio publicado')"><span class="tIcon">📍</span><b>Zona</b><small>Cobertura</small></button>
-        <button class="tool" onclick="toast('Promociones futuras: destacá tu perfil')"><span class="tIcon">🚀</span><b>Promos</b><small>Destacar perfil</small></button>
+        <button class="tool" onclick="toast('Definí zonas en cada servicio publicado')"><span class="tIcon">📍</span><b>Zonas</b><small>Cobertura</small></button>
+        <button class="tool" onclick="toast('Promociones futuras: destacá tu perfil')"><span class="tIcon">🚀</span><b>Destacar</b><small>Más visibilidad</small></button>
         <button class="tool" onclick="showScreen('messages')"><span class="tIcon">💬</span><b>Mensajes</b><small>Chats activos</small><span class="count" id="countChats">0</span></button>
         <button class="tool" onclick="openSecurity()"><span class="tIcon">⚙️</span><b>Ajustes</b><small>PIN y seguridad</small></button>
-        <button class="tool" onclick="lockPro()"><span class="tIcon">🔒</span><b>Cerrar PRO</b><small>Bloquear panel</small></button>
       </div>
 
       <div class="proCta"><div><b>Potenciá tu negocio con SERVIFIX PRO</b><small>Más visibilidad, mejores herramientas, más resultados.</small></div><button class="btn dark" style="width:auto;white-space:nowrap" onclick="toast('Planes PRO próximamente')">Mejorar →</button></div>
@@ -203,6 +276,22 @@
 <div id="favoritesModal" class="modal"><div class="sheet"><div class="sheetHead"><h3>Favoritos</h3><button class="iconBtn" onclick="closeModal('favoritesModal')">✕</button></div><div id="favoritesList"></div></div></div>
 <div id="chatModal" class="modal"><div class="sheet"><div class="sheetHead"><h3 id="chatTitle">Chat</h3><button class="iconBtn" onclick="closeModal('chatModal')">✕</button></div><div id="chatAliasBox"></div><div id="chatMessages" class="chatBox"></div><div class="input">💬<input id="chatInput" placeholder="Escribí un mensaje..."></div><button class="btn" style="margin-top:10px" onclick="sendChatMessage()">Enviar mensaje <span>→</span></button></div></div>
 <div id="ratingModal" class="modal"><div class="sheet"><div class="sheetHead"><h3>Calificar servicio</h3><button class="iconBtn" onclick="closeModal('ratingModal')">✕</button></div><p class="desc" style="text-align:center">Tu calificación ayuda a destacar a los mejores profesionales.</p><div id="ratingStars" class="stars"></div><div class="field"><label>Comentario opcional</label><textarea id="ratingComment" placeholder="Contá cómo fue el servicio..."></textarea></div><button class="btn" onclick="saveRating()">Guardar calificación <span>→</span></button></div></div>
+
+<div id="budgetModal" class="modal"><div class="sheet">
+  <div class="sheetHead"><h3>Presupuestos PRO</h3><button class="iconBtn" onclick="closeModal('budgetModal')">✕</button></div>
+  <p class="desc">Armá presupuestos rápidos para clientes. Quedan guardados en tu panel y listos para enviar por chat.</p>
+  <div class="field"><label>Cliente</label><input id="budgetClient" placeholder="Nombre del cliente"></div>
+  <div class="field"><label>Servicio</label><input id="budgetService" placeholder="Ej: Reparación eléctrica"></div>
+  <div class="row2">
+    <div class="field"><label>Importe</label><input id="budgetAmount" placeholder="$45000"></div>
+    <div class="field"><label>Validez</label><input id="budgetValid" placeholder="7 días"></div>
+  </div>
+  <div class="field"><label>Detalle</label><textarea id="budgetDetail" placeholder="Incluye materiales, mano de obra, tiempos y condiciones..."></textarea></div>
+  <button class="btn violet" onclick="saveBudget()">Guardar presupuesto <span>→</span></button>
+  <div class="sectionHead"><h3>Guardados</h3><button class="link" onclick="renderBudgets()">Actualizar</button></div>
+  <div id="budgetList"></div>
+</div></div>
+
 <div id="toast" class="toast">Listo</div>
 
 <script type="module">
@@ -230,9 +319,9 @@ window.logoutFirebase=async()=>signOut(auth).catch(()=>{});
 <script>
 const services=["Electricista","Plomero","Gasista","Carpintero","Pintor","Jardinero","Enfermero/a","Médico","Técnico de computadora","Cadete / mandados","Limpieza","Mascotas","Automotor","Cerrajero","Albañil","Aire acondicionado","Profesor particular","Cocinero/a","Niñera","Cuidado adulto mayor","Otro / varios"];
 const icons={"Electricista":"⚡","Plomero":"🚰","Gasista":"🔥","Carpintero":"🪚","Pintor":"🎨","Jardinero":"🌱","Enfermero/a":"🩺","Médico":"🩺","Técnico de computadora":"💻","Cadete / mandados":"🛵","Limpieza":"🧹","Mascotas":"🐶","Automotor":"🚗","Cerrajero":"🔑","Albañil":"🧱","Aire acondicionado":"❄️","Profesor particular":"📚","Cocinero/a":"🍳","Niñera":"🧸","Cuidado adulto mayor":"👵","Otro / varios":"🛠️"};
-let accounts=JSON.parse(localStorage.getItem("sf_accounts")||"[]"),providers=JSON.parse(localStorage.getItem("sf_providers")||"[]"),orders=JSON.parse(localStorage.getItem("sf_orders")||"[]"),favorites=JSON.parse(localStorage.getItem("sf_favorites")||"[]"),user=JSON.parse(localStorage.getItem("sf_user")||"null"),selected=null,orderFilter="Todos",authMode="login",tempProfilePhoto="",tempProviderPhoto="",tempProviderGallery=[],proUnlocked=false,currentJobId=null,currentChatOrderId=null,currentRatingOrderId=null,selectedRating=5,editingProviderId=null;
+let accounts=JSON.parse(localStorage.getItem("sf_accounts")||"[]"),providers=JSON.parse(localStorage.getItem("sf_providers")||"[]"),orders=JSON.parse(localStorage.getItem("sf_orders")||"[]"),favorites=JSON.parse(localStorage.getItem("sf_favorites")||"[]"),budgets=JSON.parse(localStorage.getItem("sf_budgets")||"[]"),user=JSON.parse(localStorage.getItem("sf_user")||"null"),selected=null,orderFilter="Todos",authMode="login",tempProfilePhoto="",tempProviderPhoto="",tempProviderGallery=[],proUnlocked=false,currentJobId=null,currentChatOrderId=null,currentRatingOrderId=null,selectedRating=5,editingProviderId=null;
 window.providers=providers;window.orders=orders;window.user=user;
-function norm(s){return(s||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/\s+/g," ").trim()}function city(s){let x=norm(s);const a={"villavol":"villa bosch","villabor":"villa bosch","caba":"capital federal","capital":"capital federal","villa deboto":"villa devoto","la prida":"laprida","la barria":"bahia blanca"};return a[x]||x}function save(){localStorage.setItem("sf_accounts",JSON.stringify(accounts));localStorage.setItem("sf_providers",JSON.stringify(providers));localStorage.setItem("sf_orders",JSON.stringify(orders));localStorage.setItem("sf_favorites",JSON.stringify(favorites));if(user)localStorage.setItem("sf_user",JSON.stringify(user));window.providers=providers;window.orders=orders;window.user=user}
+function norm(s){return(s||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/\s+/g," ").trim()}function city(s){let x=norm(s);const a={"villavol":"villa bosch","villabor":"villa bosch","caba":"capital federal","capital":"capital federal","villa deboto":"villa devoto","la prida":"laprida","la barria":"bahia blanca"};return a[x]||x}function save(){localStorage.setItem("sf_accounts",JSON.stringify(accounts));localStorage.setItem("sf_providers",JSON.stringify(providers));localStorage.setItem("sf_orders",JSON.stringify(orders));localStorage.setItem("sf_favorites",JSON.stringify(favorites));localStorage.setItem("sf_budgets",JSON.stringify(budgets));if(user)localStorage.setItem("sf_user",JSON.stringify(user));window.providers=providers;window.orders=orders;window.user=user}
 function toast(t){let el=document.getElementById('toast');el.textContent=t;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),1900)}
 function setAuthMode(m){authMode=m;loginTab.classList.toggle('active',m==='login');registerTab.classList.toggle('active',m==='register');loginForm.classList.toggle('hidden',m!=='login');registerForm.classList.toggle('hidden',m!=='register')}
 async function registerUser(){let name=regName.value.trim(),email=regEmail.value.trim().toLowerCase(),pass=regPass.value;if(!name)return toast('Ingresá tu nombre');if(!email.includes('@'))return toast('Email inválido');if(pass.length<6)return toast('Mínimo 6 caracteres');if(!regTerms.checked)return toast('Aceptá términos');try{if(window.emailRegisterFirebase)await window.emailRegisterFirebase(email,pass,name)}catch(e){console.warn(e)}user={name,email,pass,photo:'',phone:'',city:'',address:'',bio:'',proActive:false,proPin:'',wallet:{balance:0,alias:'',method:'',note:''}};if(!accounts.some(a=>a.email===email))accounts.push(user);save();if(window.saveUserCloud)window.saveUserCloud();boot();toast('Cuenta creada')}
@@ -251,7 +340,7 @@ function canCancel(o){return(new Date(o.date+'T'+o.time)-new Date())/36e5>=48}fu
 function renderOrders(){let mine=orders.filter(o=>o.clientEmail===user?.email),data=orderFilter==='Todos'?mine:mine.filter(o=>o.status===orderFilter);ordersList.innerHTML=data.length?data.map(o=>`<div class="card proCard"><div style="display:flex;justify-content:space-between"><span class="badge ${o.status==='Cancelado'?'red':o.status==='Completado'?'':'gray'}">${o.status}</span><span class="meta">#${String(o.id).slice(-4)}</span></div><h3>${o.service}</h3><p class="desc">${o.provider} · ${o.city}</p><p class="desc">📅 ${o.date} · 🕒 ${o.time}</p><div class="miniBtns"><button class="btn dark" onclick="openChat(${o.id})">Chat</button>${o.status==='Activo'?`<button class="btn red" onclick="cancelOrder(${o.id})">Cancelar</button>`:''}</div>${o.status==='Completado'&&!o.rating?`<button class="btn" style="margin-top:8px" onclick="openRating(${o.id})">Calificar servicio →</button>`:''}${o.rating?`<p class="desc" style="text-align:center">Tu calificación: ⭐ ${o.rating}/5</p>`:''}</div>`).join(''):`<div class="empty">Todavía no tenés servicios contratados.</div>`}
 function renderPro(){if(!user.proActive){proUnlocked=false;proPanel.classList.add('hidden');proGate.innerHTML=`<div class="card"><h3 style="margin-top:0">Activar PRO</h3><p class="desc">Creá una clave de 4 números para desbloquear tu panel profesional.</p><div class="field"><label>Crear clave PRO</label><input id="proPinInput" inputmode="numeric" maxlength="4" placeholder="Ej: 1234"></div><button class="btn" onclick="activatePro()">Activar panel PRO <span>→</span></button></div>`;return}if(!proUnlocked){proPanel.classList.add('hidden');proGate.innerHTML=`<div class="card"><h3 style="margin-top:0">Entrar al panel PRO</h3><p class="desc">Ingresá tu clave para ver clientes, agenda y cobros.</p><div class="field"><label>Clave PRO</label><input id="proLoginPin" type="password" inputmode="numeric" maxlength="4" placeholder="••••"></div><button class="btn" onclick="unlockPro()">Entrar a PRO <span>→</span></button></div>`;return}proGate.innerHTML='';proPanel.classList.remove('hidden');renderProStats();renderProJobs();renderMyServices();renderProRatings()}
 function activatePro(){let pin=proPinInput.value.trim();if(!/^\d{4}$/.test(pin))return toast('La clave PRO debe tener 4 números');user.proActive=true;user.proPin=pin;proUnlocked=true;user.wallet=user.wallet||{alias:'',method:'',note:''};updateAccount();renderPro();toast('Panel PRO activado')}function unlockPro(){let pin=proLoginPin.value.trim();if(pin!==user.proPin)return toast('Clave PRO incorrecta');proUnlocked=true;renderPro();toast('Bienvenido a PRO')}function lockPro(){proUnlocked=false;renderPro();toast('Panel PRO bloqueado')}
-function renderProStats(){let mine=orders.filter(o=>o.providerOwner===user?.email),pending=mine.filter(o=>o.status==='Activo').length,ratings=mine.filter(o=>o.rating),avg=ratings.length?ratings.reduce((a,o)=>a+Number(o.rating||0),0)/ratings.length:null,total=mine.filter(o=>o.paid==='Pagado'&&o.amount).reduce((a,o)=>a+parseFloat((o.amount||'0').replace(/[^0-9.]/g,'')||0),0);proStatJobs.textContent=mine.length;proStatRating.textContent=avg?avg.toFixed(1)+'⭐':'—';proStatPending.textContent=pending;walletBalance.textContent='$'+total.toLocaleString('es-AR');countJobs.textContent=pending;countChats.textContent=mine.filter(o=>(o.chat||[]).length).length}
+function renderProStats(){let mine=orders.filter(o=>o.providerOwner===user?.email),pending=mine.filter(o=>o.status==='Activo').length,ratings=mine.filter(o=>o.rating),avg=ratings.length?ratings.reduce((a,o)=>a+Number(o.rating||0),0)/ratings.length:null,total=mine.filter(o=>o.paid==='Pagado'&&o.amount).reduce((a,o)=>a+parseFloat((o.amount||'0').replace(/[^0-9.]/g,'')||0),0);proStatJobs.textContent=mine.length;proStatRating.textContent=avg?avg.toFixed(1)+'⭐':'—';proStatPending.textContent=pending;walletBalance.textContent='$'+total.toLocaleString('es-AR');countJobs.textContent=pending;countChats.textContent=mine.filter(o=>(o.chat||[]).length).length;if(document.getElementById("countBudgets"))countBudgets.textContent=budgets.filter(b=>b.owner===user?.email).length}
 function scrollToProJobs(){document.getElementById('proJobsAnchor')?.scrollIntoView({behavior:'smooth'})}function renderProJobs(){let mine=orders.filter(o=>o.providerOwner===user?.email);proJobsList.innerHTML=mine.length?mine.slice(0,5).map(o=>`<div class="jobCard"><div style="display:flex;justify-content:space-between;gap:10px"><div><h4 style="margin:0">${o.clientName||'Cliente'}</h4><p class="desc">${o.service} · ${o.city}</p><p class="desc">📅 ${o.date} · 🕒 ${o.time}</p></div><div style="display:flex;flex-direction:column;gap:5px"><span class="badge gray">${o.status}</span><span class="badge amber">${o.paid||'Pendiente'}</span></div></div><p class="desc"><b>Contacto:</b> ${o.clientPhone||o.clientEmail||'No informado'}</p><div class="miniBtns3"><button class="btn dark" onclick="openJobFicha(${o.id})">Ficha</button><button class="btn dark" onclick="openChat(${o.id})">Chat</button><button class="btn" onclick="markJobPaid(${o.id})">Pagado</button></div></div>`).join(''):`<div class="empty">Cuando alguien te contrate, lo vas a ver acá.</div>`}
 function resetProviderForm(){editingProviderId=null;provName.value=user?.name||'';provServiceSelect.value='';provService.value='';provCity.value='';provContact.value='';provPrice.value='';provHours.value='';provStatus.value='Activo';provDesc.value='';tempProviderPhoto='';tempProviderGallery=[];provPhotoPreview.style.backgroundImage='';provPhotoPreview.textContent='👤';provGalleryPreview.innerHTML='<div>+</div><div>+</div><div>+</div>'}function openProviderRegister(){if(!user.proActive||!proUnlocked)return toast('Entrá a PRO primero');resetProviderForm();providerModal.classList.add('active')}function readFile(file,cb){if(!file)return;let r=new FileReader();r.onload=e=>cb(e.target.result);r.readAsDataURL(file)}function previewProviderPhoto(e){readFile(e.target.files[0],src=>{tempProviderPhoto=src;provPhotoPreview.style.backgroundImage=`url('${src}')`;provPhotoPreview.textContent=''})}function previewProviderGallery(e){tempProviderGallery=[];let files=[...(e.target.files||[])].slice(0,6);provGalleryPreview.innerHTML='';files.forEach(file=>readFile(file,src=>{tempProviderGallery.push(src);provGalleryPreview.innerHTML=tempProviderGallery.map(x=>`<div style="background-image:url('${x}')"></div>`).join('')}))}
 function saveProvider(){let name=provName.value.trim(),service=provService.value.trim()||provServiceSelect.value,cityValue=provCity.value.trim(),contact=provContact.value.trim();if(!name||!service||!cityValue||!contact)return toast('Completá nombre, servicio, localidad y contacto');let p={id:editingProviderId||Date.now(),name,service,city:cityValue,contact,price:provPrice.value,hours:provHours.value||'A coordinar',status:provStatus.value,desc:provDesc.value||'Servicio profesional disponible.',photo:tempProviderPhoto,gallery:tempProviderGallery,icon:icons[service]||'🛠️',owner:user.email};let i=providers.findIndex(x=>x.id===p.id);if(i>=0)providers[i]=p;else providers.unshift(p);save();if(window.saveProviderCloud)window.saveProviderCloud(p);closeModal('providerModal');renderAll();showScreen('professional');toast('Servicio guardado')}
@@ -261,11 +350,42 @@ function toggleFav(id){favorites=favorites.includes(id)?favorites.filter(x=>x!==
 function renderMessages(){let data=orders.filter(o=>o.clientEmail===user?.email||o.providerOwner===user?.email);messagesList.innerHTML=data.length?data.map(o=>`<div class="quickItem"><div class="qIcon">💬</div><div class="grow"><b>${o.service}</b><small>${o.clientEmail===user?.email?o.provider:o.clientName} · ${o.date}</small></div><button class="btn dark" style="width:auto" onclick="openChat(${o.id})">Abrir</button></div>`).join(''):`<div class="empty">Los chats aparecen cuando contratás o te contratan.</div>`}
 function renderProfile(){if(!user)return;profileName.textContent=user.name||'Usuario';profileEmail.textContent=user.email||'';profileInitial.textContent=(user.name||'S')[0].toUpperCase();if(user.photo){profileInitial.style.backgroundImage=`url('${user.photo}')`;profileInitial.textContent=''}else{profileInitial.style.backgroundImage='';}statOrders.textContent=orders.filter(o=>o.clientEmail===user.email).length;statFavs.textContent=favorites.length;let r=orders.filter(o=>o.providerOwner===user.email&&o.rating),avg=r.length?r.reduce((a,o)=>a+Number(o.rating),0)/r.length:0;statScore.textContent=avg?avg.toFixed(1):'0.0'}
 function openEditProfile(){editName.value=user.name||'';editPhone.value=user.phone||'';editCity.value=user.city||'';editAddress.value=user.address||'';editBio.value=user.bio||'';tempProfilePhoto=user.photo||'';editPhotoPreview.style.backgroundImage=tempProfilePhoto?`url('${tempProfilePhoto}')`:'';editPhotoPreview.textContent=tempProfilePhoto?'':'👤';profileModal.classList.add('active')}function previewProfilePhoto(e){readFile(e.target.files[0],src=>{tempProfilePhoto=src;editPhotoPreview.style.backgroundImage=`url('${src}')`;editPhotoPreview.textContent=''})}function saveProfile(){user.name=editName.value.trim()||user.name;user.phone=editPhone.value.trim();user.city=editCity.value.trim();user.address=editAddress.value.trim();user.bio=editBio.value.trim();user.photo=tempProfilePhoto;updateAccount();closeModal('profileModal');renderProfile();toast('Perfil guardado')}
+
+function openBudgets(){
+  if(!user?.proActive || !proUnlocked) return toast('Entrá a PRO primero');
+  budgetClient.value='';budgetService.value='';budgetAmount.value='';budgetValid.value='7 días';budgetDetail.value='';
+  renderBudgets();
+  budgetModal.classList.add('active');
+}
+function saveBudget(){
+  let client=budgetClient.value.trim(), service=budgetService.value.trim(), amount=budgetAmount.value.trim();
+  if(!client || !service || !amount) return toast('Completá cliente, servicio e importe');
+  budgets.unshift({id:Date.now(),owner:user.email,client,service,amount,valid:budgetValid.value.trim()||'7 días',detail:budgetDetail.value.trim()||'Sin detalle',status:'Listo para enviar',created:new Date().toLocaleDateString('es-AR')});
+  save();
+  budgetClient.value='';budgetService.value='';budgetAmount.value='';budgetValid.value='7 días';budgetDetail.value='';
+  renderBudgets();renderProStats();
+  toast('Presupuesto guardado');
+}
+function deleteBudget(id){
+  budgets=budgets.filter(b=>b.id!==id);
+  save();renderBudgets();renderProStats();toast('Presupuesto eliminado');
+}
+function renderBudgets(){
+  if(!document.getElementById('budgetList'))return;
+  let mine=budgets.filter(b=>b.owner===user?.email);
+  budgetList.innerHTML=mine.length?mine.map(b=>`<div class="jobCard">
+    <div style="display:flex;justify-content:space-between;gap:10px"><div><h4 style="margin:0">${b.client}</h4><p class="desc">${b.service} · <b>${b.amount}</b></p></div><span class="badge">${b.status}</span></div>
+    <p class="desc"><b>Validez:</b> ${b.valid} · <b>Fecha:</b> ${b.created}</p>
+    <p class="desc">${b.detail}</p>
+    <div class="miniBtns"><button class="btn dark" onclick="toast('Presupuesto listo para enviar por chat')">Enviar</button><button class="btn red" onclick="deleteBudget(${b.id})">Eliminar</button></div>
+  </div>`).join(''):`<div class="empty">Todavía no cargaste presupuestos.</div>`;
+}
+
 function openPayments(){payAlias.value=user.wallet?.alias||'';payMethod.value=user.wallet?.method||'Mercado Pago';payNote.value=user.wallet?.note||'';paymentsModal.classList.add('active')}function savePayments(){user.wallet={alias:payAlias.value.trim(),method:payMethod.value,note:payNote.value.trim()};updateAccount();closeModal('paymentsModal');renderPro();toast('Cobros guardados')}function openSecurity(){newPass.value='';newProPin.value=user.proPin||'';securityModal.classList.add('active')}function saveSecurity(){if(newPass.value&&newPass.value.length<6)return toast('La contraseña debe tener 6 caracteres');if(newPass.value)user.pass=newPass.value;if(newProPin.value){if(!/^\d{4}$/.test(newProPin.value))return toast('El PIN PRO debe tener 4 números');user.proPin=newProPin.value;user.proActive=true}updateAccount();closeModal('securityModal');toast('Seguridad actualizada')}function openRecover(){recoverEmail.value=loginEmail.value||'';recoverModal.classList.add('active')}async function recoverPassword(){let email=recoverEmail.value.trim();if(!email.includes('@'))return toast('Ingresá un email válido');try{if(window.resetFirebase)await window.resetFirebase(email);toast('Revisá tu email')}catch(e){toast('Recuperación preparada')}}
 function openJobFicha(id){let o=orders.find(x=>x.id===id);if(!o)return;currentJobId=id;jobClientBox.innerHTML=`<div class="card" style="box-shadow:none;margin-bottom:12px"><h4>${o.clientName}</h4><p class="desc">${o.clientEmail}</p><p class="desc">${o.clientPhone||'Sin teléfono'}</p><p class="desc">${o.clientAddress||'Sin dirección'}</p></div>`;jobAmount.value=o.amount||'';jobPaid.value=o.paid||'Pendiente';jobNotes.value=o.workNotes||'';jobStatus.value=o.status||'Activo';jobModal.classList.add('active')}function saveJobFicha(){let o=orders.find(x=>x.id===currentJobId);if(!o)return;o.amount=jobAmount.value;o.paid=jobPaid.value;o.workNotes=jobNotes.value;o.status=jobStatus.value;save();if(window.saveOrderCloud)window.saveOrderCloud(o);closeModal('jobModal');renderPro();renderOrders();toast('Ficha guardada')}function markJobPaid(id){let o=orders.find(x=>x.id===id);if(!o)return;o.paid='Pagado';if(!o.amount)o.amount='$0';save();if(window.saveOrderCloud)window.saveOrderCloud(o);renderPro();toast('Marcado como pagado')}
 function openChat(id){let o=orders.find(x=>x.id===id);if(!o)return;currentChatOrderId=id;chatTitle.textContent=o.service;renderChat();chatModal.classList.add('active')}function renderChat(){let o=orders.find(x=>x.id===currentChatOrderId);if(!o)return;chatAliasBox.innerHTML='';chatMessages.innerHTML=(o.chat||[]).map(m=>`<div class="bubble ${m.email===user.email?'me':'other'}"><b>${m.name}</b><br>${m.text}</div>`).join('')||'<div class="empty">Todavía no hay mensajes.</div>'}function sendChatMessage(){let o=orders.find(x=>x.id===currentChatOrderId);let txt=chatInput.value.trim();if(!o||!txt)return;o.chat=o.chat||[];o.chat.push({email:user.email,name:user.name,text:txt,at:Date.now()});chatInput.value='';save();if(window.saveOrderCloud)window.saveOrderCloud(o);renderChat();renderMessages()}
 function openRating(id){currentRatingOrderId=id;selectedRating=5;ratingStars.innerHTML=[1,2,3,4,5].map(n=>`<button class="starBtn active" onclick="setRating(${n})">⭐</button>`).join('');ratingComment.value='';ratingModal.classList.add('active')}function setRating(n){selectedRating=n;[...ratingStars.children].forEach((b,i)=>b.classList.toggle('active',i<n))}function saveRating(){let o=orders.find(x=>x.id===currentRatingOrderId);if(!o)return;o.rating=selectedRating;o.ratingComment=ratingComment.value.trim();save();if(window.saveOrderCloud)window.saveOrderCloud(o);closeModal('ratingModal');renderOrders();toast('Calificación guardada')}
-function openTerms(){termsModal.classList.add('active')}function closeModal(id){document.getElementById(id).classList.remove('active')}function renderAll(){fillSelects();renderCategories();renderFeatured();renderResults();renderOrders();renderPro();renderMessages();renderProfile()}fillSelects();if(user)boot();
+function openTerms(){termsModal.classList.add('active')}function closeModal(id){document.getElementById(id).classList.remove('active')}function renderAll(){fillSelects();renderCategories();renderFeatured();renderResults();renderOrders();renderPro();renderMessages();renderProfile();renderBudgets()}fillSelects();if(user)boot();
 </script>
 </body>
 </html>
