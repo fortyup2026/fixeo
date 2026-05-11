@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>FIX.AR</title>
+  <title>ServiGo AR</title>
   <meta name="theme-color" content="#061827" />
   <style>
     :root{
@@ -58,6 +58,26 @@
     .chatBox{background:#f8fafc;border:1px solid var(--line);border-radius:20px;padding:12px;max-height:320px;overflow:auto;margin-bottom:10px}.bubble{max-width:82%;padding:10px 12px;border-radius:18px;margin:8px 0;font-size:.9rem;line-height:1.32}.bubble.me{margin-left:auto;background:#d1fae5}.bubble.other{background:#fff;border:1px solid var(--line)}
     .photoPreview{width:86px;height:86px;border-radius:28px;background:#f1f5f9;background-size:cover;background-position:center;display:grid;place-items:center;font-size:2.2rem;margin-bottom:10px}
     /* alias box oculta en perfil público */
+
+    /* PRO más llamativo */
+    .bottomNav .navBtn:nth-child(3){
+      position:relative;
+      margin-top:-16px;
+      height:76px;
+      align-self:start;
+      border-radius:24px;
+      background:linear-gradient(145deg,#4c1d95,#7c3aed 60%,#a855f7);
+      color:#fff;
+      box-shadow:0 0 0 4px rgba(168,85,247,.18),0 14px 34px rgba(76,29,149,.38);
+      animation:proPulse 2.2s infinite;
+    }
+    .bottomNav .navBtn:nth-child(3)::after{content:"";position:absolute;inset:7px;border-radius:20px;border:1px solid rgba(255,255,255,.22);pointer-events:none}
+    .bottomNav .navBtn:nth-child(3) .nIco{font-size:1.75rem;filter:drop-shadow(0 4px 10px rgba(0,0,0,.25))}
+    .bottomNav .navBtn:nth-child(3).proActive{color:#fff;background:linear-gradient(145deg,#2e1065,#6d28d9,#a855f7)}
+    @keyframes proPulse{0%,100%{box-shadow:0 0 0 4px rgba(168,85,247,.16),0 14px 34px rgba(76,29,149,.34)}50%{box-shadow:0 0 0 8px rgba(168,85,247,.26),0 18px 44px rgba(76,29,149,.48)}}
+    .proQuickGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:14px 0}
+    .proQuick{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.18);border-radius:20px;padding:13px;color:#fff;text-align:left;font-weight:1000;box-shadow:0 12px 28px rgba(0,0,0,.12)}
+    .proQuick small{display:block;color:#ddd6fe;font-weight:800;margin-top:4px;font-size:.72rem}
     .aliasPrivate{background:#fef3c7;border:1px solid #fcd34d;border-radius:16px;padding:12px 14px;font-size:.84rem;color:#92400e;font-weight:800;margin-top:10px;display:flex;align-items:center;gap:8px}
     @media(max-width:390px){.hero h2{font-size:3rem}.headline{font-size:1.95rem}.sub{font-size:.95rem}.actions{grid-template-columns:1fr 46px}.grid3{gap:8px}.row2,.walletGrid{grid-template-columns:1fr}}
   </style>
@@ -68,8 +88,8 @@
 <section id="loginScreen" class="loginWrap">
   <div class="loginCard">
     <div class="logoPanel">
-      <div class="bigLogo"><div class="logoMark"><span class="s">F</span></div></div>
-      <h2>FIX<span style="color:var(--green2)">.AR</span></h2>
+      <div class="bigLogo"><div class="logoMark"><span class="s">S</span></div></div>
+      <h2>Servi<span style="color:var(--green2)">Go</span> <span class="ar">AR</span></h2>
       <p class="logoTagline"><span>BUSCÁ.</span><span>CONTRATÁ.</span><span class="ok">LISTO.</span></p>
     </div>
 
@@ -109,11 +129,11 @@
 
 <!-- ═══════════ APP ═══════════ -->
 <main id="mainApp" class="app hidden">
-  <header class="top"><div class="topRow"><div class="brand"><div class="logoMark"><span class="s">F</span></div><h1>FIX<span>.AR</span></h1><span class="ar">AR</span></div><button class="pill" onclick="showScreen('profile')">☰ Menú</button></div></header>
+  <header class="top"><div class="topRow"><div class="brand"><div class="logoMark"><span class="s">S</span></div><h1>Servi<span>Go</span></h1><span class="ar">AR</span></div><button class="pill" onclick="showScreen('profile')">☰ Menú</button></div></header>
 
   <!-- INICIO -->
   <section id="home" class="screen active">
-    <div class="hero"><div class="bigLogo"><div class="logoMark"><span class="s">F</span></div></div><h2><span class="servi">FIX</span><span class="go">.AR</span></h2></div>
+    <div class="hero"><div class="bigLogo"><div class="logoMark"><span class="s">S</span></div></div><h2><span class="servi">Servi</span><span class="go">Go</span><span class="arInline">AR</span></h2></div>
     <h1 class="headline center">Buscá. Contratá. <span>Listo.</span></h1>
     <p class="sub center">Encontrá profesionales de confianza en tu zona.</p>
     <div class="searchBox">
@@ -162,6 +182,13 @@
           <div class="proStatBox"><b id="proStatJobs">0</b><small>Trabajos</small></div>
           <div class="proStatBox"><b id="proStatRating">—</b><small>Estrellas</small></div>
           <div class="proStatBox"><b id="proStatPending">0</b><small>Pendientes</small></div>
+        </div>
+
+        <div class="proQuickGrid">
+          <button class="proQuick" onclick="openProviderRegister()">➕ Nuevo servicio<small>Publicar o sumar oficio</small></button>
+          <button class="proQuick" onclick="renderProJobs();toast('Agenda actualizada')">📅 Agenda<small>Trabajos y clientes</small></button>
+          <button class="proQuick" onclick="openPayments()">💳 Cobros<small>Alias y pagos</small></button>
+          <button class="proQuick" onclick="closeProSession()">🔒 Cerrar PRO<small>Bloquear panel violeta</small></button>
         </div>
 
         <!-- Vidriera -->
@@ -218,7 +245,7 @@
         <div class="profilePic" id="profileInitial">S</div>
         <div>
           <h3 id="profileName" style="margin:0;font-size:1.45rem">Usuario</h3>
-          <p id="profileEmail" class="sub" style="font-size:.86rem">Cliente FIX.AR</p>
+          <p id="profileEmail" class="sub" style="font-size:.86rem">Cliente ServiGo AR</p>
           <span class="badge">Cuenta activa</span>
         </div>
       </div>
@@ -235,7 +262,7 @@
       <button class="menuItem" onclick="showFavorites()"><span class="mIco">❤️</span><span class="grow"><b>Favoritos</b><small>Profesionales guardados</small></span><span>›</span></button>
       <button class="menuItem" onclick="openSecurity()"><span class="mIco">🔐</span><span class="grow"><b>Seguridad</b><small>Clave, recuperación y verificación</small></span><span>›</span></button>
       <button class="menuItem" onclick="openTerms()"><span class="mIco">📄</span><span class="grow"><b>Términos y condiciones</b><small>Reglas, seguridad y privacidad</small></span><span>›</span></button>
-      <button class="menuItem" onclick="logout()"><span class="mIco">🚪</span><span class="grow"><b>Cerrar sesión</b><small>Salir de FIX.AR</small></span><span>›</span></button>
+      <button class="menuItem" onclick="logout()"><span class="mIco">🚪</span><span class="grow"><b>Cerrar sesión</b><small>Salir de ServiGo AR</small></span><span>›</span></button>
     </div>
   </section>
 
@@ -352,7 +379,7 @@
 <div id="termsModal" class="modal"><div class="sheet">
   <div class="sheetHead"><h3>Términos y condiciones</h3><button class="iconBtn" onclick="closeModal('termsModal')">✕</button></div>
   <p class="desc"><b>Cancelación:</b> el cliente puede cancelar un servicio solo con 48 horas de anticipación.</p>
-  <p class="desc"><b>Seguridad:</b> verificá identidad, matrícula, referencias y datos antes de contratar. FIX.AR funciona como puente.</p>
+  <p class="desc"><b>Seguridad:</b> verificá identidad, matrícula, referencias y datos antes de contratar. ServiGo AR funciona como puente.</p>
   <p class="desc"><b>Pagos:</b> la app puede cobrar comisión por reserva o suscripción profesional. Para pagos reales se integra pasarela segura.</p>
   <p class="desc"><b>Privacidad:</b> no usamos ubicación automática; la búsqueda es por localidad escrita. El alias de cobro del profesional solo se muestra a clientes con reserva activa.</p>
   <button class="btn" style="margin-top:14px" onclick="closeModal('termsModal')">Aceptar</button>
@@ -385,12 +412,12 @@
 const services=["Electricista","Plomero","Gasista","Carpintero","Pintor","Jardinero","Enfermero/a","Médico","Técnico de computadora","Cadete / mandados","Limpieza","Mascotas","Automotor","Cerrajero","Albañil","Aire acondicionado","Profesor particular","Cocinero/a","Niñera","Cuidado adulto mayor","Otro / varios"];
 const icons={"Electricista":"⚡","Plomero":"🚰","Gasista":"🔥","Carpintero":"🪚","Pintor":"🎨","Jardinero":"🌱","Enfermero/a":"🩺","Médico":"🩺","Técnico de computadora":"💻","Cadete / mandados":"🛵","Limpieza":"🧹","Mascotas":"🐶","Automotor":"🚗","Cerrajero":"🔑","Albañil":"🧱","Aire acondicionado":"❄️","Profesor particular":"📚","Cocinero/a":"🍳","Niñera":"🧸","Cuidado adulto mayor":"👵","Otro / varios":"🛠️"};
 
-let accounts=JSON.parse(localStorage.getItem("fixar_accounts")||"[]"),
-    providers=JSON.parse(localStorage.getItem("fixar_providers")||"[]"),
-    orders=JSON.parse(localStorage.getItem("fixar_orders")||"[]"),
-    messages=JSON.parse(localStorage.getItem("fixar_messages")||"[]"),
-    favorites=JSON.parse(localStorage.getItem("fixar_favorites")||"[]"),
-    user=JSON.parse(localStorage.getItem("fixar_user")||"null"),
+let accounts=JSON.parse(localStorage.getItem("sg_accounts")||"[]"),
+    providers=JSON.parse(localStorage.getItem("sg_providers")||"[]"),
+    orders=JSON.parse(localStorage.getItem("sg_orders")||"[]"),
+    messages=JSON.parse(localStorage.getItem("sg_messages")||"[]"),
+    favorites=JSON.parse(localStorage.getItem("sg_favorites")||"[]"),
+    user=JSON.parse(localStorage.getItem("sg_user")||"null"),
     selected=null,orderFilter="Todos",authMode="login",
     tempProfilePhoto="",tempProviderPhoto="",tempProviderGallery=[],
     proUnlocked=false,currentJobId=null,currentChatOrderId=null,
@@ -399,16 +426,111 @@ let accounts=JSON.parse(localStorage.getItem("fixar_accounts")||"[]"),
 
 function norm(s){return(s||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/\s+/g," ").trim()}
 function city(s){let x=norm(s);const a={"villavol":"villa bosch","villabor":"villa bosch","caba":"capital federal","capital":"capital federal","villadeboto":"villa devoto","villa deboto":"villa devoto","la prida":"laprida","la barria":"bahia blanca","la barría":"bahia blanca"};return a[x]||x}
-function save(){localStorage.setItem("fixar_accounts",JSON.stringify(accounts));localStorage.setItem("fixar_providers",JSON.stringify(providers));localStorage.setItem("fixar_orders",JSON.stringify(orders));localStorage.setItem("fixar_messages",JSON.stringify(messages));localStorage.setItem("fixar_favorites",JSON.stringify(favorites));if(user)localStorage.setItem("fixar_user",JSON.stringify(user))}
+function save(){localStorage.setItem("sg_accounts",JSON.stringify(accounts));localStorage.setItem("sg_providers",JSON.stringify(providers));localStorage.setItem("sg_orders",JSON.stringify(orders));localStorage.setItem("sg_messages",JSON.stringify(messages));localStorage.setItem("sg_favorites",JSON.stringify(favorites));if(user)localStorage.setItem("sg_user",JSON.stringify(user))}
 
 // ── AUTH ──
-function socialAuth(provider){toast(provider+" se conecta en producción con Firebase Auth")}
+async function socialAuth(provider){
+  if(provider!=="Google") return toast("Solo Google está habilitado por ahora");
+  try{
+    if(!window.fxAuth) return toast("Firebase todavía está cargando. Probá otra vez.");
+    toast("Abriendo Google...");
+    const p=new window.fxAuth.GoogleAuthProvider();
+    p.setCustomParameters({prompt:"select_account"});
+    await window.fxAuth.signInWithRedirect(window.fxAuth.auth,p);
+  }catch(e){
+    console.error(e);
+    toast(firebaseMsg(e));
+  }
+}
 function setAuthMode(m){authMode=m;loginTab.classList.toggle("active",m==="login");registerTab.classList.toggle("active",m==="register");loginForm.classList.toggle("hidden",m!=="login");registerForm.classList.toggle("hidden",m!=="register")}
-function registerUser(){let name=regName.value.trim(),email=regEmail.value.trim().toLowerCase(),pass=regPass.value;if(!name)return toast("Ingresá tu nombre");if(!email.includes("@"))return toast("Ingresá un email válido");if(pass.length<6)return toast("La contraseña debe tener 6 caracteres");if(!regTerms.checked)return toast("Aceptá términos y condiciones");if(accounts.some(a=>a.email===email))return toast("Ese email ya está registrado");user={name,email,pass,photo:"",phone:"",city:"",address:"",bio:"",proActive:false,proPin:"",wallet:{balance:0,alias:"",method:"",note:""}};accounts.push(user);save();boot();toast("Cuenta creada")}
-function login(){let email=loginEmail.value.trim().toLowerCase(),pass=loginPass.value;if(!email.includes("@"))return toast("Ingresá un email válido");let acc=accounts.find(a=>a.email===email&&a.pass===pass);if(!acc)return toast("Email o contraseña incorrectos");user=acc;localStorage.setItem("fixar_user",JSON.stringify(user));boot()}
-function logout(){localStorage.removeItem("fixar_user");user=null;proUnlocked=false;mainApp.classList.add("hidden");loginScreen.classList.remove("hidden");toast("Sesión cerrada")}
+async function registerUser(){
+  let name=regName.value.trim(),email=regEmail.value.trim().toLowerCase(),pass=regPass.value;
+  if(!name)return toast("Ingresá tu nombre");
+  if(!email.includes("@"))return toast("Ingresá un email válido");
+  if(pass.length<6)return toast("La contraseña debe tener 6 caracteres");
+  if(!regTerms.checked)return toast("Aceptá términos y condiciones");
+  try{
+    if(window.fxAuth){
+      const cred=await window.fxAuth.createUserWithEmailAndPassword(window.fxAuth.auth,email,pass);
+      await window.fxAuth.updateProfile(cred.user,{displayName:name});
+      await handleFirebaseUser(cred.user,{nameOverride:name,pass});
+      toast("Cuenta creada");
+      return;
+    }
+  }catch(e){console.error(e);return toast(firebaseMsg(e));}
+  if(accounts.some(a=>a.email===email))return toast("Ese email ya está registrado");
+  user={name,email,pass,photo:"",phone:"",city:"",address:"",bio:"",proActive:false,proPin:"",wallet:{balance:0,alias:"",method:"",note:""}};
+  accounts.push(user);save();boot();toast("Cuenta creada")
+}
+async function login(){
+  let email=loginEmail.value.trim().toLowerCase(),pass=loginPass.value;
+  if(!email.includes("@"))return toast("Ingresá un email válido");
+  try{
+    if(window.fxAuth){
+      const cred=await window.fxAuth.signInWithEmailAndPassword(window.fxAuth.auth,email,pass);
+      await handleFirebaseUser(cred.user,{pass});
+      toast("Sesión iniciada");
+      return;
+    }
+  }catch(e){console.error(e);return toast(firebaseMsg(e));}
+  let acc=accounts.find(a=>a.email===email&&a.pass===pass);
+  if(!acc)return toast("Email o contraseña incorrectos");
+  user=acc;localStorage.setItem("sg_user",JSON.stringify(user));boot()
+}
+async function logout(){
+  try{ if(window.fxAuth) await window.fxAuth.signOut(window.fxAuth.auth); }catch(e){console.warn(e)}
+  localStorage.removeItem("sg_user");user=null;proUnlocked=false;mainApp.classList.add("hidden");loginScreen.classList.remove("hidden");toast("Sesión cerrada")
+}
 function boot(){loginScreen.classList.add("hidden");mainApp.classList.remove("hidden");renderAll()}
 function updateAccount(){let i=accounts.findIndex(a=>a.email===user.email);if(i>=0)accounts[i]=user;else accounts.push(user);save()}
+
+async function handleFirebaseUser(fbUser,opts={}){
+  if(!fbUser||!fbUser.email)return;
+  const email=fbUser.email.toLowerCase();
+  let existing=accounts.find(a=>a.email===email) || {};
+  user={
+    ...existing,
+    uid:fbUser.uid,
+    name:opts.nameOverride||fbUser.displayName||existing.name||email.split('@')[0],
+    email,
+    pass:opts.pass||existing.pass||"",
+    photo:fbUser.photoURL||existing.photo||"",
+    phone:existing.phone||"",
+    city:existing.city||"",
+    address:existing.address||"",
+    bio:existing.bio||"",
+    proActive:existing.proActive||false,
+    proPin:existing.proPin||"",
+    wallet:existing.wallet||{balance:0,alias:"",method:"",note:""}
+  };
+  updateAccount();
+  localStorage.setItem("sg_user",JSON.stringify(user));
+  try{
+    if(window.fxAuth?.db){
+      await window.fxAuth.setDoc(window.fxAuth.doc(window.fxAuth.db,"users",fbUser.uid),{
+        uid:fbUser.uid,name:user.name,email:user.email,photo:user.photo,updatedAt:window.fxAuth.serverTimestamp()
+      },{merge:true});
+    }
+  }catch(e){console.warn("Firestore user save",e)}
+  boot();
+}
+
+function firebaseMsg(e){
+  const code=e?.code||"";
+  const map={
+    "auth/unauthorized-domain":"Este dominio no está autorizado en Firebase Auth",
+    "auth/popup-blocked":"El navegador bloqueó la ventana. Uso redirect.",
+    "auth/popup-closed-by-user":"Se cerró Google antes de terminar",
+    "auth/email-already-in-use":"Ese email ya está registrado",
+    "auth/user-not-found":"No existe una cuenta con ese email",
+    "auth/wrong-password":"Contraseña incorrecta",
+    "auth/invalid-credential":"Email o contraseña incorrectos",
+    "auth/weak-password":"La contraseña debe tener mínimo 6 caracteres",
+    "auth/operation-not-allowed":"Activá este método en Firebase Authentication",
+    "auth/network-request-failed":"Falló la conexión. Probá de nuevo"
+  };
+  return map[code]||("Error Firebase: "+(code||e?.message||"desconocido"));
+}
 
 // ── NAVEGACIÓN ──
 function fillSelects(){["searchServiceSelect","provServiceSelect"].forEach(id=>{let el=document.getElementById(id);el.innerHTML='<option value="">Seleccionar servicio</option>'+services.map(s=>`<option>${s}</option>`).join("")})}
@@ -472,6 +594,7 @@ function renderPro(){
 function unlockPro(){let pin=proLoginPin.value.trim();if(pin!==user.proPin)return toast("Clave PRO incorrecta");proUnlocked=true;renderPro();toast("Bienvenido al panel PRO")}
 function activatePro(){let pin=proPinInput.value.trim();if(!/^\d{4}$/.test(pin))return toast("La clave PRO debe tener 4 números");user.proActive=true;user.proPin=pin;proUnlocked=true;user.wallet=user.wallet||{balance:0,alias:"",method:"",note:""};updateAccount();renderPro();toast("Panel PRO activado")}
 
+function closeProSession(){proUnlocked=false;renderPro();toast("Panel PRO bloqueado")}
 function renderProStats(){
   let mine=orders.filter(o=>o.providerOwner===user?.email);
   let pending=mine.filter(o=>o.status==="Activo").length;
@@ -608,7 +731,14 @@ function providerRating(p){let rs=orders.filter(o=>o.providerOwner===p.owner&&o.
 function openSecurity(){newPass.value="";newProPin.value=user.proPin||"";securityModal.classList.add("active")}
 function saveSecurity(){if(newPass.value&&newPass.value.length<6)return toast("Contraseña mínima: 6 caracteres");if(newProPin.value&&!/^\d{4}$/.test(newProPin.value))return toast("Clave PRO: 4 números");if(newPass.value)user.pass=newPass.value;if(newProPin.value)user.proPin=newProPin.value;updateAccount();closeModal("securityModal");toast("Seguridad actualizada")}
 function openRecover(){recoverModal.classList.add("active")}
-function recoverPassword(){let email=recoverEmail.value.trim().toLowerCase();if(!email.includes("@"))return toast("Ingresá un email válido");toast("Recuperación preparada para Firebase Auth")}
+async function recoverPassword(){
+  let email=recoverEmail.value.trim().toLowerCase();
+  if(!email.includes("@"))return toast("Ingresá un email válido");
+  try{
+    if(window.fxAuth){await window.fxAuth.sendPasswordResetEmail(window.fxAuth.auth,email);closeModal("recoverModal");toast("Te enviamos el email de recuperación");return;}
+  }catch(e){console.error(e);return toast(firebaseMsg(e));}
+  toast("Recuperación enviada")
+}
 function openTerms(){termsModal.classList.add("active")}
 
 // ── UTILS ──
@@ -619,6 +749,46 @@ function renderAll(){fillSelects();renderCategories();renderFeatured();renderRes
 
 fillSelects();
 if(user)boot();
+</script>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+  import { getAuth, GoogleAuthProvider, signInWithRedirect, getRedirectResult, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, updateProfile } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
+  import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAngjYntHMxSz0oauk638Sl9JsKU9PitB4",
+    authDomain: "servigoar.firebaseapp.com",
+    projectId: "servigoar",
+    storageBucket: "servigoar.firebasestorage.app",
+    messagingSenderId: "104567945058",
+    appId: "1:104567945058:web:f569affcc2272ec9561e3b",
+    measurementId: "G-GWT8G3P02Q"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  auth.languageCode = "es";
+  const db = getFirestore(app);
+
+  window.fxAuth = { auth, db, GoogleAuthProvider, signInWithRedirect, getRedirectResult, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, updateProfile, doc, setDoc, serverTimestamp };
+
+  try{
+    const result = await getRedirectResult(auth);
+    if(result && result.user && window.handleFirebaseUser){
+      await window.handleFirebaseUser(result.user);
+      window.toast && window.toast("Sesión iniciada con Google");
+    }
+  }catch(e){
+    console.error(e);
+    window.toast && window.toast(window.firebaseMsg ? window.firebaseMsg(e) : "No se pudo iniciar con Google");
+  }
+
+  onAuthStateChanged(auth, async (fbUser)=>{
+    if(fbUser && !localStorage.getItem("sg_user") && window.handleFirebaseUser){
+      await window.handleFirebaseUser(fbUser);
+    }
+  });
 </script>
 </body>
 </html>
