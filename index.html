@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>ServiGo AR</title>
+  <title>FIX.AR</title>
   <meta name="theme-color" content="#061827" />
   <style>
     :root{
@@ -59,16 +59,6 @@
     .photoPreview{width:86px;height:86px;border-radius:28px;background:#f1f5f9;background-size:cover;background-position:center;display:grid;place-items:center;font-size:2.2rem;margin-bottom:10px}
     /* alias box oculta en perfil público */
     .aliasPrivate{background:#fef3c7;border:1px solid #fcd34d;border-radius:16px;padding:12px 14px;font-size:.84rem;color:#92400e;font-weight:800;margin-top:10px;display:flex;align-items:center;gap:8px}
-
-    /* PRO premium upgrade */
-    .navBtn.proNavBtn{position:relative;transform:translateY(-12px);background:linear-gradient(135deg,#5b21b6,#a855f7);color:#fff;border-radius:24px;margin:0 2px 8px;box-shadow:0 0 0 4px rgba(168,85,247,.18),0 14px 34px rgba(124,58,237,.42);overflow:hidden}
-    .navBtn.proNavBtn:before{content:"";position:absolute;inset:-40%;background:radial-gradient(circle,rgba(255,255,255,.35),transparent 42%);animation:proPulse 2.4s infinite ease-in-out;opacity:.75}
-    .navBtn.proNavBtn .nIco{font-size:1.72rem;position:relative;z-index:1}.navBtn.proNavBtn span,.navBtn.proNavBtn{position:relative;z-index:1}.navBtn.proNavBtn.proActive{color:#fff;box-shadow:0 0 0 5px rgba(196,181,253,.22),0 18px 42px rgba(124,58,237,.56)}
-    @keyframes proPulse{0%,100%{transform:scale(.85);opacity:.45}50%{transform:scale(1.18);opacity:.95}}
-    .proToolbar{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0 4px}.proToolbar .btn{padding:13px 12px;border-radius:18px;font-size:.86rem;justify-content:center}.btn.proGhost{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.24);color:#fff;box-shadow:none}.btn.proLogout{background:rgba(15,23,42,.24);border:1px solid rgba(255,255,255,.22);color:#fff;box-shadow:none}
-    .proQuickGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:12px 0}.proQuickBtn{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.20);color:#fff;border-radius:22px;padding:13px 10px;text-align:left;box-shadow:0 10px 22px rgba(46,16,101,.18)}.proQuickBtn b{display:block;font-size:.92rem}.proQuickBtn small{display:block;color:#ddd6fe;font-weight:750;margin-top:3px;font-size:.74rem}.proQuickBtn .qIco{font-size:1.45rem;display:block;margin-bottom:6px}
-    .proInsightGrid{display:grid;grid-template-columns:1fr;gap:10px;margin:12px 0 2px}.proInsight{background:rgba(255,255,255,.97);border:1px solid rgba(255,255,255,.35);border-radius:22px;padding:14px;color:var(--text);box-shadow:0 12px 30px rgba(46,16,101,.16)}.proInsight h4{margin:0 0 5px;font-size:1rem}.proInsight p{margin:0;color:#64748b;font-size:.82rem;font-weight:750;line-height:1.35}
-    .proMiniSectionTitle{color:#ede9fe;font-size:.82rem;font-weight:1000;letter-spacing:.08em;text-transform:uppercase;margin:16px 0 8px}
     @media(max-width:390px){.hero h2{font-size:3rem}.headline{font-size:1.95rem}.sub{font-size:.95rem}.actions{grid-template-columns:1fr 46px}.grid3{gap:8px}.row2,.walletGrid{grid-template-columns:1fr}}
   </style>
 </head>
@@ -78,8 +68,8 @@
 <section id="loginScreen" class="loginWrap">
   <div class="loginCard">
     <div class="logoPanel">
-      <div class="bigLogo"><div class="logoMark"><span class="s">S</span></div></div>
-      <h2>Servi<span style="color:var(--green2)">Go</span> <span class="ar">AR</span></h2>
+      <div class="bigLogo"><div class="logoMark"><span class="s">F</span></div></div>
+      <h2>FIX<span style="color:var(--green2)">.AR</span></h2>
       <p class="logoTagline"><span>BUSCÁ.</span><span>CONTRATÁ.</span><span class="ok">LISTO.</span></p>
     </div>
 
@@ -119,11 +109,11 @@
 
 <!-- ═══════════ APP ═══════════ -->
 <main id="mainApp" class="app hidden">
-  <header class="top"><div class="topRow"><div class="brand"><div class="logoMark"><span class="s">S</span></div><h1>Servi<span>Go</span></h1><span class="ar">AR</span></div><button class="pill" onclick="showScreen('profile')">☰ Menú</button></div></header>
+  <header class="top"><div class="topRow"><div class="brand"><div class="logoMark"><span class="s">F</span></div><h1>FIX<span>.AR</span></h1><span class="ar">AR</span></div><button class="pill" onclick="showScreen('profile')">☰ Menú</button></div></header>
 
   <!-- INICIO -->
   <section id="home" class="screen active">
-    <div class="hero"><div class="bigLogo"><div class="logoMark"><span class="s">S</span></div></div><h2><span class="servi">Servi</span><span class="go">Go</span><span class="arInline">AR</span></h2></div>
+    <div class="hero"><div class="bigLogo"><div class="logoMark"><span class="s">F</span></div></div><h2><span class="servi">FIX</span><span class="go">.AR</span></h2></div>
     <h1 class="headline center">Buscá. Contratá. <span>Listo.</span></h1>
     <p class="sub center">Encontrá profesionales de confianza en tu zona.</p>
     <div class="searchBox">
@@ -161,7 +151,7 @@
   <!-- PRO -->
   <section id="professional" class="screen">
     <div class="proMode">
-      <span class="proBadge">💼 PRO · Centro profesional</span>
+      <span class="proBadge">PRO · Profesionales</span>
       <h1 class="headline" style="color:white">Panel profesional</h1>
       <p class="sub" style="color:#ede9fe">Tu centro de control: agenda, clientes, cobros, reputación y servicios.</p>
       <div id="proGate"></div>
@@ -172,24 +162,6 @@
           <div class="proStatBox"><b id="proStatJobs">0</b><small>Trabajos</small></div>
           <div class="proStatBox"><b id="proStatRating">—</b><small>Estrellas</small></div>
           <div class="proStatBox"><b id="proStatPending">0</b><small>Pendientes</small></div>
-        </div>
-
-        <div class="proToolbar">
-          <button class="btn proGhost" onclick="openSecurity()">🔐 Cambiar PIN</button>
-          <button class="btn proLogout" onclick="logoutPro()">🚪 Cerrar sesión PRO</button>
-        </div>
-
-        <div class="proMiniSectionTitle">Accesos rápidos</div>
-        <div class="proQuickGrid">
-          <button class="proQuickBtn" onclick="openProviderRegister()"><span class="qIco">🛠️</span><b>Nuevo servicio</b><small>Publicar o sumar rubro</small></button>
-          <button class="proQuickBtn" onclick="openPayments()"><span class="qIco">💳</span><b>Cobros</b><small>Alias, método y notas</small></button>
-          <button class="proQuickBtn" onclick="renderProJobs();toast('Agenda actualizada')"><span class="qIco">📅</span><b>Agenda</b><small>Trabajos activos</small></button>
-          <button class="proQuickBtn" onclick="renderProRatings();toast('Reseñas actualizadas')"><span class="qIco">⭐</span><b>Reputación</b><small>Estrellas y comentarios</small></button>
-        </div>
-
-        <div class="proInsightGrid">
-          <div class="proInsight"><h4>📌 Consejo PRO</h4><p>Subí fotos reales, aclará zonas de trabajo y mantené tu estado actualizado. Eso aumenta la confianza antes de que te contraten.</p></div>
-          <div class="proInsight"><h4>🧾 Control profesional</h4><p>Usá la ficha de cada trabajo para marcar pago, monto, notas, materiales y estado del servicio.</p></div>
         </div>
 
         <!-- Vidriera -->
@@ -246,7 +218,7 @@
         <div class="profilePic" id="profileInitial">S</div>
         <div>
           <h3 id="profileName" style="margin:0;font-size:1.45rem">Usuario</h3>
-          <p id="profileEmail" class="sub" style="font-size:.86rem">Cliente ServiGo AR</p>
+          <p id="profileEmail" class="sub" style="font-size:.86rem">Cliente FIX.AR</p>
           <span class="badge">Cuenta activa</span>
         </div>
       </div>
@@ -263,14 +235,14 @@
       <button class="menuItem" onclick="showFavorites()"><span class="mIco">❤️</span><span class="grow"><b>Favoritos</b><small>Profesionales guardados</small></span><span>›</span></button>
       <button class="menuItem" onclick="openSecurity()"><span class="mIco">🔐</span><span class="grow"><b>Seguridad</b><small>Clave, recuperación y verificación</small></span><span>›</span></button>
       <button class="menuItem" onclick="openTerms()"><span class="mIco">📄</span><span class="grow"><b>Términos y condiciones</b><small>Reglas, seguridad y privacidad</small></span><span>›</span></button>
-      <button class="menuItem" onclick="logout()"><span class="mIco">🚪</span><span class="grow"><b>Cerrar sesión</b><small>Salir de ServiGo AR</small></span><span>›</span></button>
+      <button class="menuItem" onclick="logout()"><span class="mIco">🚪</span><span class="grow"><b>Cerrar sesión</b><small>Salir de FIX.AR</small></span><span>›</span></button>
     </div>
   </section>
 
   <nav class="bottomNav">
     <button class="navBtn active" onclick="showScreen('home',this)"><span class="nIco">🏠</span>Inicio</button>
     <button class="navBtn" onclick="showScreen('search',this)"><span class="nIco">🔎</span>Buscar</button>
-    <button class="navBtn proNavBtn" onclick="showScreen('professional',this)"><span class="nIco">💼</span>PRO</button>
+    <button class="navBtn" onclick="showScreen('professional',this)"><span class="nIco">🧑‍🔧</span>PRO</button>
     <button class="navBtn" onclick="showScreen('messages',this)"><span class="nIco">💬</span>Mensajes</button>
     <button class="navBtn" onclick="showScreen('profile',this)"><span class="nIco">👤</span>Perfil</button>
   </nav>
@@ -380,7 +352,7 @@
 <div id="termsModal" class="modal"><div class="sheet">
   <div class="sheetHead"><h3>Términos y condiciones</h3><button class="iconBtn" onclick="closeModal('termsModal')">✕</button></div>
   <p class="desc"><b>Cancelación:</b> el cliente puede cancelar un servicio solo con 48 horas de anticipación.</p>
-  <p class="desc"><b>Seguridad:</b> verificá identidad, matrícula, referencias y datos antes de contratar. ServiGo AR funciona como puente.</p>
+  <p class="desc"><b>Seguridad:</b> verificá identidad, matrícula, referencias y datos antes de contratar. FIX.AR funciona como puente.</p>
   <p class="desc"><b>Pagos:</b> la app puede cobrar comisión por reserva o suscripción profesional. Para pagos reales se integra pasarela segura.</p>
   <p class="desc"><b>Privacidad:</b> no usamos ubicación automática; la búsqueda es por localidad escrita. El alias de cobro del profesional solo se muestra a clientes con reserva activa.</p>
   <button class="btn" style="margin-top:14px" onclick="closeModal('termsModal')">Aceptar</button>
@@ -413,12 +385,12 @@
 const services=["Electricista","Plomero","Gasista","Carpintero","Pintor","Jardinero","Enfermero/a","Médico","Técnico de computadora","Cadete / mandados","Limpieza","Mascotas","Automotor","Cerrajero","Albañil","Aire acondicionado","Profesor particular","Cocinero/a","Niñera","Cuidado adulto mayor","Otro / varios"];
 const icons={"Electricista":"⚡","Plomero":"🚰","Gasista":"🔥","Carpintero":"🪚","Pintor":"🎨","Jardinero":"🌱","Enfermero/a":"🩺","Médico":"🩺","Técnico de computadora":"💻","Cadete / mandados":"🛵","Limpieza":"🧹","Mascotas":"🐶","Automotor":"🚗","Cerrajero":"🔑","Albañil":"🧱","Aire acondicionado":"❄️","Profesor particular":"📚","Cocinero/a":"🍳","Niñera":"🧸","Cuidado adulto mayor":"👵","Otro / varios":"🛠️"};
 
-let accounts=JSON.parse(localStorage.getItem("sg_accounts")||"[]"),
-    providers=JSON.parse(localStorage.getItem("sg_providers")||"[]"),
-    orders=JSON.parse(localStorage.getItem("sg_orders")||"[]"),
-    messages=JSON.parse(localStorage.getItem("sg_messages")||"[]"),
-    favorites=JSON.parse(localStorage.getItem("sg_favorites")||"[]"),
-    user=JSON.parse(localStorage.getItem("sg_user")||"null"),
+let accounts=JSON.parse(localStorage.getItem("fixar_accounts")||"[]"),
+    providers=JSON.parse(localStorage.getItem("fixar_providers")||"[]"),
+    orders=JSON.parse(localStorage.getItem("fixar_orders")||"[]"),
+    messages=JSON.parse(localStorage.getItem("fixar_messages")||"[]"),
+    favorites=JSON.parse(localStorage.getItem("fixar_favorites")||"[]"),
+    user=JSON.parse(localStorage.getItem("fixar_user")||"null"),
     selected=null,orderFilter="Todos",authMode="login",
     tempProfilePhoto="",tempProviderPhoto="",tempProviderGallery=[],
     proUnlocked=false,currentJobId=null,currentChatOrderId=null,
@@ -427,14 +399,14 @@ let accounts=JSON.parse(localStorage.getItem("sg_accounts")||"[]"),
 
 function norm(s){return(s||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/\s+/g," ").trim()}
 function city(s){let x=norm(s);const a={"villavol":"villa bosch","villabor":"villa bosch","caba":"capital federal","capital":"capital federal","villadeboto":"villa devoto","villa deboto":"villa devoto","la prida":"laprida","la barria":"bahia blanca","la barría":"bahia blanca"};return a[x]||x}
-function save(){localStorage.setItem("sg_accounts",JSON.stringify(accounts));localStorage.setItem("sg_providers",JSON.stringify(providers));localStorage.setItem("sg_orders",JSON.stringify(orders));localStorage.setItem("sg_messages",JSON.stringify(messages));localStorage.setItem("sg_favorites",JSON.stringify(favorites));if(user)localStorage.setItem("sg_user",JSON.stringify(user))}
+function save(){localStorage.setItem("fixar_accounts",JSON.stringify(accounts));localStorage.setItem("fixar_providers",JSON.stringify(providers));localStorage.setItem("fixar_orders",JSON.stringify(orders));localStorage.setItem("fixar_messages",JSON.stringify(messages));localStorage.setItem("fixar_favorites",JSON.stringify(favorites));if(user)localStorage.setItem("fixar_user",JSON.stringify(user))}
 
 // ── AUTH ──
 function socialAuth(provider){toast(provider+" se conecta en producción con Firebase Auth")}
 function setAuthMode(m){authMode=m;loginTab.classList.toggle("active",m==="login");registerTab.classList.toggle("active",m==="register");loginForm.classList.toggle("hidden",m!=="login");registerForm.classList.toggle("hidden",m!=="register")}
 function registerUser(){let name=regName.value.trim(),email=regEmail.value.trim().toLowerCase(),pass=regPass.value;if(!name)return toast("Ingresá tu nombre");if(!email.includes("@"))return toast("Ingresá un email válido");if(pass.length<6)return toast("La contraseña debe tener 6 caracteres");if(!regTerms.checked)return toast("Aceptá términos y condiciones");if(accounts.some(a=>a.email===email))return toast("Ese email ya está registrado");user={name,email,pass,photo:"",phone:"",city:"",address:"",bio:"",proActive:false,proPin:"",wallet:{balance:0,alias:"",method:"",note:""}};accounts.push(user);save();boot();toast("Cuenta creada")}
-function login(){let email=loginEmail.value.trim().toLowerCase(),pass=loginPass.value;if(!email.includes("@"))return toast("Ingresá un email válido");let acc=accounts.find(a=>a.email===email&&a.pass===pass);if(!acc)return toast("Email o contraseña incorrectos");user=acc;localStorage.setItem("sg_user",JSON.stringify(user));boot()}
-function logout(){localStorage.removeItem("sg_user");user=null;proUnlocked=false;mainApp.classList.add("hidden");loginScreen.classList.remove("hidden");toast("Sesión cerrada")}
+function login(){let email=loginEmail.value.trim().toLowerCase(),pass=loginPass.value;if(!email.includes("@"))return toast("Ingresá un email válido");let acc=accounts.find(a=>a.email===email&&a.pass===pass);if(!acc)return toast("Email o contraseña incorrectos");user=acc;localStorage.setItem("fixar_user",JSON.stringify(user));boot()}
+function logout(){localStorage.removeItem("fixar_user");user=null;proUnlocked=false;mainApp.classList.add("hidden");loginScreen.classList.remove("hidden");toast("Sesión cerrada")}
 function boot(){loginScreen.classList.add("hidden");mainApp.classList.remove("hidden");renderAll()}
 function updateAccount(){let i=accounts.findIndex(a=>a.email===user.email);if(i>=0)accounts[i]=user;else accounts.push(user);save()}
 
@@ -486,7 +458,7 @@ function renderPro(){
   }
   if(!proUnlocked){
     proPanel.classList.add("hidden");
-    proGate.innerHTML=`<div class="card" style="margin-top:18px"><h3 style="margin-top:0">Entrar al panel PRO</h3><p class="desc">Ingresá tu clave de 4 números para ver agenda, clientes, cobros y reputación.</p><div class="field"><label>Clave PRO</label><input id="proLoginPin" type="password" inputmode="numeric" maxlength="4" placeholder="••••"></div><button class="btn pro" onclick="unlockPro()">Entrar a PRO <span>→</span></button><button class="btn secondary" style="margin-top:10px" onclick="openSecurity()">Olvidé / cambiar clave PRO <span>→</span></button></div>`;
+    proGate.innerHTML=`<div class="card" style="margin-top:18px"><h3 style="margin-top:0">Entrar al panel PRO</h3><p class="desc">Ingresá tu clave de 4 números para ver agenda, clientes, cobros y reputación.</p><div class="field"><label>Clave PRO</label><input id="proLoginPin" type="password" inputmode="numeric" maxlength="4" placeholder="••••"></div><button class="btn pro" onclick="unlockPro()">Entrar a PRO <span>→</span></button></div>`;
     return;
   }
   proGate.innerHTML="";
@@ -498,7 +470,6 @@ function renderPro(){
   renderAliasStatus();
 }
 function unlockPro(){let pin=proLoginPin.value.trim();if(pin!==user.proPin)return toast("Clave PRO incorrecta");proUnlocked=true;renderPro();toast("Bienvenido al panel PRO")}
-function logoutPro(){proUnlocked=false;renderPro();toast("Sesión PRO cerrada")}
 function activatePro(){let pin=proPinInput.value.trim();if(!/^\d{4}$/.test(pin))return toast("La clave PRO debe tener 4 números");user.proActive=true;user.proPin=pin;proUnlocked=true;user.wallet=user.wallet||{balance:0,alias:"",method:"",note:""};updateAccount();renderPro();toast("Panel PRO activado")}
 
 function renderProStats(){
